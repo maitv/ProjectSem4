@@ -72,7 +72,7 @@ go
 
 Create table [Service]
 (
-	serviceId nvarchar(50),
+	serviceId nvarchar(50) primary key,
 	serviceName nvarchar(50),
 	servicePrice float,
 	serviceDesc nvarchar(50)
@@ -81,7 +81,7 @@ go
 
 Create table BookingService
 (
-	serviceId nvarchar(50) primary key,
+	serviceId nvarchar(50),
 	bookingId nvarchar(50),
 )
 go
@@ -90,7 +90,7 @@ alter table BookingService add foreign key (bookingId) references Booking(bookin
 
 go
 
-alter table [Service] add foreign key (serviceId) references BookingService(serviceId)
+alter table BookingService add foreign key (serviceId) references Service(serviceId)
 
 go
 
