@@ -3,10 +3,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Select Room</title>
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+        <script src="js/a.js"></script>
     </h:head>
     <h:body>
-        chọn số lượng phòng + loại phòng
+        <h:form>
+            Checkin Date : <h:inputText class="datepicker" id="checkinDate" value="#{bookingRoomBean.checkinDate}" required="true" requiredMessage="Please select checkin date"/><br/>
+            <h:message for="checkinDate" style="color:red"></h:message><br/>
+            Checkout Date : <h:inputText class="datepicker" id="checkoutDate" value="#{bookingRoomBean.checkoutDate}" required="true" requiredMessage="Please select checkout date"/><br/>
+            <h:message for="checkoutDate" style="color:red"></h:message><br/>
+            <h:commandButton value="Goto Select service" action="#{bookingRoomBean.SelectService()}"/>
+        </h:form>
     </h:body>
 </html>
 
