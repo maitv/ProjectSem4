@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib version="2.1" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd">
+    <tlib-version>1.0</tlib-version>
+    <short-name>bookingfunction</short-name>
+    <uri>/WEB-INF/tlds/bookingFunction</uri>
+    <function>
+        <name>getAllRoom</name>
+        <function-class>app.MyClass</function-class>
+        <function-signature>
+            java.util.ArrayList getAllRoom()
+        </function-signature>
+    </function>
+    <function>
+        <name>getAllRoomType</name>
+        <function-class>app.MyClass</function-class>
+        <function-signature>
+            java.util.ArrayList getAllRoomType()
+        </function-signature>
+    </function>
+    <function>
+        <name>getAllService</name>
+        <function-class>app.MyClass</function-class>
+        <function-signature>
+            java.util.ArrayList getAllService()
+        </function-signature>
+    </function>
+    
+    <function>
+        <name>getRoomTypeById</name>
+        <function-class>app.MyClass</function-class>
+        <function-signature>
+            java.lang.String getRoomTypeById(java.lang.String)
+        </function-signature>
+    </function>
+    
+    <function>
+        <name>getServiceNameById</name>
+        <function-class>app.MyClass</function-class>
+        <function-signature>
+            java.lang.String getServiceNameById(java.lang.String)
+        </function-signature>
+    </function>
+    
+    <function>
+        <name>getTotalPrice</name>
+        <function-class>app.MyClass</function-class>
+        <function-signature>
+            double getTotalPrice(java.lang.String[],java.lang.String)
+        </function-signature>
+    </function>
+    
+    <function>
+        <name>getAllBooking</name>
+        <function-class>app.MyClass</function-class>
+        <function-signature>
+            java.util.ArrayList getAllBooking()
+        </function-signature>
+    </function>
+    
+    <function>
+        <name>getCustomerNameByIdCard</name>
+        <function-class>app.MyClass</function-class>
+        <function-signature>
+            java.lang.String getCustomerNameByIdCard(java.lang.String)
+        </function-signature>
+    </function>
+    
+        <function>
+        <name>updateBookingStatus</name>
+        <function-class>app.MyClass</function-class>
+        <function-signature>
+            boolean updateBookingStatus(java.lang.String, int)
+        </function-signature>
+    </function>
+    
+    <function>
+        <name>getAllRoomByRoomTypeId</name>
+        <function-class>app.MyClass</function-class>
+        <function-signature>
+            java.util.ArrayList getAllRoomByRoomTypeId(java.lang.String)
+        </function-signature>
+    </function>
+    
+    
+</taglib>
