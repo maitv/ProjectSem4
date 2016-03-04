@@ -33,7 +33,7 @@ Create table Customer
 	customerIndentifyCard nvarchar(50),
 	customerDOB date,
 	customerAddress nvarchar(50),
-	customerPhone varchar(20),
+	customerPhone nvarchar(20),
 	customerEmail nvarchar(50)
 )
 go
