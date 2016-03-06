@@ -208,16 +208,7 @@ public class DataProcess {
         return list;
     }
 
-    public boolean booking(
-            int roomNumber,
-            String checkinDate,
-            String checkoutDate,
-            String customerName,
-            String identifyCard,
-            String address,
-            String phoneNumber,
-            String email,
-            String[] services) {
+    public boolean booking(int roomNumber,String checkinDate,String checkoutDate,String customerName,String identifyCard,String address,String phoneNumber,String email,String[] services) {
         // TODO:
         // 1. Add to Customer table
         if (!isExistCustomer(identifyCard)) {
@@ -266,11 +257,7 @@ public class DataProcess {
         return true;
     }
 
-    public boolean addBooking(String bookingId,
-            int roomNumber,
-            String customerIdentfy,
-            String checkinDate,
-            String checkoutDate) {
+    public boolean addBooking(String bookingId,int roomNumber,String customerIdentfy,String checkinDate,String checkoutDate) {
         Connection cnn = getConnection();
         if (cnn == null) {
             return false;
@@ -356,11 +343,7 @@ public class DataProcess {
         return isFound;
     }
 
-    public boolean addCustomer(String customerName,
-            String identifyCard,
-            String address,
-            String phoneNumber,
-            String email) {
+    public boolean addCustomer(String customerName,String identifyCard,String address,String phoneNumber,String email) {
         Connection cnn = getConnection();
 
         if (cnn == null) {

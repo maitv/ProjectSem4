@@ -1,12 +1,40 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        page điền thông tin của khách hàng (sẽ có trường hợp khách hàng đã đăng ký rồi thì sẽ chỉ cần nhập user)
+        <h:form>
+            page điền thông tin của khách hàng (sẽ có trường hợp khách hàng đã đăng ký rồi thì sẽ chỉ cần nhập user)
+            <h:selectOneRadio value="">
+                <f:selectItem itemValue="1" itemLabel="Return guest">
+                    <div>
+                        <h:outputLabel value="Email: " /><h:inputText/>
+                    </div>
+                </f:selectItem>
+                <f:selectItem itemValue="2" itemLabel="New guest">
+                    <div>
+                        <h:outputLabel value="Title:" /><h:inputText/> <br/>
+                        <h:outputLabel value="First name: " /><h:inputText/> <br/>
+                        <h:outputLabel value="Last name: " /><h:inputText/> <br/>
+                        <h:outputLabel value="Email: " /><h:inputText/> <br/>
+                        <h:outputLabel value="Telephone: " /><h:inputText/> <br/>
+                        <h:outputLabel value="Fax number: " /><h:inputText/> <br/>
+                        <h:outputLabel value="Mobile phone: " /><h:inputText/> <br/>
+                        <h:outputLabel value="Address: " /><h:inputText/> <br/>
+                        <h:outputLabel value="Country: " /><h:inputText/> <br/>  
+                        <h:outputLabel value="City: " /><h:inputText/> <br/>  
+                        <h:outputLabel value="State: " /><h:inputText/> <br/> 
+                        <h:outputLabel value="Zip code: " /><h:inputText/> <br/>  
+                    </div>
+                </f:selectItem>
+            </h:selectOneRadio>
+            <h:commandButton value="Back"/>
+            <h:commandButton value="Continue"/>
+        </h:form>
     </h:body>
 </html>
 
