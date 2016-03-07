@@ -5,21 +5,130 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Home page</title>
-        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+        <title>Booking</title>
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css"></link>
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
         <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
-        <script src="js/a.js"></script>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"></link>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"></link>
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"></link>
+        <link rel="stylesheet" href="css/jquery.bxslider.css"></link> 
+        <link rel="stylesheet" href="css/a.css"></link>
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/jquery.bxslider.min.js"></script>
+        <script type="text/javascript" src="js/jquery.bxslider.js"></script>
+        <script type="text/javascript" src="js/a.js"></script>
     </h:head>
-    <h:body>
-        <h:graphicImage library="images" name="download.png"/>
-        <h:form>
-            Checkin Date : <h:inputText class="datepicker" id="checkinDate" value="#{bookingRoomBean.checkinDate}" required="true" requiredMessage="Please select checkin date"/><br/>
-            <h:message for="checkinDate" style="color:red"></h:message><br/>
-            Checkout Date : <h:inputText class="datepicker" id="checkoutDate" value="#{bookingRoomBean.checkoutDate}" required="true" requiredMessage="Please select checkout date"/><br/>
-            <h:message for="checkoutDate" style="color:red"></h:message><br/>
-            <h:commandButton value="Booking" action="#{bookingRoomBean.gotoSelectRoom()}"/>
-        </h:form>
-    </h:body>
+    <body>
+        <f:view>
+            <h:panelGroup>
+                <ui:include src="layout/header.xhtml"/>
+            </h:panelGroup> 
+            <h:panelGroup>
+                <div class="container">
+                    <div class="slider1">
+                        <div class="slide"><img src="img/slide/slider-1.jpg"></img></div> 
+                        <div class="slide"><img src="img/slide/slider-2.jpg"></img></div>
+                      </div>
+                <!--End Slider-->
+                <h:form class="main-product main-form">
+                    <div class="form-group">
+                    <h:inputText class="datepicker form-control" id="checkinDate" value="#{bookingRoomBean.checkinDate}" required="true" requiredMessage="Please select checkin date"/><br/>
+                    <h:message for="checkinDate" style="color:red"></h:message><br/>
+                    </div>
+                    <div class="form-group">
+                    <h:inputText class="datepicker form-control" id="checkoutDate" value="#{bookingRoomBean.checkoutDate}" required="true" requiredMessage="Please select checkout date"/><br/>
+                    <h:message for="checkoutDate" style="color:red"></h:message><br/>
+                    </div>
+                    <div class="form-group">
+                    <h:commandButton value="Booking" class="button" action="#{bookingRoomBean.gotoSelectRoom()}"/>
+                    </div>
+                </h:form>
+                <div class="col-md-12 main-product">
+                    <div class="room-title">
+                        <h2>List room type in MGM</h2>
+                        <div class="sperad"></div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-6 product">
+                        <div class="image-room"><a href=""><img src="img/singleroom1.jpg"></img></a></div>
+                        <div class="room-action">
+                            <p><a href="">Single Room</a></p>
+                            <span>A room which has single bed facility</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 product">
+                        <div class="image-room"><a href=""><img src="img/doubleroom.jpg"></img></a></div>
+                        <div class="room-action">
+                            <p><a href="">Double Room</a></p>
+                            <span>A room which has double bed facility</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 product">
+                        <div class="image-room"><a href=""><img src="img/double double room.jpg"></img></a></div>
+                        <div class="room-action">
+                            <p><a href="">Double Double Room</a></p>
+                            <span>A room which has two double bed in room</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 product">
+                        <div class="image-room"><a href=""><img src="img/Duplex-Room_w.jpg"></img></a></div>
+                        <div class="room-action">
+                            <p><a href="">Duplex Room</a></p>
+                            <span>A room which is bean spread on two floor connected by an internal staircase</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 product">
+                        <div class="image-room"><a href=""><img src="img/suite-room.jpg"></img></a></div>
+                        <div class="room-action">
+                            <p><a href="">Suite Room</a></p>
+                            <span>A room comprise of two or more bedroom, a living room and a dinning area </span>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 product">
+                        <div class="image-room"><a href=""><img src="img/twin-room.jpg"></img></a></div>
+                        <div class="room-action">
+                            <p><a href="">Twin Room</a></p>
+                            <span>A room which has two single bed sperated by a center table</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 main-product">
+                     <div class="room-title">
+                        <h2>Gallery</h2>
+                        <div class="sperad"></div>
+                     </div>
+                    <div class="col-md-4 col-sm-6 ">
+                        <div class="blog-box">
+                            <a href="#"><img src="img/blog-thumb-1.jpg"></img></a>     
+                        </div>
+                    </div>   
+                    <div class="col-md-4 col-sm-6 ">
+                        <div class="blog-box">
+                            <a href="#"><img src="img/blog-thumb-2.jpg"></img></a>
+                        </div>
+                    </div> 
+                    <div class="col-md-4 col-sm-6 ">
+                        <div class="blog-box">
+                            <a href="#"><img src="img/blog-thumb-2.jpg"></img></a>
+                        </div>
+                    </div>
+                    <div class="col-md-8 col-sm-12 ">
+                        <div class="blog-box">
+                            <a href="#"><img src="img/blog-thumb-4.jpg"></img></a>
+                        </div>
+                    </div>   
+                </div>
+            </div>
+            </h:panelGroup> 
+            <h:panelGroup>
+                <ui:include src="layout/footer.xhtml"/>
+            </h:panelGroup>
+        </f:view>
+    </body>
 </html>
 

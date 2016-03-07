@@ -1,0 +1,310 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Oct 14, 2015, 3:46:43 PM
+    Author     : Michael
+*/
+*{
+    padding:0px;
+    margin:0px;
+}
+a:hover{
+    text-decoration: none;
+}
+.logo, .menu{
+    text-align: center;
+}
+img{
+    max-width: 100%
+}
+li{
+    list-style: none;
+}
+.wrap{
+    padding: 100px;
+}
+/*-----------Menu--------------*/
+.menu ul {
+    border-top: 1px solid #C4903D;
+    border-bottom: 1px solid #C4903D;
+}
+.menu ul li{
+    display: inline-block;
+    list-style: none;
+    padding: 10px 10px;
+}
+.menu ul li a{ 
+   text-transform: uppercase;
+   color:#000;
+   padding: 12px;
+}
+.menu ul li a:hover{
+    transition: background 0.2s ease;
+    color:#fff;
+    background: #C4903D;
+}
+li.menu-room:hover .dropdown-menu{
+    display: block;
+    top: inherit;
+    left: inherit;
+    height: auto;
+}
+.dropdown-menu{
+    margin: 10px 0 0;
+    border-radius: 0px;
+}
+.dropdown-menu ul{
+    border: none;
+}
+.dropdown-menu ul li{
+    float:left;
+    width: 150px;
+}
+.dropdown-menu ul li a{
+    text-transform: none;
+    font-size: 0.83em;
+}
+.dropdown-menu ul li a:hover{
+    color: #C4903D;
+}
+.dropdown-menu .image-room-menu>a{
+    padding: 0px !important;
+}
+.dropdown-menu .image-room-menu:hover a, .dropdown-menu ul li:hover a{
+    background: none;
+}
+
+/*---------------------------------------- Slider ------------------------------------*/
+
+
+        
+/*------------------------------------------End Slider----------------------------------------*/
+ 
+.main-product{
+    padding: 20px 0px;
+    display: inline-block;
+    width: 100%; 
+}
+.main-product .room-title{
+    text-align: center;
+}
+.main-product .room-title h2{
+    text-transform: uppercase;
+    font-weight: bold;
+    font-family: initial;
+}
+.main-product .room-title div.sperad{
+    background: url('../img/moon-divider.png') no-repeat;
+    height: 30px;
+    width: 70px;
+    margin: 30px auto 20px auto;
+}
+.product{
+    padding: 10px;
+}
+.image-room img{
+    border-radius: 10px;
+    height: 235px;
+    width: 350px;
+}
+.image-room img:hover{
+    transition: opacity 0.2s ease; 
+    opacity: 0.8;
+}
+.room-action{
+    text-align: center;
+}
+.room-action p a{
+    text-transform: uppercase;
+    color: crimson;
+    font-weight: bold;
+    font-family: monospace;
+    font-size: 18px;
+}
+.main-form{
+    text-align: center;
+}
+.main-product .form-group {
+    display: inline-block;
+    margin-bottom: 0;
+    vertical-align: middle;
+    height: 40px;
+}
+.main-product .form-group label{
+    font-weight: normal;
+}
+
+.form-control {
+    width: 180px;
+    border-radius: 0;
+    border: 1px solid #202935;
+    height: 40px;
+    display: inline-block;
+    cursor: pointer;
+    vertical-align: middle;
+}
+.button {
+    background-color: #202935;
+    color: #ffffff;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    white-space: nowrap;
+    display: inline-block;
+    width: 150px;
+    height: 40px;
+    padding: 5px 12px;
+    border: 2px solid #202935;
+    border-radius: 0;
+    vertical-align: middle;
+    -webkit-transition: background-color 0.3s, color 0.3s;
+    -moz-transition: background-color 0.3s, color 0.3s;
+    -o-transition: background-color 0.3s, color 0.3s;
+    transition: background-color 0.3s, color 0.3s;
+}
+.button:hover {
+    background-color: #C4903D;
+    color:#000;
+}
+.col-md-4 .blog-box{
+    margin-bottom: 30px;
+    cursor: pointer;
+}
+.col-md-4 .blog-box a:hover img, .col-md-8 .blog-box a:hover img{
+    transition: opacity 0.8s ease;
+    opacity: 0.8;
+}
+footer{
+    padding-top: 50px;
+    background: #202935;
+}
+footer .col-md-12 {
+    padding: 0px 50px 0px 50px;
+    background: #202935;
+}
+footer .col-md-12 .col-md-3{
+    padding: 20px;
+}
+footer .col-md-12 .col-md-3 .footer-content{
+    color:#59677a;
+}
+.productby{
+    background: #1c242f !important;
+    color:#59677a;
+    padding: 15px
+}
+.productby .copyright{
+   height: 50px;
+   line-height: 55px;
+   padding:0px !important;
+   text-align: center;
+}
+.footer-content li a{
+    color:#59677a !important;
+}
+.footer-content li a:hover{
+    transition: color 0.2s ease;
+    color:#eee !important;
+}
+.col-md-3 lable{
+    text-transform: uppercase;
+    font-size: 20px;
+    color:#eee;
+}
+
+.form-group-service ul li{
+    display: inline-block;
+}
+.form-group-service label {
+    width: 180px;
+    text-align: left;
+}
+.form-group-service .form-control{
+    margin: 10px
+}
+.form-group-service ul.form-control-service{
+    width: 200px;
+    display: inline-block;
+    cursor: pointer;
+}
+.text-center{
+    padding: 35px;
+}
+.btnSelect{
+    background-color: #fff;
+    color: #000;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    white-space: nowrap;
+    display: inline-block;
+    width: 150px;
+    height: 40px;
+    padding: 5px 12px;
+    border: 2px solid #202935;
+    border-radius: 0;
+    vertical-align: middle;
+    -webkit-transition: background-color 0.3s, color 0.3s;
+    -moz-transition: background-color 0.3s, color 0.3s;
+    -o-transition: background-color 0.3s, color 0.3s;
+    transition: background-color 0.3s, color 0.3s;
+}
+.btnSelect:hover {
+    background-color: #000;
+    color:#fff;
+}
+.result-title{
+    text-align: center;
+}
+.result-title h1{
+    text-transform: uppercase;
+    font-family: initial;
+}
+.result-title div.sperad{
+    background: url('../img/moon-divider.png') no-repeat;
+    height: 30px;
+    width: 70px;
+    margin: 30px auto 20px auto;
+}
+.form-group-service label span.red{
+    color:red !important;
+}
+/*------------------------------------ Admin Form -------------------*/
+.admin-form{
+    text-align: center;
+}
+.admin-form h1{
+    margin: 10px 0px;
+}
+.admin-form th {
+    height: 32px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    border: 1px solid #d4d4d4;
+    background-color: #ffffff;
+    font-weight: normal;
+    color: #555555;
+    padding: 11px 5px 11px 5px;
+    vertical-align: middle;
+}
+.admin-form td {
+    border: 1px solid #d4d4d4;
+    text-align: center;
+    padding: 5px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    vertical-align: top;
+}
+table.admin-table {
+    border-collapse: collapse;
+    margin-left: auto;
+    margin-right: auto;
+}
+
