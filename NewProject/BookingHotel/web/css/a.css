@@ -171,6 +171,21 @@ li.menu-room:hover .dropdown-menu{
     background-color: #C4903D;
     color:#000;
 }
+
+.select{
+    background-color:lightseagreen;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+    display: inline-block;
+    width: 80px;
+    height: 35px;
+    padding: 5px 12px;
+    border: 2px solid #202935;
+    border-radius: 2;
+}
+
 .col-md-4 .blog-box{
     margin-bottom: 30px;
     cursor: pointer;

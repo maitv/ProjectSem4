@@ -67,8 +67,8 @@ public class DataProcess {
                 rt = new RoomType();
                 rt.setRoomTypeId(roomTypeId);
                 rt.setRoomType(rs.getString(2));
-                rt.setPrice(rs.getFloat(3));
-                rt.setDescription(rs.getString(4));
+                rt.setCurrentPrice(rs.getFloat(3));
+                rt.setRoomTypeDesc(rs.getString(4));
             }
         } catch (SQLException ex) {
             Logger.getLogger(DataProcess.class.getName()).log(Level.SEVERE, null, ex);
@@ -152,12 +152,16 @@ public class DataProcess {
                 int roomNo = rs.getInt(1);
                 String roomType = rs.getString(2);
                 float price = rs.getFloat(3);
-                String des = rs.getString(4);
+                String imageSmall = rs.getString(4);
+                String imageLarge = rs.getString(5);
+                String des = rs.getString(6);
 
                 r.setRoomTypeId(roomNo);
                 r.setRoomType(roomType);
-                r.setPrice(price);
-                r.setDescription(des);
+                r.setCurrentPrice(price);
+                r.setRoomTypeDesc(des);
+                r.setImageSmall(imageSmall);
+                r.setImageLarge(imageLarge);
 
                 list.add(r);
             }

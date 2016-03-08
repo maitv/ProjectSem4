@@ -5,8 +5,11 @@
  */
 package app;
 
+import entity.RoomType;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import model.DataProcess;
 
 /**
  *
@@ -18,6 +21,32 @@ public class BookingRoomBean {
 
     private String checkinDate;
     private String checkoutDate;
+
+    // roomtype list
+    private List<RoomType> roomTypeList;
+    
+    private String selectedRoomTypeId;
+
+    public String getSelectedRoomTypeId() {
+        return selectedRoomTypeId;
+    }
+
+    public void setSelectedRoomTypeId(String selectedRoomTypeId) {
+        this.selectedRoomTypeId = selectedRoomTypeId;
+    }
+    
+
+    public List<RoomType> getRoomTypeList() {
+        DataProcess dp = new DataProcess();
+
+        roomTypeList = dp.getAllRoomType();
+
+        return roomTypeList;
+    }
+
+    public void setRoomTypeList(List<RoomType> roomTypeList) {
+        this.roomTypeList = roomTypeList;
+    }
 
     public String getCheckinDate() {
         return checkinDate;
@@ -45,9 +74,9 @@ public class BookingRoomBean {
 //        RequestCOn
         return "success";
     }
-    
-    public String SelectService() {
-//        RequestCOn
+
+    public String SelectService( String id ) {
+        selectedRoomTypeId = id;
         return "success";
     }
 }

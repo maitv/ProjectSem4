@@ -15,15 +15,40 @@ public class RoomType {
     private String roomType;
     private float currentPrice;
     private String roomTypeDesc;
+    private String imageSmall;
+    private String imageLarge;
 
-    public String getDescription() {
+    public float getCurrentPrice() {
+        return currentPrice;
+    }
+
+    public void setCurrentPrice(float currentPrice) {
+        this.currentPrice = currentPrice;
+    }
+
+    public String getRoomTypeDesc() {
         return roomTypeDesc;
     }
 
-    public void setDescription(String description) {
-        this.roomTypeDesc = description;
+    public void setRoomTypeDesc(String roomTypeDesc) {
+        this.roomTypeDesc = roomTypeDesc;
     }
 
+    public String getImageSmall() {
+        return imageSmall;
+    }
+
+    public void setImageSmall(String imageSmall) {
+        this.imageSmall = imageSmall;
+    }
+
+    public String getImageLarge() {
+        return imageLarge;
+    }
+
+    public void setImageLarge(String imageLarge) {
+        this.imageLarge = imageLarge;
+    }
     public int getRoomTypeId() {
         return roomTypeId;
     }
@@ -38,13 +63,5 @@ public class RoomType {
 
     public void setRoomType(String roomType) {
         this.roomType = roomType;
-    }
-
-    public float getPrice() {
-        return currentPrice;
-    }
-
-    public void setPrice(float price) {
-        this.currentPrice = price;
     }
 }

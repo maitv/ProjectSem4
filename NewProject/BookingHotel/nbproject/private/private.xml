@@ -13,9 +13,10 @@
             <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/web/UserConfirmation.xhtml</file>
             <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/web/SelectRoom.xhtml</file>
             <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/web/layout/footer.xhtml</file>
+            <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/web/css/a.css</file>
+            <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/web/css/jquery.bxslider.css</file>
             <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/src/java/entity/Payments.java</file>
             <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/web/SelectService.xhtml</file>
-            <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/web/layout/footer.jsp</file>
             <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/src/java/entity/Room.java</file>
             <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/src/java/entity/Receipts.java</file>
             <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/src/java/entity/RoomType.java</file>
@@ -26,7 +27,6 @@
             <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/src/java/app/BookingRoomBean.java</file>
             <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/src/java/entity/BookingRoom.java</file>
             <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/web/layout/header.xhtml</file>
-            <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/web/layout/header.jsp</file>
             <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/web/UserInputInformation.xhtml</file>
         </group>
     </open-files>

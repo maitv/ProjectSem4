@@ -11,6 +11,8 @@ Create table RoomType
 	roomTypeId int primary key,
 	roomType nvarchar(50),
 	currentPrice float,
+	imageSmall nvarchar(255),
+	imageLarge nvarchar(255),
 	roomTypeDesc nvarchar(50)
 
 )
