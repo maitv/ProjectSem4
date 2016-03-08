@@ -5,11 +5,13 @@
  */
 package entity;
 
+import java.io.Serializable;
+
 /**
  *
  * @author mai
  */
-public class RoomType {
+public class RoomType implements Serializable {
 
     private int roomTypeId;
     private String roomType;
@@ -49,6 +51,7 @@ public class RoomType {
     public void setImageLarge(String imageLarge) {
         this.imageLarge = imageLarge;
     }
+
     public int getRoomTypeId() {
         return roomTypeId;
     }

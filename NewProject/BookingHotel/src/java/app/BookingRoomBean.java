@@ -5,8 +5,14 @@
  */
 package app;
 
+import entity.Room;
 import entity.RoomType;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import model.DataProcess;
@@ -24,7 +30,7 @@ public class BookingRoomBean {
 
     // roomtype list
     private List<RoomType> roomTypeList;
-    
+
     private String selectedRoomTypeId;
 
     public String getSelectedRoomTypeId() {
@@ -34,12 +40,13 @@ public class BookingRoomBean {
     public void setSelectedRoomTypeId(String selectedRoomTypeId) {
         this.selectedRoomTypeId = selectedRoomTypeId;
     }
-    
 
     public List<RoomType> getRoomTypeList() {
         DataProcess dp = new DataProcess();
 
         roomTypeList = dp.getAllRoomType();
+        
+        selectedRoomTypeId = roomTypeList.get(0).getRoomTypeId()+"";
 
         return roomTypeList;
     }
@@ -75,8 +82,31 @@ public class BookingRoomBean {
         return "success";
     }
 
-    public String SelectService( String id ) {
+    public String SelectService(String id) {
         selectedRoomTypeId = id;
         return "success";
+    }
+
+    public List<Room> getRoomAvailable() {
+        System.out.println(checkinDate + " " + checkoutDate );
+        List<Room> li = null;
+        DataProcess dp = new DataProcess();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        java.util.Date cinDate;
+        java.util.Date coutDate;
+
+        try {
+            cinDate = sdf.parse(checkinDate);
+            java.sql.Date ciDate = new java.sql.Date(cinDate.getTime());
+
+            coutDate = sdf.parse(checkoutDate);
+            java.sql.Date coDate = new java.sql.Date(coutDate.getTime());
+            li = dp.getRoomsAvailable(selectedRoomTypeId, ciDate, coDate);
+        } catch (ParseException ex) {
+            Logger.getLogger(BookingRoomBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return li;
     }
 }

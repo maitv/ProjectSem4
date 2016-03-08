@@ -23,7 +23,7 @@
         <script type="text/javascript" src="js/jquery.bxslider.js"></script>
         <script type="text/javascript" src="js/a.js"></script>
         <link rel="stylesheet" href="css/table_style.css"></link>
-        <h:outputStylesheet library="css" name="table_style.css"  />
+        <!--h:outputStylesheet library="css" name="table_style.css"  /-->
     </h:head>
     <h:body>       
         <f:view>
@@ -52,35 +52,21 @@
                             <h:outputLabel value="Check-out : "/><h:inputText class="datepicker form-control" id="checkoutDate" value="#{bookingRoomBean.checkoutDate}" required="true" requiredMessage="Please select checkout date"/><br/>
                             <h:message for="checkoutDate" style="color:red"></h:message><br/>
                         </div>
+                        <div class="form-group">
+                            <h:selectOneMenu value="#{bookingRoomBean.selectedRoomTypeId}">
+                                <f:selectItems value="#{bookingRoomBean.roomTypeList}" var="c" itemLabel="#{c.roomType}" itemValue="#{c.roomTypeId}"></f:selectItems>
+                            </h:selectOneMenu>
+                        </div>
                         <div style="clear: both"></div>
-                        <h:dataTable value="#{bookingRoomBean.roomTypeList}" var="p"
+                        Hien thi danh sach phong available
+                        <h:dataTable value="#{bookingRoomBean.getRoomAvailable()}" var="p"
                                      styleClass="order-table"
                                      headerClass="order-table-header"
                                      rowClasses="order-table-row"
                                      >
                             <h:column>
-                                <!-- column header -->
-                                <f:facet name="header">Select your room</f:facet>
-                                <!-- row record -->
-                                <h:graphicImage library="images" width="150px" height="80px" name="#{p.imageSmall}" />
+                                #{p.roomNumber}
                             </h:column>
-                            <h:column>
-                                <!-- column header -->
-                                <f:facet name="header"></f:facet>
-                                <!-- row record -->
-                                #{p.roomType}
-                            </h:column>
-
-                            <h:column>
-                                <f:facet name="header">Daily rate</f:facet>
-                                    #{p.currentPrice}
-                            </h:column>
-
-                            <h:column>
-                                <f:facet name="header"></f:facet>
-                                <h:commandButton class="select" value="Select" action="#{bookingRoomBean.SelectService(p.roomTypeId)}" ></h:commandButton>
-                            </h:column>
-
                         </h:dataTable>
                     </h:form>
                 </div>

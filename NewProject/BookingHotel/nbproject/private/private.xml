@@ -5,29 +5,18 @@
         <group>
             <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/web/Home.xhtml</file>
             <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/web/Payment.xhtml</file>
-            <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/src/java/entity/Customer.java</file>
+            <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/web/js/jquery.bxslider.min.js</file>
             <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/src/java/model/DataProcess.java</file>
             <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/src/java/entity/Booking.java</file>
-            <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/web/WEB-INF/web.xml</file>
-            <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/web/Notice.xhtml</file>
-            <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/web/UserConfirmation.xhtml</file>
-            <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/web/SelectRoom.xhtml</file>
-            <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/web/layout/footer.xhtml</file>
-            <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/web/css/a.css</file>
-            <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/web/css/jquery.bxslider.css</file>
-            <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/src/java/entity/Payments.java</file>
-            <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/web/SelectService.xhtml</file>
             <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/src/java/entity/Room.java</file>
-            <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/src/java/entity/Receipts.java</file>
+            <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/web/js/jquery.bxslider.js</file>
+            <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/web/SelectRoom.xhtml</file>
+            <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/web/css/table_style.css</file>
+            <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/web/css/a.css</file>
             <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/src/java/entity/RoomType.java</file>
-            <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/src/java/entity/Service.java</file>
-            <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/web/WEB-INF/faces-config.xml</file>
             <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/web/js/a.js</file>
-            <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/src/java/entity/BookingService.java</file>
             <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/src/java/app/BookingRoomBean.java</file>
-            <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/src/java/entity/BookingRoom.java</file>
-            <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/web/layout/header.xhtml</file>
-            <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/web/UserInputInformation.xhtml</file>
+            <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/web/SelectService.xhtml</file>
         </group>
     </open-files>
 </project-private>

@@ -43,16 +43,21 @@ go
 Create table Booking
 (
 	bookingId nvarchar(50) primary key,
+	roomNumber nvarchar(20),
 	customerId nvarchar(30),
 	bookingDate date,
-	checkinDate datetime,
-	checkoutDate datetime,
+	checkinDate date,
+	checkoutDate date,
 	bookingComment nvarchar(300),
 	[status] int
 )
 go
 
 alter table Booking add foreign key (customerId) references Customer(customerId)
+
+go
+
+alter table Booking add foreign key (roomNumber) references Room(roomNumber)
 
 go
 
