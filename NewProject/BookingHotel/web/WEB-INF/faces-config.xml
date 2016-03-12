@@ -7,14 +7,18 @@
         <from-view-id>/Home.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>success</from-outcome>
-            <to-view-id>/SelectRoom.xhtml</to-view-id>
+            <to-view-id>/SearchRoom.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
-        <from-view-id>/SelectRoom.xhtml</from-view-id>
+        <from-view-id>/SearchRoom.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>success</from-outcome>
-            <to-view-id>/SelectService.xhtml</to-view-id>
+            <to-view-id>/SelectRoom.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>failed</from-outcome>
+            <to-view-id>/SearchRoom.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 </faces-config>

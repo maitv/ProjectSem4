@@ -45,8 +45,8 @@ public class BookingRoomBean {
         DataProcess dp = new DataProcess();
 
         roomTypeList = dp.getAllRoomType();
-        
-        selectedRoomTypeId = roomTypeList.get(0).getRoomTypeId()+"";
+
+        selectedRoomTypeId = roomTypeList.get(0).getRoomTypeId() + "";
 
         return roomTypeList;
     }
@@ -77,7 +77,7 @@ public class BookingRoomBean {
     public BookingRoomBean() {
     }
 
-    public String gotoSelectRoom() {
+    public String gotoSearchRoom() {
 //        RequestCOn
         return "success";
     }
@@ -88,7 +88,11 @@ public class BookingRoomBean {
     }
 
     public List<Room> getRoomAvailable() {
-        System.out.println(checkinDate + " " + checkoutDate );
+        if (checkinDate == null || "".equals(checkinDate)
+                || checkoutDate == null || "".equals(checkoutDate)) {
+            return null;
+        }
+
         List<Room> li = null;
         DataProcess dp = new DataProcess();
 
@@ -109,4 +113,9 @@ public class BookingRoomBean {
 
         return li;
     }
+
+    public String gotoSelectRoom() {
+        return "success";
+    }
+
 }

@@ -6,7 +6,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
-        <title>Select Room</title>
+        <title>Search Room</title>
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css"></link>
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
         <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
@@ -39,29 +39,28 @@
                     <!--End Slider-->
                     <div class="col-md-12 main-product">
                         <div class="room-title">
-                            <h2>Select Room</h2>
+                            <h2>Search Room</h2>
                             <div class="sperad"></div>
                         </div>
                     </div>
                     <h:form class="main-product main-form">
-                        <h:outputText value="List room here"/>
-<!--                        <div class="form-group">
-                            <h:outputText value="Check-in:"/><h:inputText class="datepicker form-control" id="checkinDate" value="{bookingRoomBean.checkinDate}" required="true" requiredMessage="Please select checkin date"/><br/>
+                        <div class="form-group">
+                            <h:outputText value="Check-in:"/><h:inputText class="datepicker form-control" id="checkinDate" value="#{bookingRoomBean.checkinDate}" required="true" requiredMessage="Please select checkin date"/><br/>
                             <h:message for="checkinDate" style="color:red"></h:message><br/>
                         </div>
                         <div class="form-group">
-                            <h:outputLabel value="Check-out : "/><h:inputText class="datepicker form-control" id="checkoutDate" value="{bookingRoomBean.checkoutDate}" required="true" requiredMessage="Please select checkout date"/><br/>
+                            <h:outputLabel value="Check-out : "/><h:inputText class="datepicker form-control" id="checkoutDate" value="#{bookingRoomBean.checkoutDate}" required="true" requiredMessage="Please select checkout date"/><br/>
                             <h:message for="checkoutDate" style="color:red"></h:message><br/>
                         </div>
                         <div class="form-group">
                             <h:outputLabel value="Room type : "/>
-                            <h:selectOneMenu value="{bookingRoomBean.selectedRoomTypeId}">
-                                <f:selectItems value="{bookingRoomBean.roomTypeList}" var="c" itemLabel="{c.roomType}" itemValue="{c.roomTypeId}"></f:selectItems>
+                            <h:selectOneMenu value="#{bookingRoomBean.selectedRoomTypeId}">
+                                <f:selectItems value="#{bookingRoomBean.roomTypeList}" var="c" itemLabel="#{c.roomType}" itemValue="#{c.roomTypeId}"></f:selectItems>
                             </h:selectOneMenu>
                         </div>
                         <div class="form-group">
-                            <h:commandButton value="Select Room" action="" class="button"/>
-                        </div>-->
+                            <h:commandButton value="Search Room" action="#{bookingRoomBean.gotoSelectRoom()}" class="button"/>
+                        </div>
 <!--                        <div style="clear: both"></div>
                         Hien thi danh sach phong available
                         <h:dataTable value="{bookingRoomBean.getRoomAvailable()}" var="p"
