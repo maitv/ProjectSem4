@@ -5,9 +5,9 @@
  */
 package app;
 
+import entity.Floor;
 import entity.Room;
 import entity.RoomType;
-import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -87,13 +87,13 @@ public class BookingRoomBean {
         return "success";
     }
 
-    public List<Room> getRoomAvailable() {
+    public List<Floor> getRoomsAvailableByFloor() {
         if (checkinDate == null || "".equals(checkinDate)
                 || checkoutDate == null || "".equals(checkoutDate)) {
             return null;
         }
 
-        List<Room> li = null;
+        List<Floor> li = null;
         DataProcess dp = new DataProcess();
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -106,7 +106,7 @@ public class BookingRoomBean {
 
             coutDate = sdf.parse(checkoutDate);
             java.sql.Date coDate = new java.sql.Date(coutDate.getTime());
-            li = dp.getRoomsAvailable(selectedRoomTypeId, ciDate, coDate);
+            li = dp.getRoomsAvailableByFloor(selectedRoomTypeId, ciDate, coDate);
         } catch (ParseException ex) {
             Logger.getLogger(BookingRoomBean.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -45,34 +45,53 @@
                     </div>
                     <h:form class="main-product main-form">
                         <h:outputText value="List room here"/>
-<!--                        <div class="form-group">
-                            <h:outputText value="Check-in:"/><h:inputText class="datepicker form-control" id="checkinDate" value="{bookingRoomBean.checkinDate}" required="true" requiredMessage="Please select checkin date"/><br/>
-                            <h:message for="checkinDate" style="color:red"></h:message><br/>
-                        </div>
-                        <div class="form-group">
-                            <h:outputLabel value="Check-out : "/><h:inputText class="datepicker form-control" id="checkoutDate" value="{bookingRoomBean.checkoutDate}" required="true" requiredMessage="Please select checkout date"/><br/>
-                            <h:message for="checkoutDate" style="color:red"></h:message><br/>
-                        </div>
-                        <div class="form-group">
-                            <h:outputLabel value="Room type : "/>
-                            <h:selectOneMenu value="{bookingRoomBean.selectedRoomTypeId}">
-                                <f:selectItems value="{bookingRoomBean.roomTypeList}" var="c" itemLabel="{c.roomType}" itemValue="{c.roomTypeId}"></f:selectItems>
-                            </h:selectOneMenu>
-                        </div>
-                        <div class="form-group">
-                            <h:commandButton value="Select Room" action="" class="button"/>
-                        </div>-->
-<!--                        <div style="clear: both"></div>
-                        Hien thi danh sach phong available
-                        <h:dataTable value="{bookingRoomBean.getRoomAvailable()}" var="p"
+                        <h:dataTable value="#{bookingRoomBean.getRoomsAvailableByFloor()}" var="p"
                                      styleClass="order-table"
                                      headerClass="order-table-header"
                                      rowClasses="order-table-row"
                                      >
                             <h:column>
-                                {p.roomNumber}
+                                Floor #{p.floorNo}
                             </h:column>
-                        </h:dataTable>-->
+                            <h:column>
+                                <h:dataTable value="#{p.roomList}" var="r"
+                                             styleClass="order-table"
+                                             headerClass="order-table-header"
+                                             rowClasses="order-table-row" >
+                                    <h:column>
+                                        #{r.roomNumber}
+                                    </h:column>        
+                                </h:dataTable>
+                            </h:column>
+                        </h:dataTable>
+                        <!--                        <div class="form-group">
+                                                    <h:outputText value="Check-in:"/><h:inputText class="datepicker form-control" id="checkinDate" value="{bookingRoomBean.checkinDate}" required="true" requiredMessage="Please select checkin date"/><br/>
+                                                    <h:message for="checkinDate" style="color:red"></h:message><br/>
+                                                </div>
+                                                <div class="form-group">
+                                                    <h:outputLabel value="Check-out : "/><h:inputText class="datepicker form-control" id="checkoutDate" value="{bookingRoomBean.checkoutDate}" required="true" requiredMessage="Please select checkout date"/><br/>
+                                                    <h:message for="checkoutDate" style="color:red"></h:message><br/>
+                                                </div>
+                                                <div class="form-group">
+                                                    <h:outputLabel value="Room type : "/>
+                                                    <h:selectOneMenu value="{bookingRoomBean.selectedRoomTypeId}">
+                                                        <f:selectItems value="{bookingRoomBean.roomTypeList}" var="c" itemLabel="{c.roomType}" itemValue="{c.roomTypeId}"></f:selectItems>
+                                                    </h:selectOneMenu>
+                                                </div>
+                                                <div class="form-group">
+                                                    <h:commandButton value="Select Room" action="" class="button"/>
+                                                </div>-->
+                        <!--                        <div style="clear: both"></div>
+                                                Hien thi danh sach phong available
+                                                <h:dataTable value="{bookingRoomBean.getRoomAvailable()}" var="p"
+                                                             styleClass="order-table"
+                                                             headerClass="order-table-header"
+                                                             rowClasses="order-table-row"
+                                                             >
+                                                    <h:column>
+                                                        {p.roomNumber}
+                                                    </h:column>
+                                                </h:dataTable>-->
                     </h:form>
                 </div>
             </h:panelGroup> 

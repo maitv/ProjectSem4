@@ -6,6 +6,7 @@
 package model;
 
 import entity.Booking;
+import entity.Floor;
 import entity.Room;
 import entity.RoomType;
 import entity.Service;
@@ -21,6 +22,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -136,6 +139,52 @@ public class DataProcess {
         return list;
     }
 
+    public ArrayList<Floor> getRoomsAvailableByFloor(String roomTypeId, Date s, Date e) {
+
+        ArrayList<Room> roomList = getRoomsAvailable(roomTypeId, s, e);
+
+        ArrayList<Floor> list = null;
+        Map<String, Floor> map = new TreeMap<>();
+
+        for (Room r : roomList) {
+            int roomNo = Integer.parseInt(r.getRoomNumber());
+            int floorNo = roomNo / 100; // roomNo format : FloorNo + RoomNo. ex: 101, 202,..
+
+            if (map.containsKey(String.valueOf(floorNo))) {
+                // first
+                Floor floor = map.get(String.valueOf(floorNo));
+                List<Room> liTemp = floor.getRoomList();
+                liTemp.add(r);
+
+                floor.setRoomList(liTemp);
+
+                // update in map
+                map.remove(String.valueOf(floorNo));
+                map.put(String.valueOf(floorNo), floor);
+            } else {
+                // Not exist
+                Floor floor = new Floor();
+                floor.setFloorNo(String.valueOf(floorNo));
+
+                ArrayList<Room> li = new ArrayList<>();
+                li.add(r);
+
+                floor.setRoomList(li);
+
+                map.put(String.valueOf(floorNo), floor);
+            }
+        }
+
+        list = new ArrayList<>();
+        for (String key : map.keySet()) {
+            Floor f = map.get(key);
+
+            list.add(f);
+        }
+
+        return list;
+    }
+
     public ArrayList<Room> getRoomsAvailable(String roomTypeId, Date s, Date e) {
         ArrayList<Room> list = new ArrayList();
         Connection cnn = getConnection();
@@ -144,7 +193,7 @@ public class DataProcess {
         }
 
         String query = "SELECT * FROM Room WHERE roomTypeId=? AND roomStatus != 1 AND roomNumber NOT IN ("
-//                + " SELECT roomNumber FROM Booking WHERE ? >= checkinDate AND ? <= checkoutDate " + ")";
+                //                + " SELECT roomNumber FROM Booking WHERE ? >= checkinDate AND ? <= checkoutDate " + ")";
                 + " SELECT roomNumber FROM Booking WHERE ( ? BETWEEN checkinDate AND checkoutDate ) OR ( ? BETWEEN checkinDate AND checkoutDate ) " + ")";
         try {
             PreparedStatement prst = cnn.prepareCall(query);
