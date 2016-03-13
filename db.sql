@@ -1,131 +1,213 @@
-Create database BookingRoom
-
-go
-
-use BookingRoom
-
-go
-
-Create table RoomType
+Use master
+CREATE DATABASE BookingRoom
+GO
+USE [BookingRoom]
+GO
+/****** Object:  Table [dbo].[Booking]    Script Date: 3/13/2016 4:31:28 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Booking](
+	[bookingId] [nvarchar](50) NOT NULL,
+	[roomNumber] [nvarchar](20) NULL,
+	[customerId] [nvarchar](30) NULL,
+	[bookingDate] [date] NULL,
+	[checkinDate] [date] NULL,
+	[checkoutDate] [date] NULL,
+	[bookingComment] [nvarchar](300) NULL,
+	[status] [int] NULL,
+PRIMARY KEY CLUSTERED 
 (
-	roomTypeId int primary key,
-	roomType nvarchar(50),
-	currentPrice float,
-	imageSmall nvarchar(255),
-	imageLarge nvarchar(255),
-	roomTypeDesc nvarchar(50)
+	[bookingId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
 
-)
-go
+GO
+/****** Object:  Table [dbo].[BookingRoom]    Script Date: 3/13/2016 4:31:28 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[BookingRoom](
+	[bookingId] [nvarchar](50) NULL,
+	[roomNumber] [nvarchar](20) NULL
+) ON [PRIMARY]
 
-Create table Room
+GO
+/****** Object:  Table [dbo].[BookingService]    Script Date: 3/13/2016 4:31:28 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[BookingService](
+	[serviceId] [nvarchar](50) NULL,
+	[bookingId] [nvarchar](50) NULL
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Customer]    Script Date: 3/13/2016 4:31:28 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Customer](
+	[customerId] [nvarchar](30) NOT NULL,
+	[customerName] [nvarchar](50) NULL,
+	[customerCountry] [nvarchar](50) NULL,
+	[customerIdentityNo] [nvarchar](50) NULL,
+	[customerDOB] [date] NULL,
+	[customerAddress] [nvarchar](50) NULL,
+	[customerPhone] [nvarchar](20) NULL,
+	[customerEmail] [nvarchar](50) NULL,
+PRIMARY KEY CLUSTERED 
 (
-	roomNumber nvarchar(20) primary key,
-	roomTypeId int,
-	roomDesc nvarchar(50),
-	roomStatus int,
-)
+	[customerId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
 
-alter table Room add foreign key (roomTypeId) references RoomType(roomTypeId)
-
-Create table Customer
+GO
+/****** Object:  Table [dbo].[Payments]    Script Date: 3/13/2016 4:31:28 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Payments](
+	[paymentId] [nvarchar](50) NOT NULL,
+	[bookingId] [nvarchar](50) NULL,
+	[paymentAmount] [float] NULL,
+	[amountPaid] [float] NULL,
+	[paymentComment] [nvarchar](300) NULL,
+PRIMARY KEY CLUSTERED 
 (
-	customerId nvarchar(30) primary key,
-	customerName nvarchar(50),
-	customerIndentifyCard nvarchar(50),
-	customerDOB date,
-	customerAddress nvarchar(50),
-	customerPhone nvarchar(20),
-	customerEmail nvarchar(50)
-)
-go
+	[paymentId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
 
-Create table Booking
+GO
+/****** Object:  Table [dbo].[Receipts]    Script Date: 3/13/2016 4:31:28 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Receipts](
+	[receiptNo] [nvarchar](50) NOT NULL,
+	[paymentId] [nvarchar](50) NULL,
+	[amount] [float] NULL,
+	[datePaid] [date] NULL,
+	[receiptComment] [nvarchar](300) NULL,
+PRIMARY KEY CLUSTERED 
 (
-	bookingId nvarchar(50) primary key,
-	roomNumber nvarchar(20),
-	customerId nvarchar(30),
-	bookingDate date,
-	checkinDate date,
-	checkoutDate date,
-	bookingComment nvarchar(300),
-	[status] int
-)
-go
+	[receiptNo] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
 
-alter table Booking add foreign key (customerId) references Customer(customerId)
-
-go
-
-alter table Booking add foreign key (roomNumber) references Room(roomNumber)
-
-go
-
-Create table BookingRoom
+GO
+/****** Object:  Table [dbo].[Room]    Script Date: 3/13/2016 4:31:28 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Room](
+	[roomNumber] [nvarchar](20) NOT NULL,
+	[roomTypeId] [int] NULL,
+	[roomDesc] [nvarchar](50) NULL,
+	[roomStatus] [int] NULL,
+PRIMARY KEY CLUSTERED 
 (
-	bookingId nvarchar(50),
-	roomNumber nvarchar(20)
-)
+	[roomNumber] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
 
-alter table BookingRoom add foreign key (bookingId) references Booking(bookingId)
-
-go
-
-alter table BookingRoom add foreign key (roomNumber) references Room(roomNumber)
-
-go
-
---alter table Booking add foreign key (roomNumber) references Room(roomNumber)
-
-Create table [Service]
+GO
+/****** Object:  Table [dbo].[RoomType]    Script Date: 3/13/2016 4:31:28 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[RoomType](
+	[roomTypeId] [int] NOT NULL,
+	[roomType] [nvarchar](50) NULL,
+	[currentPrice] [float] NULL,
+	[imageSmall] [nvarchar](255) NULL,
+	[imageLarge] [nvarchar](255) NULL,
+	[roomTypeDesc] [nvarchar](50) NULL,
+PRIMARY KEY CLUSTERED 
 (
-	serviceId nvarchar(50) primary key,
-	serviceName nvarchar(50),
-	servicePrice float,
-	serviceDesc nvarchar(50)
-)
-go
+	[roomTypeId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
 
-Create table BookingService
+GO
+/****** Object:  Table [dbo].[Service]    Script Date: 3/13/2016 4:31:28 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Service](
+	[serviceId] [nvarchar](50) NOT NULL,
+	[serviceName] [nvarchar](50) NULL,
+	[servicePrice] [float] NULL,
+	[serviceDesc] [nvarchar](50) NULL,
+PRIMARY KEY CLUSTERED 
 (
-	serviceId nvarchar(50),
-	bookingId nvarchar(50),
-)
-go
+	[serviceId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
 
-alter table BookingService add foreign key (bookingId) references Booking(bookingId)
-
-go
-
-alter table BookingService add foreign key (serviceId) references Service(serviceId)
-
-go
-
-Create table Payments
-(
-	paymentId nvarchar(50) primary key,
-	bookingId nvarchar(50),
-	paymentAmount float,
-	amountPaid float,
-	paymentComment nvarchar(300)
-)
-go
-
-alter table Payments add foreign key (bookingId) references Booking(bookingId)
-
-go
-
-Create table Receipts
-(
-	receiptNo nvarchar(50) primary key,
-	paymentId nvarchar(50),
-	amount float,
-	datePaid date,
-	receiptComment nvarchar(300)
-)
-go
-
-alter table Receipts add foreign key (paymentId) references Payments(paymentId)
-
-go
-
+GO
+INSERT [dbo].[Room] ([roomNumber], [roomTypeId], [roomDesc], [roomStatus]) VALUES (N'101', 6, NULL, 0)
+GO
+INSERT [dbo].[Room] ([roomNumber], [roomTypeId], [roomDesc], [roomStatus]) VALUES (N'102', 6, NULL, 0)
+GO
+INSERT [dbo].[Room] ([roomNumber], [roomTypeId], [roomDesc], [roomStatus]) VALUES (N'103', 5, NULL, 0)
+GO
+INSERT [dbo].[Room] ([roomNumber], [roomTypeId], [roomDesc], [roomStatus]) VALUES (N'201', 4, NULL, 0)
+GO
+INSERT [dbo].[Room] ([roomNumber], [roomTypeId], [roomDesc], [roomStatus]) VALUES (N'202', 4, NULL, 0)
+GO
+INSERT [dbo].[Room] ([roomNumber], [roomTypeId], [roomDesc], [roomStatus]) VALUES (N'301', 3, NULL, 0)
+GO
+INSERT [dbo].[Room] ([roomNumber], [roomTypeId], [roomDesc], [roomStatus]) VALUES (N'401', 2, NULL, 0)
+GO
+INSERT [dbo].[Room] ([roomNumber], [roomTypeId], [roomDesc], [roomStatus]) VALUES (N'501', 1, NULL, 0)
+GO
+INSERT [dbo].[RoomType] ([roomTypeId], [roomType], [currentPrice], [imageSmall], [imageLarge], [roomTypeDesc]) VALUES (1, N'VIP', 1000, NULL, NULL, NULL)
+GO
+INSERT [dbo].[RoomType] ([roomTypeId], [roomType], [currentPrice], [imageSmall], [imageLarge], [roomTypeDesc]) VALUES (2, N'Premium 4', 500, NULL, NULL, NULL)
+GO
+INSERT [dbo].[RoomType] ([roomTypeId], [roomType], [currentPrice], [imageSmall], [imageLarge], [roomTypeDesc]) VALUES (3, N'Premium 2', 300, NULL, NULL, NULL)
+GO
+INSERT [dbo].[RoomType] ([roomTypeId], [roomType], [currentPrice], [imageSmall], [imageLarge], [roomTypeDesc]) VALUES (4, N'Normal 4', 200, NULL, NULL, NULL)
+GO
+INSERT [dbo].[RoomType] ([roomTypeId], [roomType], [currentPrice], [imageSmall], [imageLarge], [roomTypeDesc]) VALUES (5, N'Normal 2', 100, NULL, NULL, NULL)
+GO
+INSERT [dbo].[RoomType] ([roomTypeId], [roomType], [currentPrice], [imageSmall], [imageLarge], [roomTypeDesc]) VALUES (6, N'Normal 1', 50, NULL, NULL, NULL)
+GO
+ALTER TABLE [dbo].[Booking]  WITH CHECK ADD FOREIGN KEY([customerId])
+REFERENCES [dbo].[Customer] ([customerId])
+GO
+ALTER TABLE [dbo].[Booking]  WITH CHECK ADD FOREIGN KEY([roomNumber])
+REFERENCES [dbo].[Room] ([roomNumber])
+GO
+ALTER TABLE [dbo].[BookingRoom]  WITH CHECK ADD FOREIGN KEY([bookingId])
+REFERENCES [dbo].[Booking] ([bookingId])
+GO
+ALTER TABLE [dbo].[BookingRoom]  WITH CHECK ADD FOREIGN KEY([roomNumber])
+REFERENCES [dbo].[Room] ([roomNumber])
+GO
+ALTER TABLE [dbo].[BookingService]  WITH CHECK ADD FOREIGN KEY([bookingId])
+REFERENCES [dbo].[Booking] ([bookingId])
+GO
+ALTER TABLE [dbo].[BookingService]  WITH CHECK ADD FOREIGN KEY([serviceId])
+REFERENCES [dbo].[Service] ([serviceId])
+GO
+ALTER TABLE [dbo].[Payments]  WITH CHECK ADD FOREIGN KEY([bookingId])
+REFERENCES [dbo].[Booking] ([bookingId])
+GO
+ALTER TABLE [dbo].[Receipts]  WITH CHECK ADD FOREIGN KEY([paymentId])
+REFERENCES [dbo].[Payments] ([paymentId])
+GO
+ALTER TABLE [dbo].[Room]  WITH CHECK ADD FOREIGN KEY([roomTypeId])
+REFERENCES [dbo].[RoomType] ([roomTypeId])
+GO
