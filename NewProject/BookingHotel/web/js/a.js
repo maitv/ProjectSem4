@@ -8,7 +8,11 @@ $(document).ready(function() {
         changeYear: true,
         minDate: 0
     });
-    
+    $(".dobpicker").datepicker({
+        dateFormat: 'dd-mm-yy',
+        changeMonth: true,
+        changeYear: true,
+    });
     $('.slider1').bxSlider({
         slideWidth: 1170,
         minSlides: 1,

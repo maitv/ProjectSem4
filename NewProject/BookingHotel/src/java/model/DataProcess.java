@@ -6,6 +6,7 @@
 package model;
 
 import entity.Booking;
+import entity.Floor;
 import entity.Room;
 import entity.RoomType;
 import entity.Service;
@@ -21,6 +22,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -136,6 +139,52 @@ public class DataProcess {
         return list;
     }
 
+    public ArrayList<Floor> getRoomsAvailableByFloor(String roomTypeId, Date s, Date e) {
+
+        ArrayList<Room> roomList = getRoomsAvailable(roomTypeId, s, e);
+
+        ArrayList<Floor> list = null;
+        Map<String, Floor> map = new TreeMap<>();
+
+        for (Room r : roomList) {
+            int roomNo = Integer.parseInt(r.getRoomNumber());
+            int floorNo = roomNo / 100; // roomNo format : FloorNo + RoomNo. ex: 101, 202,..
+
+            if (map.containsKey(String.valueOf(floorNo))) {
+                // first
+                Floor floor = map.get(String.valueOf(floorNo));
+                List<Room> liTemp = floor.getRoomList();
+                liTemp.add(r);
+
+                floor.setRoomList(liTemp);
+
+                // update in map
+                map.remove(String.valueOf(floorNo));
+                map.put(String.valueOf(floorNo), floor);
+            } else {
+                // Not exist
+                Floor floor = new Floor();
+                floor.setFloorNo(String.valueOf(floorNo));
+
+                ArrayList<Room> li = new ArrayList<>();
+                li.add(r);
+
+                floor.setRoomList(li);
+
+                map.put(String.valueOf(floorNo), floor);
+            }
+        }
+
+        list = new ArrayList<>();
+        for (String key : map.keySet()) {
+            Floor f = map.get(key);
+
+            list.add(f);
+        }
+
+        return list;
+    }
+
     public ArrayList<Room> getRoomsAvailable(String roomTypeId, Date s, Date e) {
         ArrayList<Room> list = new ArrayList();
         Connection cnn = getConnection();
@@ -174,7 +223,7 @@ public class DataProcess {
 
         return list;
     }
-
+    
     public ArrayList<RoomType> getAllRoomType() {
         ArrayList<RoomType> list = new ArrayList();
         Connection cnn = getConnection();
@@ -216,6 +265,7 @@ public class DataProcess {
         return list;
     }
 
+    
     public ArrayList<Service> getAllService() {
         ArrayList<Service> list = new ArrayList();
         Connection cnn = getConnection();
@@ -258,22 +308,25 @@ public class DataProcess {
             String checkinDate,
             String checkoutDate,
             String customerName,
-            String identifyCard,
+            String country,
+            String identityNo,
+            Date dob,
             String address,
             String phoneNumber,
             String email,
             String[] services) {
         // TODO:
         // 1. Add to Customer table
-        if (!isExistCustomer(identifyCard)) {
-            if (!addCustomer(customerName, identifyCard, address, phoneNumber, email)) {
+        if (!isExistCustomer(identityNo)) {
+            if (!addCustomer(customerName,country,identityNo,dob,address,phoneNumber,email)) 
+            {
                 return false;
             }
         }
 
         // 2. Add to Booking table
-        String bookingId = getBookingId(identifyCard);
-        if (!addBooking(bookingId, roomNumber, identifyCard, checkinDate, checkoutDate)) {
+        String bookingId = getBookingId(identityNo);
+        if (!addBooking(bookingId, roomNumber, identityNo, checkinDate, checkoutDate)) {
             return false;
         }
 
@@ -384,7 +437,7 @@ public class DataProcess {
             return isFound;
         }
 
-        String query = "SELECT * FROM Customer WHERE customerIndentifyCard = ?";
+        String query = "SELECT * FROM Customer WHERE customerIdentityNo= ?";
         PreparedStatement prst;
         try {
             prst = cnn.prepareStatement(query);
@@ -399,10 +452,45 @@ public class DataProcess {
         }
 
         return isFound;
-    }
+    }/*
+    public boolean addNewCustomer(Customer cus)
+    {
+         Connection cnn = getConnection();
 
+        if (cnn == null) {
+            return false;
+        }
+
+        String query = "INSERT INTO Customer(customerName,customerCountry,customerIdentityNo,customerDOB,customerAddress,customerPhone,customerEmail) VALUES(?,?,?,?,?,?,?)";
+        try {
+            PreparedStatement prst = cnn.prepareStatement(query);
+
+            prst.setString(1, cus.getCustomerName());
+            prst.setString(2, cus.getCustomerCountry());
+            prst.setString(3, cus.getCustomerIdentityNo());
+            prst.setDate(4, new java.sql.Date(cus.getCustomerDOB().getTime()));
+            prst.setString(5, cus.getCustomerAddress());
+            prst.setString(6, cus.getCustomerPhone());
+            prst.setString(7, cus.getCustomerEmail());
+
+            int cnt = 0;
+            cnt = prst.executeUpdate();
+
+            if (cnt == 0) {
+                return false;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DataProcess.class.getName()).log(Level.SEVERE, null, ex);
+
+            return false;
+        }
+
+        return true;
+    }*/
     public boolean addCustomer(String customerName,
-            String identifyCard,
+            String country,
+            String identityNo,
+            java.util.Date dob,
             String address,
             String phoneNumber,
             String email) {
@@ -412,15 +500,17 @@ public class DataProcess {
             return false;
         }
 
-        String query = "INSERT INTO Customer VALUES(?,?,?,?,?)";
+        String query = "INSERT INTO Customer(customerName,customerCountry,customerIdentityNo,customerDOB,customerAddress,customerPhone,customerEmail) VALUES(?,?,?,?,?,?,?)";
         try {
             PreparedStatement prst = cnn.prepareStatement(query);
 
-            prst.setString(1, identifyCard);
-            prst.setString(2, customerName);
-            prst.setString(3, address);
-            prst.setString(4, phoneNumber);
-            prst.setString(5, email);
+            prst.setString(1, customerName);
+            prst.setString(2, country);
+            prst.setString(3, identityNo);
+            prst.setDate(4, new java.sql.Date(dob.getTime()));
+            prst.setString(5, address);
+            prst.setString(6, phoneNumber);
+            prst.setString(7, email);
 
             int cnt = 0;
             cnt = prst.executeUpdate();
@@ -521,6 +611,8 @@ public class DataProcess {
 
         return name;
     }
+    
+    
 
     public ArrayList<Room> getAllRoomByRoomTypeId(int roomTypeId) {
         ArrayList<Room> list = new ArrayList();

@@ -5,36 +5,28 @@
  */
 package entity;
 
-import java.sql.Date;
+import java.util.Date;
 
 /**
  *
- * @author mai
+ * @author Zito
  */
 public class Customer {
 
     private String customerId;
     private String customerName;
-    private String customerIndentifyCard;
+    private String customerCountry;
+    private String customerIdentityNo;
     private Date customerDOB;
     private String customerAddress;
     private String customerPhone;
     private String customerEmail;
-
-    public Date getCustomerDOB() {
-        return customerDOB;
+    
+    public Customer() {
     }
 
-    public String getCustomerPhone() {
-        return customerPhone;
-    }
-
-    public void setCustomerPhone(String customerPhone) {
-        this.customerPhone = customerPhone;
-    }
-
-    public void setCustomerDOB(Date customerDOB) {
-        this.customerDOB = customerDOB;
+    public Customer(String customerId) {
+        this.customerId = customerId;
     }
 
     public String getCustomerId() {
@@ -53,12 +45,28 @@ public class Customer {
         this.customerName = customerName;
     }
 
-    public String getCustomerIndentifyCard() {
-        return customerIndentifyCard;
+    public String getCustomerCountry() {
+        return customerCountry;
     }
 
-    public void setCustomerIndentifyCard(String customerIndentifyCard) {
-        this.customerIndentifyCard = customerIndentifyCard;
+    public void setCustomerCountry(String customerCountry) {
+        this.customerCountry = customerCountry;
+    }
+
+    public String getCustomerIdentityNo() {
+        return customerIdentityNo;
+    }
+
+    public void setCustomerIdentityNo(String customerIdentityNo) {
+        this.customerIdentityNo = customerIdentityNo;
+    }
+
+    public Date getCustomerDOB() {
+        return customerDOB;
+    }
+
+    public void setCustomerDOB(Date customerDOB) {
+        this.customerDOB = customerDOB;
     }
 
     public String getCustomerAddress() {
@@ -69,6 +77,14 @@ public class Customer {
         this.customerAddress = customerAddress;
     }
 
+    public String getCustomerPhone() {
+        return customerPhone;
+    }
+
+    public void setCustomerPhone(String customerPhone) {
+        this.customerPhone = customerPhone;
+    }
+
     public String getCustomerEmail() {
         return customerEmail;
     }
@@ -76,5 +92,4 @@ public class Customer {
     public void setCustomerEmail(String customerEmail) {
         this.customerEmail = customerEmail;
     }
-
 }
