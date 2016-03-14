@@ -161,7 +161,7 @@ public class BookingRoomBean implements Serializable {
     }
 
     public void test() {
-        totalPrice=0;
+        totalPrice = 0;
         if (!selectedRoom.isEmpty()) {
             for (int i = 0; i < selectedRoom.size(); i++) {
                 totalPrice += getPrice(String.valueOf(selectedRoom.get(i).getRoomTypeId()));
@@ -292,6 +292,33 @@ public class BookingRoomBean implements Serializable {
     }
 
     public String gotoSelectRoom() {
+        if (checkinDate == null || "".equals(checkinDate)
+                || checkoutDate == null || "".equals(checkoutDate)) {
+            return "failed";
+        }
+
+        List<Room> li = null;
+        DataProcess dp = new DataProcess();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        java.util.Date cinDate;
+        java.util.Date coutDate;
+
+        try {
+            cinDate = sdf.parse(checkinDate);
+            java.sql.Date ciDate = new java.sql.Date(cinDate.getTime());
+
+            coutDate = sdf.parse(checkoutDate);
+            java.sql.Date coDate = new java.sql.Date(coutDate.getTime());
+            li = dp.getRoomsAvailable(selectedRoomTypeId, ciDate, coDate);
+        } catch (ParseException ex) {
+            Logger.getLogger(BookingRoomBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if (li == null || li.size() <= 0) {
+            return "failed";
+        }
+        
         return "success";
     }
 
@@ -310,8 +337,8 @@ public class BookingRoomBean implements Serializable {
         cus.setCustomerPhone(customerPhone);
 
         /*
-        DataProcess dp=new DataProcess();
-        dp.addCustomer(customerName,customerCountry,customerIdentityNo,customerDOB,customerAddress,customerPhone, customerEmail); */
+         DataProcess dp=new DataProcess();
+         dp.addCustomer(customerName,customerCountry,customerIdentityNo,customerDOB,customerAddress,customerPhone, customerEmail); */
         return "success";
     }
 
