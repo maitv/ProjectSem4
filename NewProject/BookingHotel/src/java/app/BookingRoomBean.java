@@ -232,8 +232,14 @@ public class BookingRoomBean implements Serializable {
         return "success";
     }
 
-    public String SelectService(String id) {
-        selectedRoomTypeId = id;
+    public String SelectService(String id) {        
+        DataProcess dp=new DataProcess();
+        System.out.println(id);
+        Room r=dp.getRoomById(id);
+        System.out.println(r.getRoomNumber());
+        ArrayList<Room> list=new ArrayList<>();
+        list.add(r);
+        setSelectedRoom(list);
         return "success";
     }
 

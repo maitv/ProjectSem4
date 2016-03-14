@@ -56,6 +56,30 @@ public class DataProcess {
 
         return cnn;
     }
+    
+    public Room getRoomById(String id) {
+        Room r = null;
+        Connection cnn = getConnection();
+
+        String query = "SELECT * FROM Room WHERE RoomNumber = ?";
+        PreparedStatement prst;
+        try {
+            prst = cnn.prepareStatement(query);
+            prst.setString(1, id);
+
+            ResultSet rs = prst.executeQuery();
+            if (rs.next()) {
+                r = new Room();
+                r.setRoomNumber(id);
+                r.setRoomTypeId(rs.getInt(2));
+                r.setRoomDesc(rs.getString(3));
+                r.setRoomStatus(rs.getInt(4));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DataProcess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return r;
+    }
 
     public RoomType getRoomTypeById(int roomTypeId) {
         RoomType rt = null;
