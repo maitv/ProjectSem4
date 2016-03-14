@@ -270,7 +270,7 @@ public class BookingRoomBean implements Serializable {
             return null;
         }
 
-        List<Floor> li = null;
+        List<Room> li = null;
         DataProcess dp = new DataProcess();
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -283,7 +283,7 @@ public class BookingRoomBean implements Serializable {
 
             coutDate = sdf.parse(checkoutDate);
             java.sql.Date coDate = new java.sql.Date(coutDate.getTime());
-            li = dp.getRoomsAvailableByFloor(selectedRoomTypeId, ciDate, coDate);
+            li = dp.getRoomsAvailable(selectedRoomTypeId, ciDate, coDate);
         } catch (ParseException ex) {
             Logger.getLogger(BookingRoomBean.class.getName()).log(Level.SEVERE, null, ex);
         }
