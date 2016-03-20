@@ -7,6 +7,18 @@
     </h:head>
     <h:body>
        page thanh toán tiền order (cái này phải tìm hiểu xem thanh toán qua paypal thế nào -> cái này chỉ giả lập thôi)
+       (Xem trên demo.paypal.com)
+       
+       Góc trái Logo Paypal     Góc phải hiện logo hình giỏ hàng + tổng số phải trả
+       <h:outputText id="totalPrice" value="#{bookingRoomBean.totalPrice}"/>
+       <h:form>
+           Pay with PayPal
+           <h:inputText id="ppUsername" value="#{bookingRoomBean.ppUsername}"/>
+           <h:inputText id="ppPassword" value="#{bookingRoomBean.ppPassword}"/>
+           <h:commandButton type="Submit" value="Login to Paypal" action="#{bookingRoomBean.gotoppCheckout()}"/>           
+       </h:form>
+       
+       
     </h:body>
 </html>
 

@@ -8,7 +8,7 @@
     </h:head>
     <h:body>
         page confirmed các thông tin khách hàng đã nhập xem ok chưa
-        sẽ phải bao gồm cả phần hiển thị số tiền sẽ phải trả rồi
+        sẽ phải bao gồm cả phần hiển thị số tiền sẽ phải trả rồi (đặt cọc 50%, phần còn lại sẽ thanh toán lúc checkin)
         <h:form>
             <p:fieldset legend="Customer Information"  >
                 <h:outputLabel value="Full name: " />#{bookingRoomBean.customerName}" <br/>
@@ -47,7 +47,7 @@
             </tfoot>
         </table>
 
-        <h:commandButton value="Continue"/>
+            <h:commandButton value="Continue" action="#{bookingRoomBean.gotoPayment()}" />
         </h:form>
     </h:body>
 </html>

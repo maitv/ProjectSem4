@@ -6,6 +6,7 @@
 package model;
 
 import entity.Booking;
+import entity.Customer;
 import entity.Floor;
 import entity.Room;
 import entity.RoomType;
@@ -218,7 +219,8 @@ public class DataProcess {
 
         String query = "SELECT * FROM Room WHERE roomTypeId=? AND roomStatus != 1 AND roomNumber NOT IN ("
                 //                + " SELECT roomNumber FROM Booking WHERE ? >= checkinDate AND ? <= checkoutDate " + ")";
-                + " SELECT roomNumber FROM Booking WHERE ( ? BETWEEN checkinDate AND checkoutDate ) OR ( ? BETWEEN checkinDate AND checkoutDate ) " + ")";
+              // + " SELECT roomNumber FROM Booking WHERE ( ? BETWEEN checkinDate AND checkoutDate ) OR ( ? BETWEEN checkinDate AND checkoutDate ) " + ")";
+                +"SELECT roomNumber FROM BookingRoom INNER JOIN (SELECT * FROM Booking WHERE ( ? BETWEEN checkinDate AND checkoutDate ) OR ( ? BETWEEN checkinDate AND checkoutDate )))";
         try {
             PreparedStatement prst = cnn.prepareCall(query);
 
@@ -326,19 +328,21 @@ public class DataProcess {
 
         return list;
     }
+    
 
     public boolean booking(
-            int roomNumber,
+            List<Room> selectedRoom,
             String checkinDate,
             String checkoutDate,
             String customerName,
             String country,
             String identityNo,
-            Date dob,
+            java.util.Date dob,
             String address,
             String phoneNumber,
             String email,
-            String[] services) {
+            float total,
+            List<Service> services) {
         // TODO:
         // 1. Add to Customer table
         if (!isExistCustomer(identityNo)) {
@@ -350,15 +354,34 @@ public class DataProcess {
 
         // 2. Add to Booking table
         String bookingId = getBookingId(identityNo);
-        if (!addBooking(bookingId, roomNumber, identityNo, checkinDate, checkoutDate)) {
+        if (!addBooking(bookingId, identityNo, checkinDate, checkoutDate)) {
             return false;
         }
 
         // 3. Add to Booking service table
-        return addBookingService(bookingId, services);
+        if (!addBookingService(bookingId, services))
+        {
+            return false;
+        }
+        
+         // 4. Add to BookingRoom table
+        if (!addBookingRoom(bookingId, selectedRoom)) {
+            return false;
+        }
+        
+        //5. Add to Payments table
+        if(!addPayment(bookingId, total,""))
+        {
+            return false;
+        }
+        //6. Add to Receipts table
+        java.util.Date date=new java.util.Date();
+        return addPayPalReceipts(("Payment"+bookingId),(total/2),date,"Paypal");
     }
 
-    public boolean addBookingService(String bookingId, String[] services) {
+    
+    
+    public boolean addBookingService(String bookingId, List<Service> services) {
         Connection cnn = getConnection();
         if (cnn == null) {
             return false;
@@ -369,11 +392,11 @@ public class DataProcess {
         }
 
         String query = "INSERT INTO BookingService VALUES(?,?)";
-        int size = services.length;
+        int size = services.size();
         for (int i = 0; i < size; i++) {
             try {
                 PreparedStatement prst = cnn.prepareStatement(query);
-                prst.setString(1, services[i]);
+                prst.setString(1, services.get(i).getServiceId());
                 prst.setString(2, bookingId);
 
                 int cnt = prst.executeUpdate();
@@ -387,9 +410,37 @@ public class DataProcess {
         }
         return true;
     }
-
+    public boolean addBookingRoom(String bookingId,List<Room> selectedRoom)
+    {
+        Connection con=getConnection();
+        if (con == null) {
+            return false;
+        }
+        if (selectedRoom==null)
+        {
+            return false;
+        }
+        for (int i=0;i<selectedRoom.size();i++)
+        {
+            String query="INSERT INTO BookingRoom VALUES (?,?)";
+            PreparedStatement prst;
+            try {
+                prst=con.prepareStatement(query);
+                prst.setString(1, bookingId);
+                prst.setString(2, selectedRoom.get(i).getRoomNumber());
+                prst.executeQuery();
+                prst.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(DataProcess.class.getName()).log(Level.SEVERE, null, ex);
+                return false;
+            }
+            
+        }
+        return true;
+    }
+    
+    
     public boolean addBooking(String bookingId,
-            int roomNumber,
             String customerIdentfy,
             String checkinDate,
             String checkoutDate) {
@@ -397,25 +448,21 @@ public class DataProcess {
         if (cnn == null) {
             return false;
         }
-
         String query = "INSERT INTO Booking VALUES(?,?,?,?,?,?)";
         PreparedStatement prst;
         try {
             prst = cnn.prepareStatement(query);
             prst.setString(1, bookingId);
-            prst.setInt(2, roomNumber);
-            prst.setString(3, customerIdentfy);
-
+            prst.setString(2, customerIdentfy);
+            prst.setDate(3, new java.sql.Date(new java.util.Date().getTime()));            
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             java.util.Date cinDate;
             java.util.Date coutDate;
             try {
                 cinDate = sdf.parse(checkinDate);
                 java.sql.Date ciDate = new java.sql.Date(cinDate.getTime());
-
                 coutDate = sdf.parse(checkoutDate);
                 java.sql.Date coDate = new java.sql.Date(coutDate.getTime());
-
                 prst.setDate(4, ciDate);
                 prst.setDate(5, coDate);
                 prst.setInt(6, 0);
@@ -424,7 +471,6 @@ public class DataProcess {
                 prst.close();
                 return false;
             }
-            int status = 0;
 
             int cnt = prst.executeUpdate();
             if (cnt == 0) {
@@ -596,11 +642,12 @@ public class DataProcess {
             while (rs.next()) {
                 Booking r = new Booking();
                 r.setBookingId(rs.getString(1));
-//                r.setRoomNumber(rs.String(2));
-//                r.setCustomerIdentify(rs.getString(3));
-                r.setCheckinDate(rs.getDate(5));
-                r.setCheckoutDate(rs.getDate(6));
-                r.setStatus(rs.getInt(8));
+                r.setCustomerId(rs.getString(2));
+                r.setBookingDate(rs.getDate(3));
+                r.setCheckinDate(rs.getDate(4));
+                r.setCheckoutDate(rs.getDate(5));
+                r.setBookingComment(rs.getString(6));
+                r.setStatus(rs.getInt(7));
 
                 list.add(r);
             }
@@ -618,7 +665,7 @@ public class DataProcess {
         String name = "";
         Connection cnn = getConnection();
 
-        String query = "SELECT Customer.customerName FROM Customer WHERE customerIndentifyCard = ?";
+        String query = "SELECT Customer.customerName FROM Customer WHERE customerIdentityNo = ?";
         try {
             PreparedStatement prst;
             prst = cnn.prepareStatement(query);
@@ -635,7 +682,33 @@ public class DataProcess {
 
         return name;
     }
-    
+    public Customer getCustomerByIdentityNo(String IN)
+    {
+        Customer cus=new Customer();
+        Connection con=getConnection();
+        String query="Select * FROM Customer WHERE customerIdentityNo=?";
+        try {
+            PreparedStatement prst;
+            prst = con.prepareStatement(query);
+            prst.setString(1, IN);
+
+            ResultSet rs = prst.executeQuery();
+            if (rs.next()) {
+                cus=new Customer();
+                cus.setCustomerId(rs.getString(1));
+                cus.setCustomerName(rs.getString(2));
+                cus.setCustomerIdentityNo(rs.getString(3));
+                cus.setCustomerDOB(rs.getDate(4));
+                cus.setCustomerAddress(rs.getString(5));
+                cus.setCustomerPhone(rs.getString(6));
+                cus.setCustomerEmail(rs.getString(7));
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DataProcess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return cus;
+    }
     
 
     public ArrayList<Room> getAllRoomByRoomTypeId(int roomTypeId) {
@@ -691,7 +764,57 @@ public class DataProcess {
 
         return true;
     }
-
+    public boolean addPayPalReceipts(String paymentId,float amount,java.util.Date datePaid,String receiptComment)
+    {
+        String query ="INSERT INTO Receipts VALUES (?,?,?,?,?)";
+        PreparedStatement prst;
+        ResultSet rs=null;
+        Connection con=getConnection();
+        try {
+            prst=con.prepareStatement(query);
+            prst.setString(1, "PayPal"+paymentId);
+            prst.setString(2,paymentId);
+            prst.setFloat(3, amount);
+            prst.setDate(4, new java.sql.Date(datePaid.getTime()));
+            prst.setString(5, receiptComment);
+            rs=prst.executeQuery();             
+            prst.close();
+            if (!rs.isBeforeFirst())
+            {
+                return true;
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DataProcess.class.getName()).log(Level.SEVERE, null, ex);
+        }            
+        return false;
+    }
+    public boolean addPayment(String bookingId,float paymentAmmount, String paymentComment)
+    {
+        String pid="Payment"+bookingId;
+        String query="INSERT INTO Payments VALUES(?,?,?,?)";
+        PreparedStatement prst;
+        ResultSet rs=null;
+        Connection con=getConnection();
+        try {
+            prst=con.prepareStatement(query);
+            prst.setString(1, pid);
+            prst.setString(2, bookingId);
+            prst.setFloat(3, paymentAmmount);
+            prst.setString(4, paymentComment); 
+            prst.executeUpdate();
+            rs=prst.executeQuery();             
+            prst.close();
+            if (!rs.isBeforeFirst())
+            {
+                return true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DataProcess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    
     public static void main(String[] argv) {
 //        List<RoomType> li = new DataProcess().getAllRoomType();
 //        for (RoomType r : li) {

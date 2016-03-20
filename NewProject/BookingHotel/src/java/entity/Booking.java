@@ -15,20 +15,13 @@ public class Booking {
 
     private String bookingId;
     private String customerId;
-    private String roomNumber ;
     private Date bookingDate;
     private Date checkinDate;
     private Date checkoutDate;
     private String bookingComment;
     private int status;
 
-    public String getRoomNumber() {
-        return roomNumber;
-    }
 
-    public void setRoomNumber(String roomNumber) {
-        this.roomNumber = roomNumber;
-    }
 
     public String getBookingComment() {
         return bookingComment;

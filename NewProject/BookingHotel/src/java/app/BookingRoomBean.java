@@ -38,6 +38,24 @@ public class BookingRoomBean implements Serializable {
     private String customerAddress;
     private String customerPhone;
     private String customerEmail;
+    private String ppUsername;
+    private String ppPassword;
+
+    public String getPpUsername() {
+        return ppUsername;
+    }
+
+    public void setPpUsername(String ppUsername) {
+        this.ppUsername = ppUsername;
+    }
+
+    public String getPpPassword() {
+        return ppPassword;
+    }
+
+    public void setPpPassword(String ppPassword) {
+        this.ppPassword = ppPassword;
+    }
 
     public Customer getCus() {
         return cus;
@@ -232,12 +250,12 @@ public class BookingRoomBean implements Serializable {
         return "success";
     }
 
-    public String SelectService(String id) {        
-        DataProcess dp=new DataProcess();
+    public String SelectService(String id) {
+        DataProcess dp = new DataProcess();
         System.out.println(id);
-        Room r=dp.getRoomById(id);
+        Room r = dp.getRoomById(id);
         System.out.println(r.getRoomNumber());
-        ArrayList<Room> list=new ArrayList<>();
+        ArrayList<Room> list = new ArrayList<>();
         list.add(r);
         setSelectedRoom(list);
         return "success";
@@ -324,28 +342,106 @@ public class BookingRoomBean implements Serializable {
         if (li == null || li.size() <= 0) {
             return "failed";
         }
-        
+
         return "success";
     }
 
     public String gotoUserInputInformation() {
         return "success";
     }
-
-    public String gotoUserConfirmation() {
-        cus = new Customer();
-        cus.setCustomerAddress(customerAddress);
-        cus.setCustomerCountry(customerCountry);
-        cus.setCustomerDOB(customerDOB);
-        cus.setCustomerEmail(customerEmail);
-        cus.setCustomerIdentityNo(customerIdentityNo);
-        cus.setCustomerName(customerName);
-        cus.setCustomerPhone(customerPhone);
-
-        /*
-         DataProcess dp=new DataProcess();
-         dp.addCustomer(customerName,customerCountry,customerIdentityNo,customerDOB,customerAddress,customerPhone, customerEmail); */
+    public String gotoPayment()
+    {
         return "success";
     }
+    public String gotoUserConfirmation() {
+        DataProcess dp = new DataProcess();
+        if (returnCustomerIdentityNo == null) {            
+            cus = dp.getCustomerByIdentityNo(returnCustomerIdentityNo);
+            if (cus.getCustomerId() == null) {
+                cus = new Customer();
+                cus.setCustomerAddress(customerAddress);
+                cus.setCustomerCountry(customerCountry);
+                cus.setCustomerDOB(customerDOB);
+                cus.setCustomerEmail(customerEmail);
+                cus.setCustomerIdentityNo(customerIdentityNo);
+                cus.setCustomerName(customerName);
+                cus.setCustomerPhone(customerPhone);
+                return "success";
+            } else {
+                return "failed";
+            }
+        } else {
+            cus = dp.getCustomerByIdentityNo(returnCustomerIdentityNo);
+            if (cus.getCustomerId() != null) {
+                return "success";
+            }
+            return "failed";
+        }
+    }
+    
 
+    public String gotoppCheckout() {
+        if ("test".equals(ppUsername)) {
+            if ("test".equals(ppPassword)) {
+                setPpName("Mr.Tester");
+                setPpAccount(1000);
+                return "success";
+            }
+        }
+        return "failed";
+    }
+    public String ppName;
+
+    public String getPpName() {
+        return ppName;
+    }
+
+    public void setPpName(String ppName) {
+        this.ppName = ppName;
+    }
+    public float ppAccount;
+
+    public float getPpAccount() {
+        return ppAccount;
+    }
+
+    public void setPpAccount(float ppAccount) {
+        this.ppAccount = ppAccount;
+    }
+    public String ppOrderID;
+
+    public String getPpOrderID() {
+        return ppOrderID;
+    }
+
+    public void setPpOrderID(String ppOrderID) {
+        this.ppOrderID = ppOrderID;
+    }
+
+    public String ppEmail;
+
+    public String getPpEmail() {
+        return ppEmail;
+    }
+
+    public void setPpEmail(String ppEmail) {
+        this.ppEmail = ppEmail;
+    }
+
+    public String gotoppConfirmation() {
+        if ((totalPrice/2) < ppAccount) {
+            setPpOrderID("PPOrder1");
+            setPpEmail("tester@test.com");
+            return "success";
+        }
+        return "failed";
+    }
+
+    public String gotoNotice() {
+        DataProcess dp = new DataProcess();
+        dp.booking(selectedRoom,checkinDate,checkoutDate,customerName,customerCountry,customerIdentityNo,customerDOB,customerAddress,customerPhone,customerEmail,totalPrice,selectedService);
+        
+        return "success";
+        
+    }
 }
