@@ -34,12 +34,14 @@ public class BookingRoomBean implements Serializable {
     private String customerName;
     private String customerCountry;
     private String customerIdentityNo;
-    private java.util.Date customerDOB;
+    private String customerDOB;
     private String customerAddress;
     private String customerPhone;
     private String customerEmail;
     private String ppUsername;
     private String ppPassword;
+
+    private String[] selectedRoomItems;
 
     public String getPpUsername() {
         return ppUsername;
@@ -59,6 +61,14 @@ public class BookingRoomBean implements Serializable {
 
     public Customer getCus() {
         return cus;
+    }
+
+    public String[] getSelectedRoomItems() {
+        return selectedRoomItems;
+    }
+
+    public void setSelectedRoomItems(String[] selectedRoomItems) {
+        this.selectedRoomItems = selectedRoomItems;
     }
 
     public void setCus(Customer cus) {
@@ -89,11 +99,11 @@ public class BookingRoomBean implements Serializable {
         this.customerIdentityNo = customerIdentityNo;
     }
 
-    public java.util.Date getCustomerDOB() {
+    public String getCustomerDOB() {
         return customerDOB;
     }
 
-    public void setCustomerDOB(java.util.Date customerDOB) {
+    public void setCustomerDOB(String customerDOB) {
         this.customerDOB = customerDOB;
     }
 
@@ -250,6 +260,24 @@ public class BookingRoomBean implements Serializable {
         return "success";
     }
 
+    public String SelectService() {
+        DataProcess dp = new DataProcess();
+
+        if (selectedRoomItems == null) {
+            return "failed";
+        }
+
+        ArrayList<Room> list = new ArrayList<>();
+        for (String s : selectedRoomItems) {
+            Room r = dp.getRoomById(s);
+            list.add(r);
+        }
+        
+        setSelectedRoom(list);
+
+        return "success";
+    }
+
     public String SelectService(String id) {
         DataProcess dp = new DataProcess();
         System.out.println(id);
@@ -258,6 +286,7 @@ public class BookingRoomBean implements Serializable {
         ArrayList<Room> list = new ArrayList<>();
         list.add(r);
         setSelectedRoom(list);
+
         return "success";
     }
 
@@ -349,36 +378,37 @@ public class BookingRoomBean implements Serializable {
     public String gotoUserInputInformation() {
         return "success";
     }
-    public String gotoPayment()
-    {
+
+    public String gotoPayment() {
         return "success";
     }
+
     public String gotoUserConfirmation() {
         DataProcess dp = new DataProcess();
-        if (returnCustomerIdentityNo == null) {            
-            cus = dp.getCustomerByIdentityNo(returnCustomerIdentityNo);
-            if (cus.getCustomerId() == null) {
-                cus = new Customer();
-                cus.setCustomerAddress(customerAddress);
-                cus.setCustomerCountry(customerCountry);
-                cus.setCustomerDOB(customerDOB);
-                cus.setCustomerEmail(customerEmail);
-                cus.setCustomerIdentityNo(customerIdentityNo);
-                cus.setCustomerName(customerName);
-                cus.setCustomerPhone(customerPhone);
-                return "success";
-            } else {
-                return "failed";
-            }
-        } else {
-            cus = dp.getCustomerByIdentityNo(returnCustomerIdentityNo);
-            if (cus.getCustomerId() != null) {
-                return "success";
-            }
-            return "failed";
-        }
+//        if (returnCustomerIdentityNo == null) {
+//            cus = dp.getCustomerByIdentityNo(returnCustomerIdentityNo);
+//            if (cus.getCustomerId() == null) {
+//                cus = new Customer();
+//                cus.setCustomerAddress(customerAddress);
+//                cus.setCustomerCountry(customerCountry);
+//                cus.setCustomerDOB(customerDOB);
+//                cus.setCustomerEmail(customerEmail);
+//                cus.setCustomerIdentityNo(customerIdentityNo);
+//                cus.setCustomerName(customerName);
+//                cus.setCustomerPhone(customerPhone);
+//                return "success";
+//            } else {
+//                return "failed";
+//            }
+//        } else {
+//            cus = dp.getCustomerByIdentityNo(returnCustomerIdentityNo);
+//            if (cus.getCustomerId() != null) {
+//                return "success";
+//            }
+//            return "failed";
+//        }
+        return "success";
     }
-    
 
     public String gotoppCheckout() {
         if ("test".equals(ppUsername)) {
@@ -429,7 +459,7 @@ public class BookingRoomBean implements Serializable {
     }
 
     public String gotoppConfirmation() {
-        if ((totalPrice/2) < ppAccount) {
+        if ((totalPrice / 2) < ppAccount) {
             setPpOrderID("PPOrder1");
             setPpEmail("tester@test.com");
             return "success";
@@ -439,9 +469,9 @@ public class BookingRoomBean implements Serializable {
 
     public String gotoNotice() {
         DataProcess dp = new DataProcess();
-        dp.booking(selectedRoom,checkinDate,checkoutDate,customerName,customerCountry,customerIdentityNo,customerDOB,customerAddress,customerPhone,customerEmail,totalPrice,selectedService);
-        
+        dp.booking(selectedRoom, checkinDate, checkoutDate, customerName, customerCountry, customerIdentityNo, null, customerAddress, customerPhone, customerEmail, totalPrice, selectedService);
+
         return "success";
-        
+
     }
 }

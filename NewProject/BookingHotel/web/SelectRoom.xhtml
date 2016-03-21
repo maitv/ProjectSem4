@@ -45,25 +45,19 @@
                         </div>
                     </div>
                     <h:form class="main-product main-form">
-                        <h:dataTable value="#{bookingRoomBean.getRoomsAvailableByFloor()}" var="p"
-                                     styleClass="order-table"
-                                     headerClass="order-table-header"
-                                     rowClasses="order-table-row"
-                                     >
-                            <h:column >
-                                <dir class="main-product main-form">
-                                    Floor #{p.floorNo}
-                                </dir>
-                                <h:dataTable value="#{p.roomList}" var="r">
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="#{r.roomNumber}" />
-                                        </f:facet>
-                                        <h:outputText value="#{r.roomNumber}" /><h:commandButton value="Select" action="#{bookingRoomBean.SelectService(r.roomNumber)}" ></h:commandButton>
-                                    </h:column>
-                                </h:dataTable>
-                            </h:column>
-                        </h:dataTable>
+                        <h:selectManyCheckbox value="#{bookingRoomBean.selectedRoomItems}">
+                            <f:selectItems value="#{bookingRoomBean.getRoomAvailable()}" var="r"
+                                           itemLabel="Room : #{r.roomNumber}" itemValue="#{r.roomNumber}" />
+                        </h:selectManyCheckbox>
+                        <!--                                <h:dataTable value="{p.roomList}" var="r">
+                                                            <h:column>
+                                                                <f:facet name="header">
+                                                                    <h:outputText value="{r.roomNumber}" />
+                                                                </f:facet>
+                                                                <h:outputText value="{r.roomNumber}" />
+                                                            </h:column>
+                                                        </h:dataTable>-->
+                        <h:commandButton value="Select" action="#{bookingRoomBean.SelectService()}" ></h:commandButton>
                         <!--                        <div class="form-group">
                                                     <h:outputText value="Check-in:"/><h:inputText class="datepicker form-control" id="checkinDate" value="{bookingRoomBean.checkinDate}" required="true" requiredMessage="Please select checkin date"/><br/>
                                                     <h:message for="checkinDate" style="color:red"></h:message><br/>

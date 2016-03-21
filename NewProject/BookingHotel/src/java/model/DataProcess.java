@@ -220,7 +220,8 @@ public class DataProcess {
         String query = "SELECT * FROM Room WHERE roomTypeId=? AND roomStatus != 1 AND roomNumber NOT IN ("
                 //                + " SELECT roomNumber FROM Booking WHERE ? >= checkinDate AND ? <= checkoutDate " + ")";
               // + " SELECT roomNumber FROM Booking WHERE ( ? BETWEEN checkinDate AND checkoutDate ) OR ( ? BETWEEN checkinDate AND checkoutDate ) " + ")";
-                +"SELECT roomNumber FROM BookingRoom INNER JOIN (SELECT * FROM Booking WHERE ( ? BETWEEN checkinDate AND checkoutDate ) OR ( ? BETWEEN checkinDate AND checkoutDate )))";
+                +"SELECT BookingRoom.roomNumber FROM BookingRoom INNER JOIN Booking ON BookingRoom.bookingId=Booking.bookingId" +
+                " WHERE ( ? BETWEEN Booking.checkinDate AND Booking.checkoutDate ) OR ( ? BETWEEN Booking.checkinDate AND Booking.checkoutDate ))";
         try {
             PreparedStatement prst = cnn.prepareCall(query);
 

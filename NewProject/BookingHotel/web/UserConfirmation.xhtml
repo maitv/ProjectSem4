@@ -2,53 +2,95 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Facelet Title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+        <title>Select Service</title>
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css"></link>
+        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"></link>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"></link>
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"></link>
+        <link rel="stylesheet" href="css/jquery.bxslider.css"></link> 
+        <link rel="stylesheet" href="css/a.css"></link>
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/jquery.bxslider.min.js"></script>
+        <script type="text/javascript" src="js/jquery.bxslider.js"></script>
+        <script type="text/javascript" src="js/a.js"></script>
+        <link rel="stylesheet" href="css/table_style.css"></link>
+        <!--h:outputStylesheet library="css" name="table_style.css"  /-->
     </h:head>
-    <h:body>
-        page confirmed các thông tin khách hàng đã nhập xem ok chưa
-        sẽ phải bao gồm cả phần hiển thị số tiền sẽ phải trả rồi (đặt cọc 50%, phần còn lại sẽ thanh toán lúc checkin)
-        <h:form>
-            <p:fieldset legend="Customer Information"  >
-                <h:outputLabel value="Full name: " />#{bookingRoomBean.customerName}" <br/>
-<!--                    <h:outputLabel value="Country: " />{bookingRoomBean.cus.customerCountry}" <br/>
-                    <h:outputLabel value="Identity Number: " />{bookingRoomBean.cus.customerIdentityNo}" <br/>
-                    <h:outputLabel value="Date of birth: " />{bookingRoomBean.cus.customerDOB}" <br/>
-                    <h:outputLabel value="Address: " />{bookingRoomBean.cus.customerAddress}" <br/>
-                    <h:outputLabel value="Email: " />{bookingRoomBean.cus.customerEmail}" <br/>
-                    <h:outputLabel value="Phone: " />{bookingRoomBean.cus.customerPhone}" <br/>-->
-                
-            </p:fieldset>
-            
-            
-            
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>No.</th>
-                    <th>Item details</th>
-                    <th>Price</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Room details/Services</td>
-                    <td>$10</td>
-                </tr>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <th colspan="2">Total:</th>
-                    <th></th>
-                    
-                </tr>
-            </tfoot>
-        </table>
+    <h:body>       
+        <f:view>
+            <h:panelGroup>
+                <ui:include src="layout/header.xhtml"/>
+            </h:panelGroup> 
+            <h:panelGroup>
+                <div class="container">
+                    <div class="slider1">
+                        <div class="slide"><img src="img/slide/slider-1.jpg"></img></div> 
+                        <div class="slide"><img src="img/slide/slider-2.jpg"></img></div>
+                    </div>
+                    <!--End Slider-->
+                    <div class="col-md-12 main-product">
+                        <div class="room-title">
+                            <h2>Booking Information</h2>
+                            <div class="sperad"></div>
+                        </div>
+                    </div>
+                    <h:form>
+                        <p:fieldset legend="Customer Information"  >
+                            <h:outputLabel value="Full name: " />"#{bookingRoomBean.customerName}" <br/>
+                            <!--                    <h:outputLabel value="Country: " />{bookingRoomBean.cus.customerCountry}" <br/>
+                                                <h:outputLabel value="Identity Number: " />{bookingRoomBean.cus.customerIdentityNo}" <br/>
+                                                <h:outputLabel value="Date of birth: " />{bookingRoomBean.cus.customerDOB}" <br/>
+                                                <h:outputLabel value="Address: " />{bookingRoomBean.cus.customerAddress}" <br/>
+                                                <h:outputLabel value="Email: " />{bookingRoomBean.cus.customerEmail}" <br/>
+                                                <h:outputLabel value="Phone: " />{bookingRoomBean.cus.customerPhone}" <br/>-->
 
-            <h:commandButton value="Continue" action="#{bookingRoomBean.gotoPayment()}" />
-        </h:form>
+                        </p:fieldset>
+
+
+
+                        <table border="1">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Item details</th>
+                                    <th>Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Room details/Services</td>
+                                    <td>$10</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th colspan="2">Total:</th>
+                                    <th></th>
+
+                                </tr>
+                            </tfoot>
+                        </table>
+
+                        <h:commandButton value="Continue" action="#{bookingRoomBean.gotoPayment()}" />
+                    </h:form>
+                </div>
+            </h:panelGroup> 
+            <h:panelGroup>
+                <ui:include src="layout/footer.xhtml"/>
+            </h:panelGroup>
+        </f:view>
     </h:body>
 </html>
+
 

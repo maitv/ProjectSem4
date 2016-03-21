@@ -44,22 +44,19 @@
                             <div class="sperad"></div>
                         </div>
                     </div>
-                    <h:form>       
-                        <p:accordionPanel>
-                            <p:tab title="New customer">
-                                <h:outputLabel value="Full name: " /><h:inputText value="#{bookingRoomBean.customerName}"/> <br/>
-                                <h:outputLabel value="Country: " /><h:inputText value="#{bookingRoomBean.customerCountry}"/> <br/>
-                                <h:outputLabel value="Identity Number: " /><h:inputText value="#{bookingRoomBean.customerIdentityNo}"/> <br/>
-                                <h:outputLabel value="Date of birth: " /><h:inputText value="#{bookingRoomBean.customerDOB}"/> <br/>
-                                <h:outputLabel value="Address: " /><h:inputText value="#{bookingRoomBean.customerAddress}"/> <br/>
-                                <h:outputLabel value="Email: " /><h:inputText value="#{bookingRoomBean.customerEmail}"/> <br/>
-                                <a href="WEB-INF/faces-config.xml"></a>
-                                <h:outputLabel value="Phone: " /><h:inputText value="#{bookingRoomBean.customerPhone}"/> <br/>
-                            </p:tab>
-                            <p:tab title="Return customer">
-                                <h:outputLabel value="Identity Number: " /><h:inputText value="#{bookingRoomBean.returnCustomerIdentityNo}"/> <br/>
-                            </p:tab>
-                        </p:accordionPanel>
+                    <h:form class="main-product main-form">     
+                        
+                        <h:outputLabel value="New customer :"/><br/>
+                        <h:outputLabel value="Full name: " /><h:inputText value="#{bookingRoomBean.customerName}"/> <br/>
+                        <h:outputLabel value="Country: " /><h:inputText value="#{bookingRoomBean.customerCountry}"/> <br/>
+                        <h:outputLabel value="Identity Number: " /><h:inputText value="#{bookingRoomBean.customerIdentityNo}"/> <br/>
+                        <h:outputLabel value="Date of birth: " /><h:inputText value="#{bookingRoomBean.customerDOB}"/> <br/>
+                        <h:outputLabel value="Address: " /><h:inputText value="#{bookingRoomBean.customerAddress}"/> <br/>
+                        <h:outputLabel value="Email: " /><h:inputText value="#{bookingRoomBean.customerEmail}"/> <br/>
+                        <h:outputLabel value="Phone: " /><h:inputText value="#{bookingRoomBean.customerPhone}"/> <br/>
+                        
+                        <h:selectBooleanCheckbox value="returnCustomer" label="Return Custusmer" /><h:outputLabel value="Return customer"/><br/>
+                        <h:outputLabel value="Identity Number: " /><h:inputText value="#{bookingRoomBean.returnCustomerIdentityNo}"/> <br/>
                         <h:commandButton value="Continue" action="#{bookingRoomBean.gotoUserConfirmation()}"/>
                     </h:form>
                 </div>
