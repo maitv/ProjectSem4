@@ -10,10 +10,10 @@
         Thank you! Your order is complete.
         Your order number is: <h:outputText value="#{bookingRoomBean.ppOrderID}"/>
         An order confirmation will be sent to: <h:outputText value="#{bookingRoomBean.ppEmail}"/>
-        
+        <h:form>
         For testing purpose click this link
         <h:commandLink value="https://payment.paypal.com/wtfurlhere/ABCXYZ" action="#{bookingRoomBean.gotoNotice()}"/>
-        
+        </h:form>
     </h:body>
 </html>
 

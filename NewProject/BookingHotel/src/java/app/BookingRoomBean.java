@@ -500,12 +500,13 @@ public class BookingRoomBean implements Serializable {
     }
 
     public String gotoppConfirmation() {
-        if ((totalPrice / 2) < ppAccount) {
+        //String s="failed";
+        //if ((totalPrice / 2) < ppAccount) {
             setPpOrderID("PPOrder1");
             setPpEmail("tester@test.com");
-            return "success";
-        }
-        return "failed";
+            //s="success";
+       // }
+        return "success";
     }
 
     public String gotoNotice() {
