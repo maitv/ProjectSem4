@@ -11,7 +11,7 @@ $(document).ready(function() {
     $(".dobpicker").datepicker({
         dateFormat: 'dd-mm-yy',
         changeMonth: true,
-        changeYear: true,
+        changeYear: true
     });
     $('.slider1').bxSlider({
         slideWidth: 1170,
@@ -19,5 +19,6 @@ $(document).ready(function() {
         maxSlides: 1,
         slideMargin: 10
     });
+    
 });
 

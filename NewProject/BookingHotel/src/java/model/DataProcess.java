@@ -508,7 +508,7 @@ public class DataProcess {
             return isFound;
         }
 
-        String query = "SELECT * FROM Customer WHERE customerIdentityNo= ?";
+        String query = "SELECT * FROM Customer WHERE customerIndentifyCard= ?";
         PreparedStatement prst;
         try {
             prst = cnn.prepareStatement(query);
