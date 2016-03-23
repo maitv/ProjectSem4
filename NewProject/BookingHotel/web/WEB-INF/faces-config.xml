@@ -29,6 +29,20 @@
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
+        <from-view-id>/ppCheckout.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/ppConfirmation.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/ppConfirmation.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/Notice.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
         <from-view-id>/SelectService.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>success</from-outcome>

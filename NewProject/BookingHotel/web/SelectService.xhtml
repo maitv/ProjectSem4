@@ -58,13 +58,19 @@
                                     Room Desc
                                 </f:facet>
                                 #{r.roomDesc}
-                            </p:column>
+                            </p:column>                            
                             <p:column>
                                 <f:facet name="header">
                                     Price
                                 </f:facet>
                                 #{bookingRoomBean.getPrice(r.roomTypeId)}
-                            </p:column>            
+                            </p:column>      
+                            <p:column>
+                                <f:facet name="header">
+                                    Days
+                                </f:facet>
+                                #{bookingRoomBean.diffDays}
+                            </p:column> 
                         </p:dataTable>
 
                         <p:dataTable rowKey="#{r.serviceName}" id="sList" widgetVar="serviceList" selection="#{bookingRoomBean.selectedService}" value="#{bookingRoomBean.serviceList}" var="r"  >     

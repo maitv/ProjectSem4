@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
@@ -40,6 +41,15 @@ public class BookingRoomBean implements Serializable {
     private String customerEmail;
     private String ppUsername;
     private String ppPassword;
+    private String diffDays;
+
+    public String getDiffDays() {
+        return diffDays;
+    }
+
+    public void setDiffDays(String diffDays) {
+        this.diffDays = diffDays;
+    }
 
     private String[] selectedRoomItems;
 
@@ -190,9 +200,19 @@ public class BookingRoomBean implements Serializable {
 
     public void test() {
         totalPrice = 0;
-        if (!selectedRoom.isEmpty()) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        java.util.Date cinDate;
+        java.util.Date coutDate;
+        try {
+            cinDate = sdf.parse(checkinDate);
+            java.sql.Date ciDate = new java.sql.Date(cinDate.getTime());
+            coutDate = sdf.parse(checkoutDate);
+            java.sql.Date coDate = new java.sql.Date(coutDate.getTime());
+            long diff=coutDate.getTime()-ciDate.getTime();
+            
+            if (!selectedRoom.isEmpty()) {
             for (int i = 0; i < selectedRoom.size(); i++) {
-                totalPrice += getPrice(String.valueOf(selectedRoom.get(i).getRoomTypeId()));
+                totalPrice += getPrice(String.valueOf(selectedRoom.get(i).getRoomTypeId()))*TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
             }
         }
         if (!selectedService.isEmpty()) {
@@ -201,6 +221,13 @@ public class BookingRoomBean implements Serializable {
             }
         }
         setTotalPrice(totalPrice);
+        } catch (ParseException ex) {
+            Logger.getLogger(BookingRoomBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+
+            
+        
     }
 
     public List<Room> getSelectedRoom() {
@@ -274,7 +301,21 @@ public class BookingRoomBean implements Serializable {
         }
 
         setSelectedRoom(list);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        java.util.Date cinDate;
+        java.util.Date coutDate;
 
+        try {
+            cinDate = sdf.parse(checkinDate);
+            java.sql.Date ciDate = new java.sql.Date(cinDate.getTime());
+            coutDate = sdf.parse(checkoutDate);
+            java.sql.Date coDate = new java.sql.Date(coutDate.getTime());
+            long diff=coutDate.getTime()-ciDate.getTime();
+            diffDays=String.valueOf(TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
+        } catch (ParseException ex) {
+            Logger.getLogger(BookingRoomBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
         return "success";
     }
 
@@ -414,7 +455,7 @@ public class BookingRoomBean implements Serializable {
         if ("test".equals(ppUsername)) {
             if ("test".equals(ppPassword)) {
                 setPpName("Mr.Tester");
-                setPpAccount(1000);
+                setPpAccount(10000000);
                 return "success";
             }
         }
