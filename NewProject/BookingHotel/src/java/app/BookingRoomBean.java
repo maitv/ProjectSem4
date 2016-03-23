@@ -208,26 +208,23 @@ public class BookingRoomBean implements Serializable {
             java.sql.Date ciDate = new java.sql.Date(cinDate.getTime());
             coutDate = sdf.parse(checkoutDate);
             java.sql.Date coDate = new java.sql.Date(coutDate.getTime());
-            long diff=coutDate.getTime()-ciDate.getTime();
-            
+            long diff = coutDate.getTime() - ciDate.getTime();
+
             if (!selectedRoom.isEmpty()) {
-            for (int i = 0; i < selectedRoom.size(); i++) {
-                totalPrice += getPrice(String.valueOf(selectedRoom.get(i).getRoomTypeId()))*TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+                for (int i = 0; i < selectedRoom.size(); i++) {
+                    totalPrice += getPrice(String.valueOf(selectedRoom.get(i).getRoomTypeId())) * TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+                }
             }
-        }
-        if (!selectedService.isEmpty()) {
-            for (int i = 0; i < selectedService.size(); i++) {
-                totalPrice += selectedService.get(i).getServicePrice();
+            if (!selectedService.isEmpty()) {
+                for (int i = 0; i < selectedService.size(); i++) {
+                    totalPrice += selectedService.get(i).getServicePrice();
+                }
             }
-        }
-        setTotalPrice(totalPrice);
+            setTotalPrice(totalPrice);
         } catch (ParseException ex) {
             Logger.getLogger(BookingRoomBean.class.getName()).log(Level.SEVERE, null, ex);
         }
-            
 
-            
-        
     }
 
     public List<Room> getSelectedRoom() {
@@ -310,12 +307,12 @@ public class BookingRoomBean implements Serializable {
             java.sql.Date ciDate = new java.sql.Date(cinDate.getTime());
             coutDate = sdf.parse(checkoutDate);
             java.sql.Date coDate = new java.sql.Date(coutDate.getTime());
-            long diff=coutDate.getTime()-ciDate.getTime();
-            diffDays=String.valueOf(TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
+            long diff = coutDate.getTime() - ciDate.getTime();
+            diffDays = String.valueOf(TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
         } catch (ParseException ex) {
             Logger.getLogger(BookingRoomBean.class.getName()).log(Level.SEVERE, null, ex);
         }
-            
+
         return "success";
     }
 
@@ -426,29 +423,38 @@ public class BookingRoomBean implements Serializable {
 
     public String gotoUserConfirmation() {
         DataProcess dp = new DataProcess();
-//        if (returnCustomerIdentityNo == null) {
-//            cus = dp.getCustomerByIdentityNo(returnCustomerIdentityNo);
-//            if (cus.getCustomerId() == null) {
-//                cus = new Customer();
-//                cus.setCustomerAddress(customerAddress);
-//                cus.setCustomerCountry(customerCountry);
-//                cus.setCustomerDOB(customerDOB);
-//                cus.setCustomerEmail(customerEmail);
-//                cus.setCustomerIdentityNo(customerIdentityNo);
-//                cus.setCustomerName(customerName);
-//                cus.setCustomerPhone(customerPhone);
-//                return "success";
-//            } else {
-//                return "failed";
-//            }
-//        } else {
-//            cus = dp.getCustomerByIdentityNo(returnCustomerIdentityNo);
-//            if (cus.getCustomerId() != null) {
-//                return "success";
-//            }
-//            return "failed";
-//        }
-        return "success";
+        if (returnCustomerIdentityNo == null || "".equals(returnCustomerIdentityNo)) {
+            cus = dp.getCustomerByIdentityNo(returnCustomerIdentityNo);
+            if (cus == null) {
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                java.util.Date doBDate = null;
+                try {
+                    doBDate = sdf.parse(customerDOB);
+                } catch (ParseException ex) {
+                    Logger.getLogger(BookingRoomBean.class.getName()).log(Level.SEVERE, null, ex);
+                    return "failed" ;
+                }
+                
+                cus = new Customer();
+                cus.setCustomerAddress(customerAddress);
+                cus.setCustomerCountry(customerCountry);
+                cus.setCustomerDOB(doBDate);
+                cus.setCustomerEmail(customerEmail);
+                cus.setCustomerIdentityNo(customerIdentityNo);
+                cus.setCustomerName(customerName);
+                cus.setCustomerPhone(customerPhone);
+                return "success";
+            } else {
+                return "failed";
+            }
+        } else {
+            cus = dp.getCustomerByIdentityNo(returnCustomerIdentityNo);
+            if (cus.getCustomerId() != null) {
+                return "success";
+            }
+            return "failed";
+        }
+//        return "success";
     }
 
     public String gotoppCheckout() {
@@ -502,25 +508,18 @@ public class BookingRoomBean implements Serializable {
     public String gotoppConfirmation() {
         //String s="failed";
         //if ((totalPrice / 2) < ppAccount) {
-            setPpOrderID("PPOrder1");
-            setPpEmail("tester@test.com");
+        setPpOrderID("PPOrder1");
+        setPpEmail("tester@test.com");
             //s="success";
-       // }
+        // }
         return "success";
     }
 
     public String gotoNotice() {
         DataProcess dp = new DataProcess();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        java.util.Date doBDate = null;
-        try {
-            doBDate = sdf.parse(customerDOB);
-        } catch (ParseException ex) {
-            Logger.getLogger(BookingRoomBean.class.getName()).log(Level.SEVERE, null, ex);
-            return "failed";
-        }
 
-        dp.booking(selectedRoom, checkinDate, checkoutDate, customerName, customerCountry, customerIdentityNo, doBDate, customerAddress, customerPhone, customerEmail, totalPrice, selectedService);
+        dp.booking(selectedRoom, checkinDate, checkoutDate, customerName, customerCountry, customerIdentityNo, cus.getCustomerDOB(), customerAddress,
+                customerPhone, customerEmail, totalPrice, selectedService);
 
         return "success";
 

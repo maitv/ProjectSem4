@@ -5,11 +5,13 @@
  */
 package entity;
 
+import java.io.Serializable;
+
 /**
  *
  * @author mai
  */
-public class Room {
+public class Room implements Serializable{
 
     private String roomNumber;
     private int roomTypeId;

@@ -5,13 +5,15 @@
  */
 package entity;
 
+import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
  *
  * @author Zito
  */
-public class Customer {
+public class Customer implements Serializable {
 
     private String customerId;
     private String customerName;
@@ -21,6 +23,13 @@ public class Customer {
     private String customerAddress;
     private String customerPhone;
     private String customerEmail;
+    
+    public String getDateOfBirthInFormat(){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        String str = sdf.format(customerDOB).toString();
+        
+        return str;
+    }
     
     public Customer() {
     }

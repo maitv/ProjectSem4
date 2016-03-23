@@ -46,13 +46,13 @@
                     </div>
                     <h:form>
                         <p:fieldset legend="Customer Information"  >
-                            <h:outputLabel value="Full name: " />"#{bookingRoomBean.customerName}" <br/>
-                            <!--                    <h:outputLabel value="Country: " />{bookingRoomBean.cus.customerCountry}" <br/>
-                                                <h:outputLabel value="Identity Number: " />{bookingRoomBean.cus.customerIdentityNo}" <br/>
-                                                <h:outputLabel value="Date of birth: " />{bookingRoomBean.cus.customerDOB}" <br/>
-                                                <h:outputLabel value="Address: " />{bookingRoomBean.cus.customerAddress}" <br/>
-                                                <h:outputLabel value="Email: " />{bookingRoomBean.cus.customerEmail}" <br/>
-                                                <h:outputLabel value="Phone: " />{bookingRoomBean.cus.customerPhone}" <br/>-->
+                            <h:outputLabel value="Full name: " />#{bookingRoomBean.cus.customerName} <br/>
+                            <h:outputLabel value="Country: " />#{bookingRoomBean.cus.customerCountry} <br/>
+                            <h:outputLabel value="Identity Number: " />#{bookingRoomBean.cus.customerIdentityNo} <br/>
+                            <h:outputLabel value="Date of birth: " />#{bookingRoomBean.cus.getDateOfBirthInFormat()} <br/>
+                            <h:outputLabel value="Address: " />#{bookingRoomBean.cus.customerAddress} <br/>
+                            <h:outputLabel value="Email: " />#{bookingRoomBean.cus.customerEmail} <br/>
+                            <h:outputLabel value="Phone: " />#{bookingRoomBean.cus.customerPhone} <br/>
 
                         </p:fieldset>
 
