@@ -272,7 +272,7 @@ public class BookingRoomBean implements Serializable {
             Room r = dp.getRoomById(s);
             list.add(r);
         }
-        
+
         setSelectedRoom(list);
 
         return "success";
@@ -469,7 +469,16 @@ public class BookingRoomBean implements Serializable {
 
     public String gotoNotice() {
         DataProcess dp = new DataProcess();
-        dp.booking(selectedRoom, checkinDate, checkoutDate, customerName, customerCountry, customerIdentityNo, null, customerAddress, customerPhone, customerEmail, totalPrice, selectedService);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        java.util.Date doBDate = null;
+        try {
+            doBDate = sdf.parse(customerDOB);
+        } catch (ParseException ex) {
+            Logger.getLogger(BookingRoomBean.class.getName()).log(Level.SEVERE, null, ex);
+            return "failed";
+        }
+
+        dp.booking(selectedRoom, checkinDate, checkoutDate, customerName, customerCountry, customerIdentityNo, doBDate, customerAddress, customerPhone, customerEmail, totalPrice, selectedService);
 
         return "success";
 
