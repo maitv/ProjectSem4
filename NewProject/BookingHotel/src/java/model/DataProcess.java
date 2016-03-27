@@ -779,16 +779,15 @@ public class DataProcess {
             prst.setFloat(3, amount);
             prst.setDate(4, new java.sql.Date(datePaid.getTime()));
             prst.setString(5, receiptComment);
-            rs = prst.executeQuery();
+            prst.executeUpdate();
             prst.close();
-            if (!rs.isBeforeFirst()) {
-                return true;
-            }
             
         } catch (SQLException ex) {
             Logger.getLogger(DataProcess.class.getName()).log(Level.SEVERE, null, ex);
+            return false ;
         }
-        return false;
+        
+        return true;
     }
     
     public boolean addPayment(String bookingId, float paymentAmmount, String paymentComment) {
@@ -805,12 +804,9 @@ public class DataProcess {
             prst.setFloat(4, paymentAmmount);
             prst.setString(5, paymentComment);
             prst.executeUpdate();
-//            rs = prst.executeQuery();
+
             prst.close();
-//            if (!rs.isBeforeFirst()) {
-//                return true;
-//            }
-//            return true ;
+
         } catch (SQLException ex) {
             Logger.getLogger(DataProcess.class.getName()).log(Level.SEVERE, null, ex);
             return false;

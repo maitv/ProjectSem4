@@ -184,6 +184,15 @@ public class BookingRoomBean implements Serializable {
     }
 
     private float totalPrice;
+    private float minPaid;
+
+    public float getMinPaid() {
+        return minPaid;
+    }
+
+    public void setMinPaid(float minPaid) {
+        this.minPaid = minPaid;
+    }
 
     public float getTotalPrice() {
         return totalPrice;
@@ -221,6 +230,10 @@ public class BookingRoomBean implements Serializable {
                 }
             }
             setTotalPrice(totalPrice);
+            if (totalPrice != 0) {
+                setMinPaid(totalPrice/2);
+            }
+
         } catch (ParseException ex) {
             Logger.getLogger(BookingRoomBean.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -432,9 +445,9 @@ public class BookingRoomBean implements Serializable {
                     doBDate = sdf.parse(customerDOB);
                 } catch (ParseException ex) {
                     Logger.getLogger(BookingRoomBean.class.getName()).log(Level.SEVERE, null, ex);
-                    return "failed" ;
+                    return "failed";
                 }
-                
+
                 cus = new Customer();
                 cus.setCustomerAddress(customerAddress);
                 cus.setCustomerCountry(customerCountry);
@@ -510,7 +523,7 @@ public class BookingRoomBean implements Serializable {
         //if ((totalPrice / 2) < ppAccount) {
         setPpOrderID("PPOrder1");
         setPpEmail("tester@test.com");
-            //s="success";
+        //s="success";
         // }
         return "success";
     }

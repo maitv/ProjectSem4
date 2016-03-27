@@ -14,6 +14,9 @@ and open the template in the editor.
 a:hover{
     text-decoration: none;
 }
+.logo {
+    margin: 10px;
+}
 .logo, .menu{
     text-align: center;
 }
@@ -26,25 +29,27 @@ li{
 .wrap{
     padding: 100px;
 }
+body {
+   background-image: url('../img/background.png');
+}
 /*-----------Menu--------------*/
 .menu ul {
-    border-top: 1px solid #C4903D;
-    border-bottom: 1px solid #C4903D;
+    background: #C4903D;
 }
 .menu ul li{
     display: inline-block;
     list-style: none;
-    padding: 10px 10px;
+    padding: 15px 10px;
 }
 .menu ul li a{ 
    text-transform: uppercase;
-   color:#000;
-   padding: 12px;
+   color: #fff;
+   padding: 17px 15px;
 }
 .menu ul li a:hover{
     transition: background 0.2s ease;
-    color:#fff;
-    background: #C4903D;
+    color:#C4903D;
+    background: #fff;
 }
 li.menu-room:hover .dropdown-menu{
     display: block;
@@ -96,7 +101,7 @@ li.menu-room:hover .dropdown-menu{
     font-weight: bold;
     font-family: initial;
 }
-.main-product .room-title div.sperad{
+.sperad{
     background: url('../img/moon-divider.png') no-repeat;
     height: 30px;
     width: 70px;
@@ -139,9 +144,8 @@ li.menu-room:hover .dropdown-menu{
 
 .form-control {
     width: 180px;
-    border-radius: 0;
-    border: 1px solid #202935;
-    height: 40px;
+    border-radius: 3px;
+    height: 40px !important;
     display: inline-block;
     cursor: pointer;
     vertical-align: middle;
@@ -160,12 +164,13 @@ li.menu-room:hover .dropdown-menu{
     height: 40px;
     padding: 5px 12px;
     border: 2px solid #202935;
-    border-radius: 0;
+    border-radius: 3px;
     vertical-align: middle;
     -webkit-transition: background-color 0.3s, color 0.3s;
     -moz-transition: background-color 0.3s, color 0.3s;
     -o-transition: background-color 0.3s, color 0.3s;
     transition: background-color 0.3s, color 0.3s;
+    line-height: 0;
 }
 .button:hover {
     background-color: #C4903D;
@@ -290,6 +295,235 @@ footer .col-md-12 .col-md-3 .footer-content{
 }
 .form-group-service label span.red{
     color:red !important;
+}
+
+.buttonSearchRoom {
+    border: none;
+    padding: 10px 30px;
+    text-transform: uppercase;
+    margin-left: 40px;
+    font-size: 17px;
+    border-radius: 3px;
+    font-weight: bold;
+}
+.form-select {
+    border-radius: 5px;
+    box-shadow: 1px 1px 2px 0 rgba(0,0,0,.15);
+    border: 1px solid #ccc;
+    padding: 0px;
+    margin-bottom: 15px;
+    background: #fff;
+    margin-top: 10px;
+}
+.titleSelectRoom {
+    position: relative;
+    text-align: center;
+}
+.titleSelectRoom img{
+    width: 100%
+}
+.titleSelectRoom > h2{ 
+    -webkit-animation-name: example;
+    -webkit-animation-duration: 5s;
+    animation-name: example;
+    animation-duration: 5s;
+    animation-iteration-count: 1000;
+    animation-direction: alternate;
+    position: absolute;
+    bottom: 25%;
+    color: #fff;
+    text-transform: uppercase;
+    left: 5%;
+    font-size: 40px;
+}
+.titleSelectRoom > i{ 
+    -webkit-animation-name: example1;
+    -webkit-animation-duration: 5s;
+    animation-name: example1;
+    animation-duration: 5s;
+    animation-iteration-count: 1000;
+    animation-direction: alternate;
+    position: absolute;
+    bottom: 20%;
+    color: #fff;
+    right: 20%;
+    font-size: 18px;
+    margin-right:500px
+}
+@keyframes example {
+    0%   {opacity:0}
+    50% {margin-left: 15px}
+    100%  {margin-left:50px; opacity:1}
+    
+}
+@keyframes example1 {
+    0%   {opacity:0}
+    50% {margin-right:450px}
+    100%  {margin-right:550px; opacity:1}
+    
+}
+.tableSearchRoom div > h2 {
+    font-style: italic;
+    text-decoration: underline;
+    font-size: 20px;
+    margin-top: 5px
+}
+.checkSelectRoom tr > td label{
+    padding-left: 5px;
+    font-size: 15px;
+    font-weight: normal;
+}
+.icon-bed {
+    background-image: url('../img/icon-bed.jpg');
+    height: 30px;
+    width: 30px;
+    background-position: 40px 40px;
+}
+input[type=checkbox] {
+    display: none;
+}
+.checkSelectRoom label:before { 
+    border-radius: 3px;
+    content: "";
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    left: 7px;
+    bottom: 8px;
+    background-color: #aaa;
+    box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);
+}
+input[type=checkbox]:checked + label:before {
+    content: "\2713";
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
+    font-size: 15px;
+    color: #f3f3f3;
+    text-align: center;
+    line-height: 15px;
+}
+.checkSelectRoom tr > td{
+    width: 130px;
+    display: inline-block;
+    margin: 0px 5px;
+    position: relative;
+}
+.checkSelectRoom > tr {
+    line-height: 2
+}
+#player {
+    display: block
+}
+.progress_bar {
+    width: auto;
+    margin-bottom: 2.4em;
+    border: solid 1px #779bca;
+    background: #e6edf6;
+}
+.progress_bar_margin {
+    margin-bottom: 10px;
+}
+.progress_bar ul {
+    text-align: left;
+    height: 2.08em;
+    color: #003580;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: auto;
+    display: block;
+}
+.progress_bar li {
+    display: block;
+    float: left;
+    clear: right;
+    padding: 10px;
+    margin: 0;
+    background: #C4903D;
+    width: 33.333333333%;
+    line-height: 2.08em;
+    text-align: center;
+    border-left: 1px solid #fff;
+    border-right: 1px solid #fff;
+}
+.progress_bar li:first-child {
+    border-left: none;
+}
+.progress_bar li:last-child {
+    border-right: none;
+}
+.progress_bar li span{
+   text-transform: uppercase;
+   color: #fff;
+   font-weight: bold
+}
+.progress_bar li.b_selected_progress_bar_state {
+    background: #fff;
+}
+.progress_bar li.b_selected_progress_bar_state span{
+    color: #C4903D;
+    font-weight: bold;
+}
+.ui-state-default {
+    border: none;
+}
+.btnSelectService {
+    background: #202935;
+}
+.userInputConfirm {
+    line-height: 3;
+}
+.userInputConfirm label{
+    width: 160px;
+    text-align: left;
+    padding-left: 10px;
+}
+
+.userInputConfirm label:after{
+   content: '*';
+   color: red;
+}
+.userInputConfirm label.title{
+    font-size: 20px;
+    text-transform: uppercase;
+    width: 100%;
+    text-align: center;
+}
+.userInputConfirm label.title:after{
+    content: '';
+}
+.userInputConfirm input[type=text] {
+    border: none;
+    border-radius: 3px;
+    background: #eee;
+    padding: 0px 10px;
+    width: 70%;
+}
+
+.userInputConfirm input[type=submit] {
+    float: right;
+    margin-right: 8px;
+}
+.table-confirmUser {
+    width: 100%;
+    border: 1px solid #ccc;
+    margin: 20px 0px;
+    background: #fff;
+}
+.table-confirmUser  th {
+    padding: 5px 10px;
+}
+.table-confirmUser  tr > td {
+    padding: 15px 10px;
+}
+.confirmUser {
+    display: inline-block;
+    width: 100%;
+    margin: 15px 0px;
+}
+.confirmUser input[type=submit] {
+    float:right;
+    margin: 10px 0px;
 }
 /*------------------------------------ Admin Form -------------------*/
 .admin-form{

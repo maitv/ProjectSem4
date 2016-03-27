@@ -29,12 +29,12 @@
                 <ui:include src="layout/header.xhtml"/>
             </h:panelGroup> 
             <h:panelGroup>
-                <div class="container">
-                    <div class="slider1">
+                <div class="slider1">
                         <div class="slide"><img src="img/slide/slider-1.jpg"></img></div> 
                         <div class="slide"><img src="img/slide/slider-2.jpg"></img></div>
-                    </div>
-                    <!--End Slider-->
+                </div>
+                <!--End Slider-->
+                <div class="container">
                     <h:form class="main-product main-form">
                         <div class="form-group">
                             <h:inputText class="datepicker form-control" id="checkinDate" value="#{bookingRoomBean.checkinDate}" required="true" requiredMessage="Please select checkin date"/><br/>
@@ -45,7 +45,7 @@
                             <h:message for="checkoutDate" style="color:red"></h:message><br/>
                         </div>
                         <div class="form-group">
-                            <h:selectOneMenu value="#{bookingRoomBean.selectedRoomTypeId}">
+                            <h:selectOneMenu value="#{bookingRoomBean.selectedRoomTypeId}" styleClass="form-control">
                                 <f:selectItems value="#{bookingRoomBean.roomTypeList}" var="c" itemLabel="#{c.roomType}" itemValue="#{c.roomTypeId}"></f:selectItems>
                             </h:selectOneMenu>
                         </div>

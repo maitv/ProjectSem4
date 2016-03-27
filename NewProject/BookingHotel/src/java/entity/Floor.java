@@ -6,13 +6,14 @@
 
 package entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  *
  * @author mai
  */
-public class Floor {
+public class Floor implements Serializable {
    private String floorNo;
    private List<Room> roomList;
 

@@ -6,11 +6,13 @@
 
 package entity;
 
+import java.io.Serializable;
+
 /**
  *
  * @author mai
  */
-public class Service {
+public class Service implements Serializable {
     private String serviceId;
     private String serviceName;
     private float servicePrice;

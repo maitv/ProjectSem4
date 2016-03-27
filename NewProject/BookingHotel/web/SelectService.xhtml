@@ -32,20 +32,30 @@
                 <ui:include src="layout/header.xhtml"/>
             </h:panelGroup> 
             <h:panelGroup>
+                <div class="col-md-12 col-xs-12 col-sm-12" style="padding: 0px; margin-top: -10px;">
+                    <div class="titleSelectRoom">
+                        <img src="img/banner/header-reservation.jpg"></img>
+                        <h2>Select Service</h2>
+                    </div>
+                </div> 
+                <div class="progress_bar progress_bar_margin">
+                        <ul>
+                            <li class=" b_progress_bar_s1 ">
+                                <span>1. Choose your room</span>
+                            </li>
+                            <li class=" b_progress_bar_s2 b_selected_progress_bar_state ">
+                                <span>2. Choose your service</span>
+                            </li>
+                            <li class=" b_progress_bar_s3 ">
+                                <span>3. Confirm your reservation</span>
+                            </li>
+                        </ul>
+                        <div class="clear"></div>
+                </div>
                 <div class="container">
-                    <div class="slider1">
-                        <div class="slide"><img src="img/slide/slider-1.jpg"></img></div> 
-                        <div class="slide"><img src="img/slide/slider-2.jpg"></img></div>
-                    </div>
-                    <!--End Slider-->
-                    <div class="col-md-12 main-product">
-                        <div class="room-title">
-                            <h2>Select Service</h2>
-                            <div class="sperad"></div>
-                        </div>
-                    </div>
-                    Extra services: <br/>
-                    <h:form id="form">
+                    
+                    
+                    <h:form id="form" style="display: inline-block; margin-top: 10px;">
                         <p:dataTable value="#{bookingRoomBean.selectedRoom}" var="r">
                             <p:column>
                                 <f:facet name="header">
@@ -58,46 +68,49 @@
                                     Room Desc
                                 </f:facet>
                                 #{r.roomDesc}
-                            </p:column>                            
+                            </p:column>
                             <p:column>
                                 <f:facet name="header">
                                     Price
                                 </f:facet>
                                 #{bookingRoomBean.getPrice(r.roomTypeId)}
-                            </p:column>      
+                            </p:column>
                             <p:column>
                                 <f:facet name="header">
                                     Days
                                 </f:facet>
                                 #{bookingRoomBean.diffDays}
-                            </p:column> 
+                            </p:column>             
                         </p:dataTable>
+                        <div style="margin: 20px 0px 0px">
+                            <p:dataTable rowKey="#{r.serviceName}" id="sList" widgetVar="serviceList" selection="#{bookingRoomBean.selectedService}" value="#{bookingRoomBean.serviceList}" var="r"  >     
+                                <p:column selectionMode="multiple" style="width:100px;text-align:center" />
+                                <p:column>
+                                    <f:facet name="header">
+                                        Service Name
+                                    </f:facet>
+                                    #{r.serviceName}
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        Service Desc
+                                    </f:facet>
+                                    #{r.serviceDesc}
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        Price
+                                    </f:facet>
+                                    #{r.servicePrice}
 
-                        <p:dataTable rowKey="#{r.serviceName}" id="sList" widgetVar="serviceList" selection="#{bookingRoomBean.selectedService}" value="#{bookingRoomBean.serviceList}" var="r"  >     
-                            <p:column selectionMode="multiple" style="width:100px;text-align:center" />
-                            <p:column>
-                                <f:facet name="header">
-                                    Service Name
-                                </f:facet>
-                                #{r.serviceName}
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    Service Desc
-                                </f:facet>
-                                #{r.serviceDesc}
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    Price
-                                </f:facet>
-                                #{r.servicePrice}
-
-                            </p:column>            
-                        </p:dataTable>
-                        <p:commandButton update="output" value="Update" actionListener="#{bookingRoomBean.test()}"/>
-                        Total: <h:outputText  id="output" value="#{bookingRoomBean.totalPrice}"/>
-                        <p:commandButton value="Continue" action="#{bookingRoomBean.gotoUserInputInformation()}"/>
+                                </p:column>            
+                            </p:dataTable>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12" style="text-align: right; margin: 30px 10px">
+                            <p:commandButton update="output" value="Update" actionListener="#{bookingRoomBean.test()}" class="button btnSelectService"/>
+                                <div style="display: inline-block; padding: 0px 10px;">Total: <h:outputText  id="output" value="#{bookingRoomBean.totalPrice}"/></div>
+                            <p:commandButton value="Continue" action="#{bookingRoomBean.gotoUserInputInformation()}" class="button btnSelectService"/>
+                        </div>
                     </h:form>
                 </div>
             </h:panelGroup> 

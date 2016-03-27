@@ -28,36 +28,47 @@
     </h:head>
     <h:body>       
         <f:view>
-            <h:panelGroup>
+            <h:panelGroup> 
                 <ui:include src="layout/header.xhtml"/>
             </h:panelGroup> 
+            <div class="col-md-12 col-xs-12 col-sm-12" style="padding: 0px; margin-top: -10px;">
+                    <div class="titleSelectRoom">
+                        <img src="img/banner/confirm.jpg"></img>
+                    </div>
+                </div> 
+            <div class="progress_bar progress_bar_margin">
+                <ul>
+                    <li class=" b_progress_bar_s1 ">
+                        <span>1. Choose your room</span>
+                    </li>
+                    <li class=" b_progress_bar_s2 ">
+                        <span>2. Choose your service</span>
+                    </li>
+                    <li class=" b_progress_bar_s3 b_selected_progress_bar_state ">
+                        <span>3. Confirm your reservation</span>
+                    </li>
+                </ul>
+                <div class="clear"></div>
+            </div>
             <h:panelGroup>
                 <div class="container">
-                    <div class="slider1">
-                        <div class="slide"><img src="img/slide/slider-1.jpg"></img></div> 
-                        <div class="slide"><img src="img/slide/slider-2.jpg"></img></div>
-                    </div>
-                    <!--End Slider-->
-                    <div class="col-md-12 main-product">
-                        <div class="room-title">
-                            <h2>User Information</h2>
-                            <div class="sperad"></div>
-                        </div>
-                    </div>
                     <h:form class="main-product main-form">     
-                        
-                        <h:outputLabel value="New customer :"/><br/>
-                        <h:outputLabel value="Full name: " /><h:inputText value="#{bookingRoomBean.customerName}"/> <br/>
-                        <h:outputLabel value="Country: " /><h:inputText value="#{bookingRoomBean.customerCountry}"/> <br/>
-                        <h:outputLabel value="Identity Number: " /><h:inputText value="#{bookingRoomBean.customerIdentityNo}"/> <br/>
-                        <h:outputLabel value="Date of birth: " /><h:inputText class="dobpicker" value="#{bookingRoomBean.customerDOB}"/> <br/>
-                        <h:outputLabel value="Address: " /><h:inputText value="#{bookingRoomBean.customerAddress}"/> <br/>
-                        <h:outputLabel value="Email: " /><h:inputText value="#{bookingRoomBean.customerEmail}"/> <br/>
-                        <h:outputLabel value="Phone: " /><h:inputText value="#{bookingRoomBean.customerPhone}"/> <br/>
-                        
-                        <h:selectBooleanCheckbox value="returnCustomer" label="Return Custusmer" /><h:outputLabel value="Return customer"/><br/>
-                        <h:outputLabel value="Identity Number: " /><h:inputText value="#{bookingRoomBean.returnCustomerIdentityNo}"/> <br/>
-                        <h:commandButton value="Continue" action="#{bookingRoomBean.gotoUserConfirmation()}"/>
+                        <div class="col-md-6 col-sm-6 col-xs-12 userInputConfirm" style="padding: 0px">
+                            <h:outputLabel value="New customer" styleClass="title"/><br/>
+                            <h:outputLabel value="Full name: " /><h:inputText value="#{bookingRoomBean.customerName}"/> <br/>
+							<h:outputLabel value="Country: " /><h:inputText value="#{bookingRoomBean.customerCountry}"/> <br/>
+							<h:outputLabel value="Identity Number: " /><h:inputText value="#{bookingRoomBean.customerIdentityNo}"/> <br/>
+							<h:outputLabel value="Date of birth: " /><h:inputText class="dobpicker" value="#{bookingRoomBean.customerDOB}"/> <br/>
+							<h:outputLabel value="Address: " /><h:inputText value="#{bookingRoomBean.customerAddress}"/> <br/>
+							<h:outputLabel value="Email: " /><h:inputText value="#{bookingRoomBean.customerEmail}"/> <br/>
+							<h:outputLabel value="Phone: " /><h:inputText value="#{bookingRoomBean.customerPhone}"/> <br/>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12 userInputConfirm" style="padding: 0px">
+                            <h:selectBooleanCheckbox value="returnCustomer" label="Return Custusmer" />
+                            <h:outputLabel value="Return customer" styleClass="title"/><br/>
+                            <h:outputLabel value="Identity Number: " /><h:inputText value="#{bookingRoomBean.returnCustomerIdentityNo}"/> <br/>
+                            <h:commandButton value="Continue" action="#{bookingRoomBean.gotoUserConfirmation()}" styleClass="button"/>
+                        </div>
                     </h:form>
                 </div>
             </h:panelGroup> 
