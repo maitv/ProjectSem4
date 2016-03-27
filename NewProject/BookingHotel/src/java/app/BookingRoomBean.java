@@ -536,5 +536,5 @@ public class BookingRoomBean implements Serializable {
 
         return "success";
 
-    }
+    } 
 }
