@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -47,6 +48,16 @@ public class BookingRoomBean implements Serializable {
     private String ppPassword;
     private String ppID;
     private String diffDays;
+    private String uuid;
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
+    
 
     public String getDiffDays() {
         return diffDays;
@@ -558,6 +569,7 @@ public class BookingRoomBean implements Serializable {
         if ((totalPrice / 2) > ppAccount) {  
             return "failed";
         }
+        this.setUuid(UUID.randomUUID().toString().replaceAll("-", ""));
         return "success";
     }
    
@@ -570,4 +582,5 @@ public class BookingRoomBean implements Serializable {
         return "success";
 
     }
+    
 }

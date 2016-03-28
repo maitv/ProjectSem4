@@ -110,7 +110,7 @@
                             <p:commandButton update="output" value="Update" actionListener="#{bookingRoomBean.test()}" class="button btnSelectService"/>
                             <div style="display: inline-block; padding: 0px 10px;">Total: <h:outputText  id="output" value="#{bookingRoomBean.totalPrice}"/></div>
                             <p:commandButton value="Continue" action="#{bookingRoomBean.gotoUserInputInformation()}" class="button btnSelectService"/>
-                            <p:remoteCommand name="onload" action="#{bookingRoomBean.test}" autoRun="true"/>
+                            <p:remoteCommand update="output" name="onload" action="#{bookingRoomBean.test}" autoRun="true"/>
                         </div>
                     </h:form>
                 </div>
