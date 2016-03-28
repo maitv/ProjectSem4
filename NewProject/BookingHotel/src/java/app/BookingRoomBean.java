@@ -15,11 +15,15 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.ValueChangeEvent;
 import model.DataProcess;
+import org.primefaces.context.RequestContext;
 
 /**
  *
@@ -41,6 +45,7 @@ public class BookingRoomBean implements Serializable {
     private String customerEmail;
     private String ppUsername;
     private String ppPassword;
+    private String ppID;
     private String diffDays;
 
     public String getDiffDays() {
@@ -469,15 +474,41 @@ public class BookingRoomBean implements Serializable {
         }
 //        return "success";
     }
+    
+    private String ppCardNumber;
+
+    public String getPpCardNumber() {
+        return ppCardNumber;
+    }
+
+    public void setPpCardNumber(String ppCardNumber) {
+        this.ppCardNumber = ppCardNumber;
+    }
+
+    public String getPpID() {
+        return ppID;
+    }
+
+    public void setPpID(String ppID) {
+        this.ppID = ppID;
+    }
 
     public String gotoppCheckout() {
-        if ("test".equals(ppUsername)) {
-            if ("test".equals(ppPassword)) {
-                setPpName("Mr.Tester");
-                setPpAccount(10000000);
-                return "success";
-            }
+       /* RequestContext context = RequestContext.getCurrentInstance();
+        FacesMessage message = null;*/
+        DataProcess dp=new DataProcess();
+        if(dp.checkLogin(ppUsername, ppPassword)!=null) {
+            PayPalAccount acc=dp.checkLogin(ppUsername, ppPassword);
+            this.setPpName(acc.getFullname());
+            this.setPpEmail(acc.getEmail());
+            this.setPpAccount(acc.getBalance());
+            this.setPpCardNumber(acc.getCardnumber());
+            this.setPpID(acc.getId());
+            return "success";
+        } else {
+            //message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error", "Invalid credentials");
         }
+        //FacesContext.getCurrentInstance().addMessage(null, message);
         return "failed";
     }
     public String ppName;
@@ -517,24 +548,26 @@ public class BookingRoomBean implements Serializable {
     public void setPpEmail(String ppEmail) {
         this.ppEmail = ppEmail;
     }
-
-    public String gotoppConfirmation() {
-        //String s="failed";
-        //if ((totalPrice / 2) < ppAccount) {
-        setPpOrderID("PPOrder1");
-        setPpEmail("tester@test.com");
-        //s="success";
-        // }
-        return "success";
+    public String logout()
+    {
+        return "logout";
     }
 
+    public String gotoppConfirmation() {
+        
+        if ((totalPrice / 2) > ppAccount) {  
+            return "failed";
+        }
+        return "success";
+    }
+   
     public String gotoNotice() {
         DataProcess dp = new DataProcess();
 
         dp.booking(selectedRoom, checkinDate, checkoutDate, customerName, customerCountry, customerIdentityNo, cus.getCustomerDOB(), customerAddress,
-                customerPhone, customerEmail, totalPrice, selectedService);
-
+                customerPhone, customerEmail, totalPrice, selectedService,ppID,ppAccount);
+        setPpOrderID(dp.getOrderID());
         return "success";
 
-    } 
+    }
 }

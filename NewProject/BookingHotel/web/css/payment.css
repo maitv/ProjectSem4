@@ -1,0 +1,99 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Mar 28, 2016, 11:14:50 AM
+    Author     : Zito
+*/
+.col1{
+    width:20%;
+}
+.col2{
+    width:30%;
+}
+.col3
+{
+    width:50%;
+    text-align: right;
+    margin-top: 40px;
+    float:right;
+    padding-right: 10px;
+}
+.cart
+{
+    margin-left: 100px;
+    height: 50px;
+    width:  50px;
+}
+.logincontainer{
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+
+}
+#loginform{
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+    margin-left: 35%;
+}
+.d1{
+    font-size: xx-large;
+    text-align: center;
+    font-weight: bold;
+    font-style: italic;
+}
+.ppUsername{
+    margin-top: 50px;
+    width: 450px;
+}
+.ppPassword{
+    margin-top: 10px;
+    width: 450px;
+}
+.submitButton{
+    margin-top: 50px;
+    padding: 10px;
+}
+.p1{
+    margin-left: 50px;
+    font-size: x-large;
+    font-weight: bold;
+    font-style: italic;
+}
+.p2{
+    
+    margin-top: 20px;
+    font-size: large;
+    margin-left: 50px;
+    font-style: italic;
+    line-height: 150%;
+}
+.p3{
+    
+    margin-top: 80px;
+    font-size: large;
+    margin-left: 50px;
+    line-height: 150%;
+}
+.p4{
+    font-size: large;
+    margin-left: 50px;
+}
+.centered{
+    margin-left: 35%;
+    text-align: center;
+    font-size: xx-large;
+    font-weight: bold;
+    padding: 10px;
+}
+.c1{
+    font-size: large;
+    line-height: 150%;
+}
+.t1{
+    margin-top: 100px;
+    font-style: italic;
+}

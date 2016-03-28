@@ -4,21 +4,54 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Facelet Title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+        <title>Checkout</title>
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css"></link>
+        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"></link>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"></link>
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"></link>
+        <link rel="stylesheet" href="css/jquery.bxslider.css"></link> 
+        <link rel="stylesheet" href="css/payment.css"></link> 
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/jquery.bxslider.min.js"></script>
+        <script type="text/javascript" src="js/jquery.bxslider.js"></script>
     </h:head>
     <h:body>
         <h:form>
-        Welcome back <h:outputText value="#{bookingRoomBean.ppName}"/>
-        Payment to
-        Booking Hotel Boss
-        Anywhere on the Earth, ABCXYZ, Solar System
-        
-        Pay with
-        Credit card/Debit card: Mastercard $<h:outputText value="#{bookingRoomBean.totalPrice/2}"/> USD
-        XXXX-XXXX-XXXX-XXXX
-        <h:commandButton value="Pay Now" action="#{bookingRoomBean.gotoppConfirmation()}"/>
-        
-        
+            <p:panel>
+                <h:panelGrid columns="3" columnClasses="col1,col2,col3">
+                    <h:graphicImage id="logo" value="img/paypal-logo.png"/>
+                    <h:panelGroup/>
+                    <h:panelGroup>
+                         <h:form>
+                    <h:outputText value="Welcome #{bookingRoomBean.ppName}"/><h:commandLink action="#{bookingRoomBean.logout()}" value="[logout]"/></h:form>
+                        <h:graphicImage styleClass="cart" value="img/cart.png"/>
+                        <h:outputText id="totalPrice" value=":#{bookingRoomBean.totalPrice/2} USD"/>
+                    </h:panelGroup>
+
+                </h:panelGrid>
+            </p:panel>   
+            <p:panel>
+            <h:panelGrid styleClass="p1">
+                Payment to:
+            </h:panelGrid>
+            <h:panelGrid styleClass="p2">
+                Booking Hotel Boss <br/>
+                Anywhere on the Earth, ABCXYZ, Solar System
+            </h:panelGrid>
+                <h:panelGroup  styleClass="p3">
+                Pay with: Mastercard <h:outputText value="#{bookingRoomBean.ppCardNumber}"/> <br/>
+                <h:outputText styleClass="p4" value="$#{bookingRoomBean.totalPrice/2}USD"/> 
+                <br/>
+            </h:panelGroup>            
+
+                <h:commandButton styleClass="centered" value="Pay Now" action="#{bookingRoomBean.gotoppConfirmation()}"/>
+                </p:panel>
         </h:form>
     </h:body>
 </html>

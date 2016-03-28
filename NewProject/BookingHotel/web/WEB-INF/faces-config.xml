@@ -58,6 +58,10 @@
             <from-outcome>success</from-outcome>
             <to-view-id>/ppConfirmation.xhtml</to-view-id>
         </navigation-case>
+        <navigation-case>
+            <from-outcome>logout</from-outcome>
+            <to-view-id>/Payment.xhtml</to-view-id>
+        </navigation-case>
     </navigation-rule>
     <navigation-rule>
         <from-view-id>/ppConfirmation.xhtml</from-view-id>
@@ -65,27 +69,9 @@
             <from-outcome>success</from-outcome>
             <to-view-id>/Notice.xhtml</to-view-id>
         </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>/admin/AdminPage.xhtml</from-view-id>
         <navigation-case>
-            <from-outcome>success</from-outcome>
-            <to-view-id>/admin/ControlPanel.xhtml</to-view-id>
-        </navigation-case>
-        <navigation-case>
-            <from-outcome>failed</from-outcome>
-            <to-view-id>/admin/Login.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>/admin/Login.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>success</from-outcome>
-            <to-view-id>/admin/ControlPanel.xhtml</to-view-id>
-        </navigation-case>
-        <navigation-case>
-            <from-outcome>failed</from-outcome>
-            <to-view-id>/admin/Login.xhtml</to-view-id>
+            <from-outcome>logout</from-outcome>
+            <to-view-id>/Payment.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 </faces-config>
