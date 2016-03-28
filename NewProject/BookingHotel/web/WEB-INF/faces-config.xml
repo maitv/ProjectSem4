@@ -28,6 +28,7 @@
         <navigation-case>
             <from-outcome>success</from-outcome>
             <to-view-id>/UserInputInformation.xhtml</to-view-id>
+            <redirect>1</redirect>
         </navigation-case>
     </navigation-rule>
     
@@ -36,6 +37,7 @@
         <navigation-case>
             <from-outcome>success</from-outcome>
             <to-view-id>/UserConfirmation.xhtml</to-view-id>
+            <redirect>1</redirect>
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
