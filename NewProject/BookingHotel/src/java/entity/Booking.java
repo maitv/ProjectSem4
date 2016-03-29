@@ -22,8 +22,6 @@ public class Booking implements Serializable {
     private String bookingComment;
     private int status;
 
-
-
     public String getBookingComment() {
         return bookingComment;
     }
@@ -80,4 +78,49 @@ public class Booking implements Serializable {
         this.status = status;
     }
 
+    public String getStringStatus() {
+        String str = "";
+        switch (status) {
+            case 0:
+                str = "Unconfirmed";
+                break;
+            case 1:
+                str = "Confirmed";
+                break;
+            case 2:
+                str = "Completed";
+                break;
+            case 3:
+                str = "Canceled";
+                break;
+            case 4:
+                str = "Deleted";
+                break;
+            default:
+                str = "Deleted";
+                break;
+        }
+
+        return str;
+    }
+
+    public boolean isUnconfirmed() {
+        return (status == 0);
+    }
+
+    public boolean isConfirmed() {
+        return (status == 1);
+    }
+
+    public boolean isCompleted() {
+        return (status == 2);
+    }
+
+    public boolean isCanceled() {
+        return (status == 3);
+    }
+
+    public boolean isDeleted() {
+        return (status == 4);
+    }
 }

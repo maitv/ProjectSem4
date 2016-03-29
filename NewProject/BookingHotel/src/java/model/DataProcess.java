@@ -350,7 +350,7 @@ public class DataProcess {
             String address,
             String phoneNumber,
             String email,
-            float total,            
+            float total,
             List<Service> services,
             String ppID,
             float ppBalance) {
@@ -385,28 +385,26 @@ public class DataProcess {
         }
         //6. Subtract from PayPalAccount table
 
-                if(!subPP(ppID,ppBalance,total/2))
-                {
-                    return false;
-               }
-        
+        if (!subPP(ppID, ppBalance, total / 2)) {
+            return false;
+        }
 
         //7. Add to Receipts table
         java.util.Date date = new java.util.Date();
         return addPayPalReceipts(("Payment" + bookingId), (total / 2), date, "Paypal");
     }
-    public boolean subPP(String id,float balance,float ammount)
-    {
-        Connection con=getConnection();
-        String query="UPDATE PayPalAccount SET balance=? WHERE id=?";
+
+    public boolean subPP(String id, float balance, float ammount) {
+        Connection con = getConnection();
+        String query = "UPDATE PayPalAccount SET balance=? WHERE id=?";
         try {
-            PreparedStatement prst=con.prepareStatement(query);
-            prst.setFloat(1, balance-ammount);
-            prst.setString(1, id);
+            PreparedStatement prst = con.prepareStatement(query);
+            prst.setFloat(1, balance - ammount);
+            prst.setString(2, id);
             prst.executeUpdate();
             prst.close();
         } catch (SQLException ex) {
-            
+
             Logger.getLogger(DataProcess.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
@@ -827,8 +825,6 @@ public class DataProcess {
 
         return true;
     }
-    
-    
 
     public boolean addPayment(String bookingId, float paymentAmmount, String paymentComment) {
         String pid = "Payment" + bookingId;
@@ -872,9 +868,9 @@ public class DataProcess {
                 acc.setUsername(rs.getString(2));
                 acc.setPassword(rs.getString(3));
                 acc.setFullname(rs.getString(4));
-                acc.setEmail(rs.getString(5));
-                acc.setBalance(rs.getFloat(6));
-                acc.setCardnumber(rs.getString(7));
+                acc.setCardnumber(rs.getString(5));
+                acc.setEmail(rs.getString(6));
+                acc.setBalance(rs.getFloat(7));
             }
 
             prst.close();
@@ -884,6 +880,37 @@ public class DataProcess {
 
         }
         return acc;
+    }
+
+    public Booking getBookingById(String id) {
+        String query = "SELECT * FROM Booking WHERE bookingId=?";
+        PreparedStatement prst;
+        ResultSet rs = null;
+        Booking bk = null;
+        Connection con = getConnection();
+        try {
+            prst = con.prepareStatement(query);
+            prst.setString(1, id);
+            rs = prst.executeQuery();
+
+            if (rs.next()) {
+                bk = new Booking();
+                bk.setBookingId(rs.getString(1));
+                bk.setCustomerId(rs.getString(2));
+                bk.setBookingDate(rs.getDate(3));
+                bk.setCheckinDate(rs.getDate(4));
+                bk.setCheckoutDate(rs.getDate(5));
+                bk.setBookingComment(rs.getString(6));
+                bk.setStatus(rs.getInt(7));
+            }
+
+            prst.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DataProcess.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+        return bk;
     }
 
     public static void main(String[] argv) {

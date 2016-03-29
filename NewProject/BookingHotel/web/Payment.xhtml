@@ -39,8 +39,8 @@
             <h:form id="loginform">
                 <h:panelGrid columns="1" columnClasses="logincontainer">
                     <h:outputText styleClass="d1" value="Pay with PayPal"/>
-                    <h:inputText label="Username" styleClass="ppUsername" id="ppUsername" value="#{bookingRoomBean.ppUsername}"/>
-                    <h:inputSecret label="Password" styleClass="ppPassword" id="ppPassword" value="#{bookingRoomBean.ppPassword}"/>
+                    <h:outputLabel value="Username : "/><h:inputText styleClass="ppUsername" id="ppUsername" value="#{bookingRoomBean.ppUsername}"/>
+                    <h:outputLabel value="Password : "/><h:inputSecret styleClass="ppPassword" id="ppPassword" value="#{bookingRoomBean.ppPassword}"/>
                     <h:commandButton styleClass="submitButton" type="Submit" value="Login to Paypal" action="#{bookingRoomBean.gotoppCheckout()}"/>    
                 </h:panelGrid>
             </h:form>

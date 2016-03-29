@@ -5,9 +5,11 @@
  */
 package app;
 
+import entity.Booking;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import model.DataProcess;
 
 /**
  *
@@ -19,6 +21,27 @@ public class AdminBean {
 
     private String username;
     private String password;
+
+    private String bookingIdSelected;
+    private Booking currentBooking;
+
+    public Booking getCurrentBooking() {
+        return currentBooking;
+    }
+
+    public void setCurrentBooking(Booking currentBooking) {
+        this.currentBooking = currentBooking;
+    }
+
+    public String getBookingIdSelected() {
+        return bookingIdSelected;
+    }
+
+    public void setBookingIdSelected(String bookingIdSelected) {
+        DataProcess db = new DataProcess();
+        
+        currentBooking = db.getBookingById(bookingIdSelected);
+    }
 
     public String getUsername() {
         return username;
@@ -72,6 +95,20 @@ public class AdminBean {
 
     public String logout() {
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("user");
+        return "success";
+    }
+
+    public String gotoDetail(String id) {
+        setBookingIdSelected(id);
+
+        return "detail";
+    }
+    
+    public String changeBookingStatus(String id, int status)
+    {
+        DataProcess dp = new DataProcess();
+        dp.updateBookingStatus(id, status);
+        
         return "success";
     }
 }

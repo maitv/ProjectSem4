@@ -50,6 +50,25 @@ public class BookingRoomBean implements Serializable {
     private String diffDays;
     private String uuid;
 
+    private boolean isRoomAvailable;
+    private boolean isSearchClick;
+
+    public boolean isIsRoomAvailable() {
+        return isRoomAvailable;
+    }
+
+    public void setIsRoomAvailable(boolean isRoomAvailable) {
+        this.isRoomAvailable = isRoomAvailable;
+    }
+
+    public boolean isIsSearchClick() {
+        return isSearchClick;
+    }
+
+    public void setIsSearchClick(boolean isSearchClick) {
+        this.isSearchClick = isSearchClick;
+    }
+
     public String getUuid() {
         return uuid;
     }
@@ -58,7 +77,6 @@ public class BookingRoomBean implements Serializable {
         this.uuid = uuid;
     }
     
-
     public String getDiffDays() {
         return diffDays;
     }
@@ -189,6 +207,32 @@ public class BookingRoomBean implements Serializable {
         this.serviceList = serviceList;
     }
 
+    private List<Booking> bookingList;
+
+    public List<Booking> getAllBooking() {
+        DataProcess dp = new DataProcess();
+        bookingList = dp.getAllBooking();
+        return bookingList;
+    }
+    
+    private List<Booking> selectedBooking;
+
+    public List<Booking> getBookingList() {
+        return bookingList;
+    }
+
+    public void setBookingList(List<Booking> bookingList) {
+        this.bookingList = bookingList;
+    }
+
+    public List<Booking> getSelectedBooking() {
+        return selectedBooking;
+    }
+
+    public void setSelectedBooking(List<Booking> selectedBooking) {
+        this.selectedBooking = selectedBooking;
+    }
+    
     private List<Service> selectedService;
 
     public List<Service> getSelectedService() {
@@ -247,7 +291,7 @@ public class BookingRoomBean implements Serializable {
             }
             setTotalPrice(totalPrice);
             if (totalPrice != 0) {
-                setMinPaid(totalPrice/2);
+                setMinPaid(totalPrice / 2);
             }
 
         } catch (ParseException ex) {
@@ -306,6 +350,8 @@ public class BookingRoomBean implements Serializable {
      * Creates a new instance of BookingRoomBean
      */
     public BookingRoomBean() {
+        isRoomAvailable = false;
+        isSearchClick = false;
     }
 
     public String gotoSearchRoom() {
@@ -417,6 +463,8 @@ public class BookingRoomBean implements Serializable {
             return "failed";
         }
 
+        isSearchClick = true;
+
         List<Room> li = null;
         DataProcess dp = new DataProcess();
 
@@ -436,9 +484,11 @@ public class BookingRoomBean implements Serializable {
         }
 
         if (li == null || li.size() <= 0) {
+            isRoomAvailable = false;
             return "failed";
         }
 
+        isRoomAvailable = true;
         return "success";
     }
 
@@ -485,7 +535,7 @@ public class BookingRoomBean implements Serializable {
         }
 //        return "success";
     }
-    
+
     private String ppCardNumber;
 
     public String getPpCardNumber() {
@@ -505,11 +555,11 @@ public class BookingRoomBean implements Serializable {
     }
 
     public String gotoppCheckout() {
-       /* RequestContext context = RequestContext.getCurrentInstance();
-        FacesMessage message = null;*/
-        DataProcess dp=new DataProcess();
-        if(dp.checkLogin(ppUsername, ppPassword)!=null) {
-            PayPalAccount acc=dp.checkLogin(ppUsername, ppPassword);
+        /* RequestContext context = RequestContext.getCurrentInstance();
+         FacesMessage message = null;*/
+        DataProcess dp = new DataProcess();
+        if (dp.checkLogin(ppUsername, ppPassword) != null) {
+            PayPalAccount acc = dp.checkLogin(ppUsername, ppPassword);
             this.setPpName(acc.getFullname());
             this.setPpEmail(acc.getEmail());
             this.setPpAccount(acc.getBalance());
@@ -559,28 +609,38 @@ public class BookingRoomBean implements Serializable {
     public void setPpEmail(String ppEmail) {
         this.ppEmail = ppEmail;
     }
-    public String logout()
-    {
+
+    public String logout() {
         return "logout";
     }
 
     public String gotoppConfirmation() {
-        
-        if ((totalPrice / 2) > ppAccount) {  
+
+        if ((totalPrice / 2) > ppAccount) {
             return "failed";
         }
         this.setUuid(UUID.randomUUID().toString().replaceAll("-", ""));
         return "success";
     }
-   
+
     public String gotoNotice() {
         DataProcess dp = new DataProcess();
 
         dp.booking(selectedRoom, checkinDate, checkoutDate, customerName, customerCountry, customerIdentityNo, cus.getCustomerDOB(), customerAddress,
-                customerPhone, customerEmail, totalPrice, selectedService,ppID,ppAccount);
+                customerPhone, customerEmail, totalPrice, selectedService, ppID, ppAccount);
         setPpOrderID(dp.getOrderID());
         return "success";
 
     }
+
+    public boolean isShowRoomAvailableMessage() {
+        return ((!isRoomAvailable) && isSearchClick);
+    }
     
+    public String getDateInFormat(java.sql.Date d){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        String str = sdf.format(d);
+        
+        return str;
+    }
 }

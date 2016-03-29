@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Booking detail</title>
+    </h:head>
+    <h:body>
+        <f:view>
+            <h:panelGroup>
+                <h:form class="main-product main-form">
+                    <p:fieldset legend="Booking Information " >
+                        <h:outputLabel value="Booking ID: " />&nbsp;#{adminBean.currentBooking.bookingId} <br/>
+                        <h:outputLabel value="Customer ID : " />#{adminBean.currentBooking.bookingId} <br/>
+                        <h:outputLabel value="Booking Date : " />#{adminBean.currentBooking.bookingId} <br/>
+                        <h:outputLabel value="Checkin Date: " />#{adminBean.currentBooking.checkinDate} <br/>
+                        <h:outputLabel value="Checkout Date: " />#{adminBean.currentBooking.checkoutDate} <br/>
+                    </p:fieldset>
+                    <h:panelGroup rendered="#{adminBean.currentBooking.unconfirmed}">
+                        <h:commandButton value="Confirm" class="button" action="#{adminBean.changeBookingStatus(adminBean.currentBooking.bookingId, 1)}"/>
+                        <h:commandButton value="Cancel" class="button" action="#{adminBean.changeBookingStatus(adminBean.currentBooking.bookingId, 3)}"/>
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{adminBean.currentBooking.confirmed}">
+                        <h:commandButton value="Checkout" class="button" action="#{adminBean.changeBookingStatus(adminBean.currentBooking.bookingId, 2)}"/>
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{adminBean.currentBooking.completed}">
+                        <h:commandButton value="Delete" class="button" action="#{adminBean.changeBookingStatus(adminBean.currentBooking.bookingId, 4)}"/>
+                    </h:panelGroup>
+                </h:form>
+            </h:panelGroup>
+        </f:view>
+    </h:body>
+</html>
+

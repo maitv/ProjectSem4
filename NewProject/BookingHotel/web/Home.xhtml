@@ -30,8 +30,8 @@
             </h:panelGroup> 
             <h:panelGroup>
                 <div class="slider1">
-                        <div class="slide"><img src="img/slide/slider-1.jpg"></img></div> 
-                        <div class="slide"><img src="img/slide/slider-2.jpg"></img></div>
+                    <div class="slide"><img src="img/slide/slider-1.jpg"></img></div> 
+                    <div class="slide"><img src="img/slide/slider-2.jpg"></img></div>
                 </div>
                 <!--End Slider-->
                 <div class="container">
@@ -49,10 +49,16 @@
                                 <f:selectItems value="#{bookingRoomBean.roomTypeList}" var="c" itemLabel="#{c.roomType}" itemValue="#{c.roomTypeId}"></f:selectItems>
                             </h:selectOneMenu>
                         </div>
+
                         <div class="form-group">
                             <h:commandButton value="Booking" class="button" action="#{bookingRoomBean.gotoSelectRoom()}"/>
                         </div>
                     </h:form>
+                    <div class="main-product main-form">
+                        <h:panelGroup rendered="#{bookingRoomBean.showRoomAvailableMessage}">
+                            <h:outputText style="color:red" value="The rooms are not available, please choose another room type or date!"/>
+                        </h:panelGroup> 
+                    </div>
                     <div class="col-md-12 main-product">
                         <div class="room-title">
                             <h2>List room type in MGM</h2>
