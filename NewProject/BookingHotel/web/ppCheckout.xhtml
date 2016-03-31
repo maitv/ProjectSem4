@@ -15,6 +15,7 @@
         <!-- Optional theme -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"></link>
         <link rel="stylesheet" href="css/jquery.bxslider.css"></link> 
+        <link rel="stylesheet" href="css/a.css"></link>
         <link rel="stylesheet" href="css/payment.css"></link> 
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -24,34 +25,42 @@
     <h:body>
         <h:form>
             <p:panel>
-                <h:panelGrid columns="3" columnClasses="col1,col2,col3">
-                    <h:graphicImage id="logo" value="img/paypal-logo.png"/>
+                <h:panelGrid columns="3" columnClasses="col1,col2,col-md-offset3">
+                    <h:graphicImage id="logo" value="img/icon/paypal_logo.png"/>
                     <h:panelGroup/>
                     <h:panelGroup>
-                         <h:form>
-                    <h:outputText value="Welcome #{bookingRoomBean.ppName}"/><h:commandLink action="#{bookingRoomBean.logout()}" value="[logout]"/></h:form>
-                        <h:graphicImage styleClass="cart" value="img/cart.png"/>
-                        <h:outputText id="totalPrice" value=":#{bookingRoomBean.totalPrice/2} USD"/>
+                        <div style="text-align: right">
+                            <h:form>
+                               <h:outputText value="Welcome #{bookingRoomBean.ppName}"/><h:commandLink action="#{bookingRoomBean.logout()}" value="[logout]"/>
+                            </h:form>
+                            <h:graphicImage styleClass="cart" value="img/cart.png"/>
+                            <h:outputText id="totalPrice" value=":#{bookingRoomBean.totalPrice/2} USD"/>
+                        </div>
                     </h:panelGroup>
 
                 </h:panelGrid>
             </p:panel>   
             <p:panel>
-            <h:panelGrid styleClass="p1">
-                Payment to:
-            </h:panelGrid>
-            <h:panelGrid styleClass="p2">
-                Booking Hotel Boss <br/>
-                Anywhere on the Earth, ABCXYZ, Solar System
-            </h:panelGrid>
-                <h:panelGroup  styleClass="p3">
-                Pay with: Mastercard <h:outputText value="#{bookingRoomBean.ppCardNumber}"/> <br/>
-                <h:outputText styleClass="p4" value="$#{bookingRoomBean.totalPrice/2}USD"/> 
-                <br/>
-            </h:panelGroup>            
-
-                <h:commandButton styleClass="centered" value="Pay Now" action="#{bookingRoomBean.gotoppConfirmation()}"/>
-                </p:panel>
+                 <h:panelGroup>
+                     <div style="margin-top: 100px">
+                        <h:panelGrid styleClass="p1">
+                            Payment to:
+                        </h:panelGrid>
+                        <h:panelGrid styleClass="p2">
+                            Booking Hotel MGM Grand <br/>
+                            Anywhere on the Earth, Book directly with MGM Grand for the best rates, guaranteed , Solar System
+                        </h:panelGrid>
+                        <h:panelGroup>
+                            <div class="p3" style="margin-bottom: 50px">
+                                Pay with: Mastercard <h:outputText value="#{bookingRoomBean.ppCardNumber}"/> <br/>
+                                <h:outputText styleClass="p4" value="Price: $#{bookingRoomBean.totalPrice/2}"/> 
+                                <br/>
+                            </div>
+                        </h:panelGroup>            
+                         <h:commandButton styleClass="centered" value="Pay Now" action="#{bookingRoomBean.gotoppConfirmation()}" />
+                     </div>
+                 </h:panelGroup>
+            </p:panel>
         </h:form>
     </h:body>
 </html>

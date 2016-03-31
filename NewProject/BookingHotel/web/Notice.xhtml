@@ -30,12 +30,16 @@
                 <ui:include src="layout/header.xhtml"/>
             </h:panelGroup> 
             <h:panelGroup>
-                <div class="container">     
-                    <div style="text-align: center;font-size: xx-large;font-weight: bolder">
-                        Your order id is: <h:outputText value="#{bookingRoomBean.ppOrderID}"/> <br/>
-                        Thank you for using our online booking system!
+                <div class="container" style="padding: 100px;text-align: center"> 
+                    <div style="margin-top: 10px;border: 1px solid #aaa;">
+                            <h3 style="font-size: 20px;text-transform: uppercase"><i style="font-size: 30px;border: 1px solid #ccc;border-radius: 50%;color: #fff;background: #FF3D0A;padding: 5px;" class="fa fa-check"></i>&nbsp;&nbsp;Order Success !</h3>
+                            <p style="color: #999;">Order Code: <span style="color: #F04D22"><h:outputText value="#{bookingRoomBean.ppOrderID}"/></span></p>
+                            <p>
+                                Congratulations successful payment orders.<br/>
+                                Staff care will contact you when the order is confirmed. <br/>
+                            </p>
+                            <a target="_parent" href="Home.xhtml" class="btnRed" style="padding: 5px;display: inline-block;margin: 20px 0;background: #333;color: #fff;padding: 15px 30px;border-radius: 5px;">Back to Home Page</a>
                     </div>
-
                 </div>
             </h:panelGroup> 
            

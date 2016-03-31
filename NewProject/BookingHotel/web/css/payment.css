@@ -23,9 +23,8 @@ and open the template in the editor.
 }
 .cart
 {
-    margin-left: 100px;
-    height: 50px;
-    width:  50px;
+    height: 25px;
+    width:  25px;
 }
 .logincontainer{
     margin: 0 auto;
@@ -37,22 +36,20 @@ and open the template in the editor.
     margin: 0 auto;
     display: block;
     text-align: center;
-    margin-left: 35%;
+    width: 100%;
+}
+#loginform table{
+    width: 100%;
+    line-height: 2
 }
 .d1{
     font-size: xx-large;
     text-align: center;
-    font-weight: bold;
-    font-style: italic;
 }
-.ppUsername{
-    margin-top: 50px;
+.ppUsername,.ppPassword{
     width: 450px;
 }
-.ppPassword{
-    margin-top: 10px;
-    width: 450px;
-}
+
 .submitButton{
     margin-top: 50px;
     padding: 10px;
@@ -64,7 +61,6 @@ and open the template in the editor.
     font-style: italic;
 }
 .p2{
-    
     margin-top: 20px;
     font-size: large;
     margin-left: 50px;
@@ -72,15 +68,14 @@ and open the template in the editor.
     line-height: 150%;
 }
 .p3{
-    
-    margin-top: 80px;
+    margin-top: 25px;
     font-size: large;
     margin-left: 50px;
     line-height: 150%;
 }
 .p4{
     font-size: large;
-    margin-left: 50px;
+    margin-left: 88px;
 }
 .centered{
     margin-left: 35%;
@@ -96,4 +91,21 @@ and open the template in the editor.
 .t1{
     margin-top: 100px;
     font-style: italic;
+}
+ button,  input[type=button],  input[type=reset],  input[type=submit] {
+    padding: 5px 70px;
+    font-size: 25px;
+    border: none;
+    border-radius: 3px;
+    color: #fff;
+    background: #0070ba;
+    font-weight: normal;
+}
+.logincontainer label {
+    font-family: monospace;
+    font-size: 17px;
+}
+.logincontainer input[type=text], .logincontainer input[type=password] {
+    margin-left: 12px;
+    padding: 0px 10px;
 }

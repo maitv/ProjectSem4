@@ -556,4 +556,19 @@ table.admin-table {
     margin-left: auto;
     margin-right: auto;
 }
+.ui-widget-content {
+    background: none !important;
+    border: none;
+}
+.ui-datepicker table {
+    background: #fff;
+}
+.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
+    border: 1px solid #000;
+}
+@media screen and (max-width: 1024px) {
+    .userInputConfirm label {
+        width: 140px;
+    }
+}
 

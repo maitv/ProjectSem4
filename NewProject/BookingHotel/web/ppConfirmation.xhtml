@@ -15,33 +15,37 @@
         <!-- Optional theme -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"></link>
         <link rel="stylesheet" href="css/jquery.bxslider.css"></link> 
+        <link rel="stylesheet" href="css/a.css"></link>
         <link rel="stylesheet" href="css/payment.css"></link> 
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="js/jquery.bxslider.min.js"></script>
         <script type="text/javascript" src="js/jquery.bxslider.js"></script>
     </h:head>
-    <h:body>        
+    <h:body>         
         <p:panel>
-            <h:panelGrid columns="3" columnClasses="col1,col2,col3">
-                <h:graphicImage id="logo" value="img/paypal-logo.png"/>
+            <h:panelGrid columns="3" columnClasses="col1,col2,col-md-offset-3">
+                <h:graphicImage id="logo" value="img/icon/paypal_logo.png"/>
                 <h:panelGroup/>
                 <h:panelGroup>
-                    <h:form>
-                    <h:outputText value="Welcome #{bookingRoomBean.ppName}"/><h:commandLink action="#{bookingRoomBean.logout()}" value="[logout]"/></h:form>
-                    <h:graphicImage styleClass="cart" value="img/cart.png"/>
-                    <h:outputText id="totalPrice" value=":#{bookingRoomBean.totalPrice/2} USD"/>
+                    <div style="text-align: right">
+                        <h:graphicImage styleClass="cart" value="img/cart.png"/>
+                        <h:outputText id="totalPrice" value=":#{bookingRoomBean.totalPrice/2} USD"/>
+                    </div>
                 </h:panelGroup>
+
             </h:panelGrid>
-        </p:panel>   
-        <h:panelGroup styleClass="c1">
-            Thank you for using our booking online service. <br/>
-            An order confirmation will be sent to: <h:outputText value="#{bookingRoomBean.ppEmail}"/><br/>
-            To complete the order, please click the link inside the email
-            <h:form styleClass="t1">
-                For testing purpose click this link
-                <h:commandLink value="#{bookingRoomBean.uuid}" action="#{bookingRoomBean.gotoNotice()}"/>
-            </h:form>
+        </p:panel>    
+        <h:panelGroup>
+            <div style="width: 100%;text-align: center;padding: 100px">
+                Thank you for using our booking online service. <br/>
+                An order confirmation will be sent to: <h:outputText value="#{bookingRoomBean.ppEmail}"/><br/>
+                To complete the order, please click the link inside the email
+                <h:form styleClass="t1">
+                    For testing purpose click this link
+                    <h:commandLink value="#{bookingRoomBean.uuid}" action="#{bookingRoomBean.gotoNotice()}"/>
+                </h:form>
+            </div>
         </h:panelGroup>
     </h:body>
 </html>
