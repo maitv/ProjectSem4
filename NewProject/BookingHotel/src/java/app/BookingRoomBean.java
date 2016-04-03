@@ -501,9 +501,24 @@ public class BookingRoomBean implements Serializable {
 
         return "success";
     }
+    
+    public String paymentMethod;
 
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+    
+    
     public String gotoPayment() {
+        if ("PayPal".equals(paymentMethod))
+        {
         return "success";
+        }
+        else return "failed";
     }
 
     public String gotoUserConfirmation() {
@@ -528,6 +543,7 @@ public class BookingRoomBean implements Serializable {
                 cus.setCustomerIdentityNo(customerIdentityNo);
                 cus.setCustomerName(customerName);
                 cus.setCustomerPhone(customerPhone);
+                setPaymentMethod("PayPal");
                 return "success";
             } else {
                 return "failed";
@@ -535,6 +551,7 @@ public class BookingRoomBean implements Serializable {
         } else {
             cus = dp.getCustomerByIdentityNo(returnCustomerIdentityNo);
             if (cus.getCustomerId() != null) {
+                setPaymentMethod("PayPal");
                 return "success";
             }
             return "failed";
