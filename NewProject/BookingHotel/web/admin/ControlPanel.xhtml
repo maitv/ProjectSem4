@@ -183,9 +183,13 @@
                           <!-- Content Header (Page header) -->
                           <section class="content-header">
                             <h1>
-                              Dashboard
+                              Dashboard > 
                               <small>Control panel</small>
                             </h1>
+                              <h:form>
+                                  <h:inputText id="txtSearch" value="#{adminBean.username}" pt:placeholder="Input BookingId to search"/>
+                                  <h:commandButton value="Search" action="#{adminBean.search()}"
+                              </h:form>
                             <ol class="breadcrumb">
                               <li><a href="ControlPanel.xhtml"><i class="fa fa-dashboard"></i> Home</a></li>
                               <li class="active">Dashboard</li>

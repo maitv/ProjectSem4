@@ -6,6 +6,8 @@
 package app;
 
 import entity.Booking;
+import java.util.ArrayList;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
@@ -21,6 +23,16 @@ public class AdminBean {
 
     private String username;
     private String password;
+
+    private String txtSearch;
+
+    public String getTxtSearch() {
+        return txtSearch;
+    }
+
+    public void setTxtSearch(String txtSearch) {
+        this.txtSearch = txtSearch;
+    }
 
     private String bookingIdSelected;
     private Booking currentBooking;
@@ -63,7 +75,8 @@ public class AdminBean {
      * Creates a new instance of AdminBean
      */
     public AdminBean() {
-
+        DataProcess dp = new DataProcess();
+        bookingList = dp.getAllBooking();
     }
 
     public String redirectToPanelIfLoggedIn() {
@@ -155,5 +168,36 @@ public class AdminBean {
         Booking bk = dp.getBookingById(selectedId);
 
         return (bk.getStatus() == 4);
+    }
+
+    public String checkout() {
+        return "checkout";
+    }
+
+    public String gohome() {
+        return "success";
+    }
+
+    private List<Booking> bookingList;
+
+    public List<Booking> getBookingList() {
+        return bookingList;
+    }
+
+    public void setBookingList(List<Booking> bookingList) {
+        this.bookingList = bookingList;
+    }
+
+    public String search() {
+        DataProcess dp = new DataProcess();
+        if ("".equals(txtSearch)) {
+            bookingList = dp.getAllBooking();
+        } else {
+            bookingList = new ArrayList<>();
+            Booking b = dp.getBookingById(txtSearch);
+            bookingList.add(b);
+        }
+
+        return "success";
     }
 }

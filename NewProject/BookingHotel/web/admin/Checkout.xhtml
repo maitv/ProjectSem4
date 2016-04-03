@@ -199,25 +199,10 @@
                                         <h:outputLabel value="Checkin Date: " />#{adminBean.currentBooking.checkinDate} <br/>
                                         <h:outputLabel value="Checkout Date: " />#{adminBean.currentBooking.checkoutDate} <br/>
                                     </p:fieldset>
-                                    <h:panelGroup rendered="#{adminBean.unconfirmed}">
-                                        <h:commandButton value="Confirm" class="button" action="#{adminBean.changeBookingStatus(1)}"/>
-                                        <h:commandButton value="Cancel" class="button" action="#{adminBean.changeBookingStatus(3)}"/>
-                                        <h:commandButton value="Delete" class="button" action="#{adminBean.changeBookingStatus(4)}"/>
-                                    </h:panelGroup>
-                                    <h:panelGroup rendered="#{adminBean.confirmed}">
-                                        <h:commandButton value="Checkout" class="button" action="#{adminBean.checkout()}"/>
-                                        <h:commandButton value="Cancel" class="button" action="#{adminBean.changeBookingStatus(3)}"/>
-                                        <h:commandButton value="Delete" class="button" action="#{adminBean.changeBookingStatus(4)}"/>
-                                    </h:panelGroup>
-                                    <h:panelGroup rendered="#{adminBean.canceled}">
-                                        <h:commandButton value="Delete" class="button" action="#{adminBean.changeBookingStatus(4)}"/>
-                                    </h:panelGroup> 
-                                    <h:panelGroup rendered="#{adminBean.completed}">
-                                        <h:commandButton value="Delete" class="button" action="#{adminBean.changeBookingStatus(4)}"/>
-                                    </h:panelGroup>
+                                        <h:commandButton value="OK" class="button" action="#{adminBean.changeBookingStatus(2)}"/>
+                                        <h:commandButton value="Go home" class="button" action="#{adminBean.gohome()}"/>                                    
                                 </h:form>
                             </section>
-
                         </div><!-- /.content-wrapper -->
                         <footer class="main-footer">      
                             <strong>Copyright &copy; 2016 <a href="">Michael Jay</a>.</strong> All rights reserved.
