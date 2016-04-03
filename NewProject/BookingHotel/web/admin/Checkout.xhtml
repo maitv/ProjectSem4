@@ -191,16 +191,78 @@
                                 </ol>
                             </section>
                             <section class="content">
+
+                                <p:fieldset legend="Booking Information " >
+                                    <h:outputLabel value="Booking ID: " />&nbsp;#{adminBean.currentBooking.bookingId} <br/>
+                                    <h:outputLabel value="Booking Date : " />#{adminBean.currentBooking.bookingDate} <br/>
+                                    <h:outputLabel value="Checkin Date: " />#{adminBean.currentBooking.checkinDate} <br/>
+                                    <h:outputLabel value="Checkout Date: " />#{adminBean.currentBooking.checkoutDate} <br/>
+                                </p:fieldset>
+                                <p:fieldset legend="Customer Information " >
+                                    <h:outputLabel value="Customer ID: " />&nbsp;#{adminBean.currentCustomer.customerId} <br/>
+                                    <h:outputLabel value="Customer Name : " />#{adminBean.currentCustomer.customerName} <br/>
+                                    <h:outputLabel value="Country : " />#{adminBean.currentCustomer.customerCountry} <br/>
+                                    <h:outputLabel value="Address : " />#{adminBean.currentCustomer.customerAddress} <br/>
+                                    <h:outputLabel value="Email : " />#{adminBean.currentCustomer.customerEmail} <br/>
+                                </p:fieldset>
+                                <p:fieldset legend="Room Information " >
+                                    <p:dataTable value="#{adminBean.currentBooking.listRoomUsed}" var="r">
+                                        <p:column>
+                                            <f:facet name="header">
+                                                Room Number
+                                            </f:facet>
+                                            #{r.roomNumber}
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                Room Desc
+                                            </f:facet>
+                                            #{r.roomDesc}
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                Price
+                                            </f:facet>
+                                            #{adminBean.getPrice(r.roomTypeId)}
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                Days
+                                            </f:facet>
+                                            #{adminBean.currentBooking.diffDays}
+                                        </p:column>             
+                                    </p:dataTable>
+                                </p:fieldset>
+                                <p:fieldset legend="Service Information " >
+                                    <p:dataTable value="#{adminBean.currentBooking.listServiceUsed}" var="v">
+                                        <p:column>
+                                            <f:facet name="header">
+                                                Service Name
+                                            </f:facet>
+                                            #{v.serviceName}
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                Price
+                                            </f:facet>
+                                            #{v.servicePrice}
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                Days
+                                            </f:facet>
+                                            #{adminBean.currentBooking.diffDays}
+                                        </p:column>             
+                                    </p:dataTable>
+                                </p:fieldset>
+                                <p:fieldset legend="Billing Information " >
+                                    <h:outputLabel value="Room Price : " />&nbsp;#{adminBean.currentBooking.getTotalRoomPrice()} <br/>
+                                    <h:outputLabel value="Service Price : " />#{adminBean.currentBooking.getTotalServicePrice()} <br/>
+                                    <h:outputLabel value="Total : " />#{adminBean.currentBooking.getTotalPrice()} <br/>
+                                </p:fieldset>
                                 <h:form class="main-product main-form">
-                                    <p:fieldset legend="Booking Information " >
-                                        <h:outputLabel value="Booking ID: " />&nbsp;#{adminBean.currentBooking.bookingId} <br/>
-                                        <h:outputLabel value="Customer ID : " />#{adminBean.currentBooking.customerId} <br/>
-                                        <h:outputLabel value="Booking Date : " />#{adminBean.currentBooking.bookingDate} <br/>
-                                        <h:outputLabel value="Checkin Date: " />#{adminBean.currentBooking.checkinDate} <br/>
-                                        <h:outputLabel value="Checkout Date: " />#{adminBean.currentBooking.checkoutDate} <br/>
-                                    </p:fieldset>
-                                        <h:commandButton value="OK" class="button" action="#{adminBean.changeBookingStatus(2)}"/>
-                                        <h:commandButton value="Go home" class="button" action="#{adminBean.gohome()}"/>                                    
+                                    <h:commandButton value="Checkout" class="button" action="#{adminBean.changeBookingStatus(2)}"/>
+                                    <h:commandButton value="Go back" class="button" action="#{adminBean.gohome()}"/>                                    
                                 </h:form>
                             </section>
                         </div><!-- /.content-wrapper -->

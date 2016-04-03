@@ -21,7 +21,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="../js/app.min.js"></script>
         <script type="text/javascript" src="../js/demo.js"></script>
-        
+
     </h:head>
     <h:body styleClass="hold-transition skin-blue sidebar-mini">
         <h:panelGroup>
@@ -31,7 +31,7 @@
                         <header><div class="paypal-logo"></div></header>
                         <div id="main" class="main" role="main">
                             <section id="login" class="login" data-role="page" data-title="Log in to your PayPal account">
-                                 <h:form class="proceed maskable">
+                                <h:form class="proceed maskable">
                                     <div id="passwordSection" class="clearfix">
                                         <div class="textInput" id="login_emaildiv">
                                             <div class="fieldWrapper">
@@ -61,143 +61,142 @@
                 <h:panelGroup rendered="#{adminBean.isLogin()}">
                     <div class="wrapper">
                         <header class="main-header">
-                          <!-- Logo -->
-                          <a href="ControlPanel.xhtml" class="logo">
-                            <!-- mini logo for sidebar mini 50x50 pixels -->
-                            <span class="logo-mini"><b>A</b>MG</span>
-                            <!-- logo for regular state and mobile devices -->
-                            <span class="logo-lg"><b>Admin</b> MGM Grand</span>
-                          </a>
-                          <!-- Header Navbar: style can be found in header.less -->
-                          <nav class="navbar navbar-static-top" role="navigation">
-                            <!-- Sidebar toggle button-->
-                            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-                              <span class="sr-only">Toggle navigation</span>
+                            <!-- Logo -->
+                            <a href="ControlPanel.xhtml" class="logo">
+                                <!-- mini logo for sidebar mini 50x50 pixels -->
+                                <span class="logo-mini"><b>A</b>MG</span>
+                                <!-- logo for regular state and mobile devices -->
+                                <span class="logo-lg"><b>Admin</b> MGM Grand</span>
                             </a>
-                            <div class="navbar-custom-menu">
-                              <ul class="nav navbar-nav">
+                            <!-- Header Navbar: style can be found in header.less -->
+                            <nav class="navbar navbar-static-top" role="navigation">
+                                <!-- Sidebar toggle button-->
+                                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                                    <span class="sr-only">Toggle navigation</span>
+                                </a>
+                                <div class="navbar-custom-menu">
+                                    <ul class="nav navbar-nav">
 
-                                <li class="dropdown user user-menu">
-                                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                      <img src="../img/icon/avatar5.png" class="user-image" alt="User Image"></img>
-                                      <span class="hidden-xs">Admin #{adminBean.username}</span>
-                                  </a>
-                                  <ul class="dropdown-menu">
-                                    <!-- User image -->
-                                    <li class="user-header">
-                                      <img src="../img/icon/avatar5.png" class="img-circle" alt="User Image"></img>
-                                      <p>
-                                          #{adminBean.username} - Super User
-                                        <small>Member since Mar. 2016</small>
-                                      </p>
-                                    </li>                
-                                    <!-- Menu Footer-->
+                                        <li class="dropdown user user-menu">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                <img src="../img/icon/avatar5.png" class="user-image" alt="User Image"></img>
+                                                <span class="hidden-xs">Admin #{adminBean.username}</span>
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <!-- User image -->
+                                                <li class="user-header">
+                                                    <img src="../img/icon/avatar5.png" class="img-circle" alt="User Image"></img>
+                                                    <p>
+                                                        #{adminBean.username} - Super User
+                                                        <small>Member since Mar. 2016</small>
+                                                    </p>
+                                                </li>                
+                                                <!-- Menu Footer-->
 
-                                    <li class="user-footer">
-                                      <div class="pull-left">
-                                        <a href="#" class="btn btn-default btn-flat">Profile</a>
-                                      </div>
-                                      <div class="pull-right">
-                                        <h:form class="main-product main-form">
-                                            <h:commandButton value="Sign out" class="btn btn-default btn-flat" action="#{adminBean.logout()}"/>
-                                        </h:form>
-                                      </div>
-                                    </li>
-                                  </ul>
-                                </li>
+                                                <li class="user-footer">
+                                                    <div class="pull-left">
+                                                        <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                                    </div>
+                                                    <div class="pull-right">
+                                                        <h:form class="main-product main-form">
+                                                            <h:commandButton value="Sign out" class="btn btn-default btn-flat" action="#{adminBean.logout()}"/>
+                                                        </h:form>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </li>
 
-                              </ul>
-                            </div>
-                          </nav>
+                                    </ul>
+                                </div>
+                            </nav>
                         </header>
                         <!-- Left side column. contains the logo and sidebar -->
                         <aside class="main-sidebar">
-                          <!-- sidebar: style can be found in sidebar.less -->
-                          <section class="sidebar">
-                            <!-- Sidebar user panel -->
-                            <div class="user-panel">
-                              <div class="pull-left image">
-                                  <img src="../img/icon/avatar5.png" class="img-circle" alt="User Image"></img>
-                              </div>
-                              <div class="pull-left info">
-                                  <p>Admin #{adminBean.username}</p>
-                                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-                              </div>
-                            </div>
-                            <!-- search form -->
-                            <form action="#" method="get" class="sidebar-form">
-                              <div class="input-group">
-                                  <input type="text" name="q" class="form-control" placeholder="Search..."></input>
-                                <span class="input-group-btn">
-                                  <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
-                                </span>
-                              </div>
-                            </form>        
-                            <ul class="sidebar-menu">
-                              <li class="header">MAIN NAVIGATION</li>
-                              <li class="treeview">
-                                <a href="ControlPanel.xhtml">
-                                    <i class="fa fa-server"></i> <span>Control Panel</span>
-                                </a>
-                              </li>
-                              <li class="treeview">
-                                <a href="#">
-                                  <i class="fa fa-list"></i> <span>Booking</span>
-                                  <i class="fa fa-angle-left pull-right"></i>
-                                </a>
-                                <ul class="treeview-menu">
-                                    <li><a href="#"><i class="fa fa-circle-o"></i> Deltail</a></li>
-        <!--                        <li>
-                                        <a href="#"><i class="fa fa-circle-o"></i> Level One <i class="fa fa-angle-left pull-right"></i></a>
+                            <!-- sidebar: style can be found in sidebar.less -->
+                            <section class="sidebar">
+                                <!-- Sidebar user panel -->
+                                <div class="user-panel">
+                                    <div class="pull-left image">
+                                        <img src="../img/icon/avatar5.png" class="img-circle" alt="User Image"></img>
+                                    </div>
+                                    <div class="pull-left info">
+                                        <p>Admin #{adminBean.username}</p>
+                                        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                                    </div>
+                                </div>
+                                <!-- search form -->
+                                <form action="#" method="get" class="sidebar-form">
+                                    <div class="input-group">
+                                        <input type="text" name="q" class="form-control" placeholder="Search..."></input>
+                                        <span class="input-group-btn">
+                                            <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
+                                        </span>
+                                    </div>
+                                </form>        
+                                <ul class="sidebar-menu">
+                                    <li class="header">MAIN NAVIGATION</li>
+                                    <li class="treeview">
+                                        <a href="ControlPanel.xhtml">
+                                            <i class="fa fa-server"></i> <span>Control Panel</span>
+                                        </a>
+                                    </li>
+                                    <li class="treeview">
+                                        <a href="#">
+                                            <i class="fa fa-list"></i> <span>Booking</span>
+                                            <i class="fa fa-angle-left pull-right"></i>
+                                        </a>
                                         <ul class="treeview-menu">
-                                          <li><a href="#"><i class="fa fa-circle-o"></i> Level Two</a></li>
-                                          <li>
-                                            <a href="#"><i class="fa fa-circle-o"></i> Level Two <i class="fa fa-angle-left pull-right"></i></a>
-                                            <ul class="treeview-menu">
-                                              <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-                                              <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-                                            </ul>
-                                          </li>
+                                            <li><a href="#"><i class="fa fa-circle-o"></i> Deltail</a></li>
+                                            <!--                        <li>
+                                                                            <a href="#"><i class="fa fa-circle-o"></i> Level One <i class="fa fa-angle-left pull-right"></i></a>
+                                                                            <ul class="treeview-menu">
+                                                                              <li><a href="#"><i class="fa fa-circle-o"></i> Level Two</a></li>
+                                                                              <li>
+                                                                                <a href="#"><i class="fa fa-circle-o"></i> Level Two <i class="fa fa-angle-left pull-right"></i></a>
+                                                                                <ul class="treeview-menu">
+                                                                                  <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
+                                                                                  <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
+                                                                                </ul>
+                                                                              </li>
+                                                                            </ul>
+                                                                        </li>-->
                                         </ul>
-                                    </li>-->
-                                </ul>
-                              </li>
-                              <li class="treeview">
-                                <a href="#">
-                                  <i class="fa fa-users"></i> <span>User</span>
-                                  <i class="fa fa-angle-left pull-right"></i>
-                                </a>
-                                <ul class="treeview-menu">
-                                    <li><a href="#"><i class="fa fa-circle-o"></i> Role</a></li>
-                                </ul>
-                              </li>
+                                    </li>
+                                    <li class="treeview">
+                                        <a href="#">
+                                            <i class="fa fa-users"></i> <span>User</span>
+                                            <i class="fa fa-angle-left pull-right"></i>
+                                        </a>
+                                        <ul class="treeview-menu">
+                                            <li><a href="#"><i class="fa fa-circle-o"></i> Role</a></li>
+                                        </ul>
+                                    </li>
 
 
-                            </ul>
-                          </section>
-                          <!-- /.sidebar -->
+                                </ul>
+                            </section>
+                            <!-- /.sidebar -->
                         </aside>
 
                         <!-- Content Wrapper. Contains page content -->
                         <div class="content-wrapper">
-                          <!-- Content Header (Page header) -->
-                          <section class="content-header">
-                            <h1>
-                              Dashboard > 
-                              <small>Control panel</small>
-                            </h1>
-                              <h:form>
-                                  <h:inputText id="txtSearch" value="#{adminBean.username}" pt:placeholder="Input BookingId to search"/>
-                                  <h:commandButton value="Search" action="#{adminBean.search()}"
-                              </h:form>
-                            <ol class="breadcrumb">
-                              <li><a href="ControlPanel.xhtml"><i class="fa fa-dashboard"></i> Home</a></li>
-                              <li class="active">Dashboard</li>
-                            </ol>
-                          </section>
-                          <section class="content">
-                              <h:form class="main-product main-form">
-                                <p:dataTable rowKey="#{r.bookingId}" id="sList" widgetVar="bookingList" selection="#{bookingRoomBean.selectedService}" value="#{bookingRoomBean.allBooking}" var="r"  >     
+                            <!-- Content Header (Page header) -->
+                            <section class="content-header">
+                                <p>
+                                    <h:form class="main-product main-form" >
+                                        <h:inputText id="txtSearch" value="#{adminBean.txtSearch}" style="width: 200px" pt:placeholder="Input BookingId to search"/>&nbsp;
+                                        <h:commandButton value="Search" action="#{adminBean.search()}"></h:commandButton>
+                                    </h:form>
+                                </p>
+
+                                <ol class="breadcrumb">
+                                    <li><a href="ControlPanel.xhtml"><i class="fa fa-dashboard"></i> Home</a></li>
+                                    <li class="active">Dashboard</li>
+                                </ol>
+                            </section>
+                            <section class="content">
+
+                                <p:dataTable rowKey="#{r.bookingId}" id="sList" widgetVar="bookingList" selection="#{adminBean.bookingSeletedList}" value="#{adminBean.bookingList}" var="r"  >     
                                     <p:column>
                                         <f:facet name="header">
                                             Booking ID
@@ -238,15 +237,16 @@
                                         <f:facet name="header">
                                             Detail
                                         </f:facet>
-                                        <h:commandButton value="Detail" action="#{adminBean.gotoDetail(r.bookingId)}"/>
+                                        <h:form class="main-product main-form">
+                                            <h:commandButton value="Detail" action="#{adminBean.gotoDetail(r.bookingId)}"/>
+                                        </h:form>
                                     </p:column>
                                 </p:dataTable>
-                            </h:form>
-                          </section>
+                            </section>
 
                         </div><!-- /.content-wrapper -->
                         <footer class="main-footer">      
-                          <strong>Copyright &copy; 2016 <a href="">Michael Jay</a>.</strong> All rights reserved.
+                            <strong>Copyright &copy; 2016 <a href="">Michael Jay</a>.</strong> All rights reserved.
                         </footer>
                     </div><!-- ./wrapper -->
                 </h:panelGroup>

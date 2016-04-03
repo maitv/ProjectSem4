@@ -944,6 +944,126 @@ public class DataProcess {
         return id;
     }
 
+    public float getRoomPrice(String bookingId) {
+        float price = 0;
+        // get all room list
+        List<Room> roomUsedList = getAllRoomListByBookingId(bookingId);
+
+        return price;
+    }
+
+    public float getPriceAllRoomListByBookingId(String bookingId) {
+        String query = "SELECT * FROM BookingRoom WHERE bookingId=?";
+        float price = 0;
+        PreparedStatement prst;
+        ResultSet rs = null;
+        Connection con = getConnection();
+        try {
+            prst = con.prepareStatement(query);
+            prst.setString(1, bookingId);
+            rs = prst.executeQuery();
+
+            while (rs.next()) {
+                String roomNumber = rs.getString(2);
+
+                Room r = getRoomById(roomNumber);
+                RoomType rt = getRoomTypeById(r.getRoomTypeId());
+                float tmp = rt.getCurrentPrice();
+                price += tmp;
+            }
+
+            prst.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DataProcess.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+
+        return price;
+    }
+
+    public List<Room> getAllRoomListByBookingId(String bookingId) {
+        String query = "SELECT * FROM BookingRoom WHERE bookingId=?";
+        List<Room> li = new ArrayList<>();
+        PreparedStatement prst;
+        ResultSet rs = null;
+        Connection con = getConnection();
+        try {
+            prst = con.prepareStatement(query);
+            prst.setString(1, bookingId);
+            rs = prst.executeQuery();
+
+            while (rs.next()) {
+                String roomNumber = rs.getString(2);
+                Room r = getRoomById(roomNumber);
+                li.add(r);
+            }
+
+            prst.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DataProcess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return li;
+    }
+
+    public float getPriceAllServiceListByBookingId(String bookingId) {
+        String query = "SELECT * FROM BookingService WHERE bookingId=?";
+        float price = 0;
+        PreparedStatement prst;
+        ResultSet rs = null;
+        Connection con = getConnection();
+        try {
+            prst = con.prepareStatement(query);
+            prst.setString(1, bookingId);
+            rs = prst.executeQuery();
+
+            while (rs.next()) {
+                String svId = rs.getString("serviceId");
+
+                Service sv = getServiceById(svId);
+                float tmp = sv.getServicePrice();
+                price += tmp;
+            }
+
+            prst.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DataProcess.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+
+//        getRoomById
+        return price;
+    }
+
+    public List<Service> getAllServiceListByBookingId(String bookingId) {
+        String query = "SELECT * FROM BookingService WHERE bookingId=?";
+        List<Service> li = new ArrayList<>();
+        PreparedStatement prst;
+        ResultSet rs = null;
+        Connection con = getConnection();
+        try {
+            prst = con.prepareStatement(query);
+            prst.setString(1, bookingId);
+            rs = prst.executeQuery();
+
+            while (rs.next()) {
+                String svId = rs.getString("serviceId");
+                Service sv = getServiceById(svId);
+                li.add(sv);
+            }
+
+            prst.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DataProcess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return li;
+    }
+
     public static void main(String[] argv) {
 //        List<RoomType> li = new DataProcess().getAllRoomType();
 //        for (RoomType r : li) {

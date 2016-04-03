@@ -194,26 +194,34 @@
                                 <h:form class="main-product main-form">
                                     <p:fieldset legend="Booking Information " >
                                         <h:outputLabel value="Booking ID: " />&nbsp;#{adminBean.currentBooking.bookingId} <br/>
-                                        <h:outputLabel value="Customer ID : " />#{adminBean.currentBooking.customerId} <br/>
                                         <h:outputLabel value="Booking Date : " />#{adminBean.currentBooking.bookingDate} <br/>
                                         <h:outputLabel value="Checkin Date: " />#{adminBean.currentBooking.checkinDate} <br/>
                                         <h:outputLabel value="Checkout Date: " />#{adminBean.currentBooking.checkoutDate} <br/>
                                     </p:fieldset>
+                                    <p:fieldset legend="Customer Information " >
+                                        <h:outputLabel value="Customer ID: " />&nbsp;#{adminBean.currentCustomer.customerId} <br/>
+                                        <h:outputLabel value="Customer Name : " />#{adminBean.currentCustomer.customerName} <br/>
+                                        <h:outputLabel value="Country : " />#{adminBean.currentCustomer.customerCountry} <br/>
+                                        <h:outputLabel value="Address : " />#{adminBean.currentCustomer.customerAddress} <br/>
+                                        <h:outputLabel value="Email : " />#{adminBean.currentCustomer.customerEmail} <br/>
+                                    </p:fieldset>
                                     <h:panelGroup rendered="#{adminBean.unconfirmed}">
                                         <h:commandButton value="Confirm" class="button" action="#{adminBean.changeBookingStatus(1)}"/>
                                         <h:commandButton value="Cancel" class="button" action="#{adminBean.changeBookingStatus(3)}"/>
-                                        <h:commandButton value="Delete" class="button" action="#{adminBean.changeBookingStatus(4)}"/>
+                                        <h:commandButton value="Go back" class="button" action="#{adminBean.gohome()}"/>
                                     </h:panelGroup>
                                     <h:panelGroup rendered="#{adminBean.confirmed}">
                                         <h:commandButton value="Checkout" class="button" action="#{adminBean.checkout()}"/>
-                                        <h:commandButton value="Cancel" class="button" action="#{adminBean.changeBookingStatus(3)}"/>
                                         <h:commandButton value="Delete" class="button" action="#{adminBean.changeBookingStatus(4)}"/>
+                                        <h:commandButton value="Go back" class="button" action="#{adminBean.gohome()}"/>
                                     </h:panelGroup>
                                     <h:panelGroup rendered="#{adminBean.canceled}">
                                         <h:commandButton value="Delete" class="button" action="#{adminBean.changeBookingStatus(4)}"/>
+                                        <h:commandButton value="Go back" class="button" action="#{adminBean.gohome()}"/>
                                     </h:panelGroup> 
                                     <h:panelGroup rendered="#{adminBean.completed}">
                                         <h:commandButton value="Delete" class="button" action="#{adminBean.changeBookingStatus(4)}"/>
+                                        <h:commandButton value="Go back" class="button" action="#{adminBean.gohome()}"/>
                                     </h:panelGroup>
                                 </h:form>
                             </section>

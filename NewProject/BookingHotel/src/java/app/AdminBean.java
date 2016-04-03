@@ -6,6 +6,8 @@
 package app;
 
 import entity.Booking;
+import entity.Customer;
+import entity.RoomType;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -36,6 +38,15 @@ public class AdminBean {
 
     private String bookingIdSelected;
     private Booking currentBooking;
+    private Customer currentCustomer;
+
+    public Customer getCurrentCustomer() {
+        return currentCustomer;
+    }
+
+    public void setCurrentCustomer(Customer currentCustomer) {
+        this.currentCustomer = currentCustomer;
+    }
 
     public Booking getCurrentBooking() {
         return currentBooking;
@@ -53,6 +64,8 @@ public class AdminBean {
         DataProcess db = new DataProcess();
 
         currentBooking = db.getBookingById(bookingIdSelected);
+
+        currentCustomer = db.getCustomerByIdentityNo(currentBooking.getCustomerId());
     }
 
     public String getUsername() {
@@ -75,8 +88,10 @@ public class AdminBean {
      * Creates a new instance of AdminBean
      */
     public AdminBean() {
-        DataProcess dp = new DataProcess();
-        bookingList = dp.getAllBooking();
+        if (bookingList == null) {
+            DataProcess dp = new DataProcess();
+            bookingList = dp.getAllBooking();
+        }
     }
 
     public String redirectToPanelIfLoggedIn() {
@@ -117,6 +132,7 @@ public class AdminBean {
         bookingIdSelected = id;
         DataProcess dp = new DataProcess();
         currentBooking = dp.getBookingById(bookingIdSelected);
+        currentCustomer = dp.getCustomerByIdentityNo(currentBooking.getCustomerId());
 
         return "detail";
     }
@@ -126,6 +142,8 @@ public class AdminBean {
 
         DataProcess dp = new DataProcess();
         dp.updateBookingStatus(selectedId, status);
+
+        bookingList = dp.getAllBooking();
 
         return "success";
     }
@@ -171,14 +189,45 @@ public class AdminBean {
     }
 
     public String checkout() {
+
+        String selectedId = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("SelectedId");
+        if (selectedId != null && !"".equals(selectedId)) {
+            DataProcess dp = new DataProcess();
+            currentBooking = dp.getBookingById(selectedId);
+            currentCustomer = dp.getCustomerByIdentityNo(currentBooking.getCustomerId());
+            updateBillingInfo();
+        }
+
         return "checkout";
     }
 
+    private void updateBillingInfo() {
+        if (currentBooking != null) {
+            DataProcess dp = new DataProcess();
+//            List<Room> roomUsedList = dp.get
+        }
+    }
+
+    public Float getPrice(String selectedRoomTypeId) {
+        DataProcess dp = new DataProcess();
+        RoomType r = dp.getRoomTypeById(Integer.parseInt(selectedRoomTypeId));
+        return r.getCurrentPrice();
+    }
+
     public String gohome() {
-        return "success";
+        return "gohome";
     }
 
     private List<Booking> bookingList;
+    private List<Booking> bookingSeletedList;
+
+    public List<Booking> getBookingSeletedList() {
+        return bookingSeletedList;
+    }
+
+    public void setBookingSeletedList(List<Booking> bookingSeletedList) {
+        this.bookingSeletedList = bookingSeletedList;
+    }
 
     public List<Booking> getBookingList() {
         return bookingList;
@@ -190,12 +239,14 @@ public class AdminBean {
 
     public String search() {
         DataProcess dp = new DataProcess();
-        if ("".equals(txtSearch)) {
+        if (txtSearch == null || "".equals(txtSearch)) {
             bookingList = dp.getAllBooking();
         } else {
             bookingList = new ArrayList<>();
             Booking b = dp.getBookingById(txtSearch);
-            bookingList.add(b);
+            if (b != null) {
+                bookingList.add(b);
+            }
         }
 
         return "success";

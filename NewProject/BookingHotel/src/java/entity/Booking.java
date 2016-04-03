@@ -7,6 +7,9 @@ package entity;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import model.DataProcess;
 
 /**
  *
@@ -123,4 +126,47 @@ public class Booking implements Serializable {
     public boolean isDeleted() {
         return (status == 4);
     }
+
+    public int getDiffDays() {
+        long diff = checkoutDate.getTime() - checkinDate.getTime();
+        int diffDays = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+
+        return diffDays;
+    }
+
+    public List<Room> getListRoomUsed() {
+        DataProcess dp = new DataProcess();
+
+        List<Room> li = dp.getAllRoomListByBookingId(bookingId);
+
+        return li;
+    }
+
+    public List<Service> getListServiceUsed() {
+        DataProcess dp = new DataProcess();
+
+        List<Service> li = dp.getAllServiceListByBookingId(bookingId);
+
+        return li;
+    }
+
+    public float getTotalRoomPrice() {
+        DataProcess dp = new DataProcess();
+        float price = dp.getPriceAllRoomListByBookingId(bookingId);
+
+        return price;
+    }
+
+    public float getTotalServicePrice() {
+        DataProcess dp = new DataProcess();
+        float price = dp.getPriceAllServiceListByBookingId(bookingId);
+
+        return price;
+    }
+
+    public float getTotalPrice() {
+        float price = getTotalRoomPrice() + getTotalServicePrice();
+        return price;
+    }
+
 }

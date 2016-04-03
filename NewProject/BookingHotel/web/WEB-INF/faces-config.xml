@@ -82,6 +82,10 @@
             <from-outcome>detail</from-outcome>
             <to-view-id>/admin/BookingDetail.xhtml</to-view-id>
         </navigation-case>
+        <navigation-case>
+            <from-outcome>search</from-outcome>
+            <to-view-id>/admin/ControlPanel.xhtml</to-view-id>
+        </navigation-case>
     </navigation-rule>
     <navigation-rule>
         <from-view-id>/admin/BookingDetail.xhtml</from-view-id>
@@ -93,9 +97,18 @@
             <from-outcome>checkout</from-outcome>
             <to-view-id>/admin/Checkout.xhtml</to-view-id>
         </navigation-case>
-    </navigation-rule>
+        <navigation-case>
+            <from-outcome>gohome</from-outcome>
+            <to-view-id>/admin/ControlPanel.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule> 
     <navigation-rule>
         <from-view-id>/admin/Checkout.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>gohome</from-outcome>
+            <to-view-id>/admin/ControlPanel.xhtml</to-view-id>
+            <redirect>1</redirect>
+        </navigation-case>
         <navigation-case>
             <from-outcome>success</from-outcome>
             <to-view-id>/admin/ControlPanel.xhtml</to-view-id>
