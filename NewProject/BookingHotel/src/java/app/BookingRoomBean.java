@@ -76,7 +76,7 @@ public class BookingRoomBean implements Serializable {
     public void setUuid(String uuid) {
         this.uuid = uuid;
     }
-    
+
     public String getDiffDays() {
         return diffDays;
     }
@@ -214,7 +214,7 @@ public class BookingRoomBean implements Serializable {
         bookingList = dp.getAllBooking();
         return bookingList;
     }
-    
+
     private List<Booking> selectedBooking;
 
     public List<Booking> getBookingList() {
@@ -232,7 +232,7 @@ public class BookingRoomBean implements Serializable {
     public void setSelectedBooking(List<Booking> selectedBooking) {
         this.selectedBooking = selectedBooking;
     }
-    
+
     private List<Service> selectedService;
 
     public List<Service> getSelectedService() {
@@ -493,6 +493,12 @@ public class BookingRoomBean implements Serializable {
     }
 
     public String gotoUserInputInformation() {
+        // set id
+        DataProcess dp = new DataProcess();
+        String newId = dp.getAutoIdentifyNumber();
+
+        customerIdentityNo = newId;
+
         return "success";
     }
 
@@ -636,11 +642,11 @@ public class BookingRoomBean implements Serializable {
     public boolean isShowRoomAvailableMessage() {
         return ((!isRoomAvailable) && isSearchClick);
     }
-    
-    public String getDateInFormat(java.sql.Date d){
+
+    public String getDateInFormat(java.sql.Date d) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         String str = sdf.format(d);
-        
+
         return str;
     }
 }

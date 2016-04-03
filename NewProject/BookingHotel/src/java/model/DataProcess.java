@@ -667,7 +667,7 @@ public class DataProcess {
             return list;
         }
 
-        String query = "SELECT * FROM Booking WHERE status != 99 ORDER BY status ASC";
+        String query = "SELECT * FROM Booking WHERE status != 4 ORDER BY status ASC";
         try {
             Statement st = cnn.createStatement();
 
@@ -913,6 +913,37 @@ public class DataProcess {
         return bk;
     }
 
+    public String getAutoIdentifyNumber() {
+        int id = getLastId();
+        String cid = "HTOX" + id;
+
+        return cid;
+    }
+
+    public int getLastId() {
+        Connection cnn = getConnection();
+        String query = "SELECT * FROM CustomerLastIndex ORDER BY cid DESC";
+        Statement st;
+        int id = 0;
+        try {
+            st = cnn.createStatement();
+
+            ResultSet rs = st.executeQuery(query);
+            if (rs.next()) {
+                id = rs.getInt(1);
+
+                id = id + 1;
+            } else {
+                // first time.
+                id = 1;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DataProcess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return id;
+    }
+
     public static void main(String[] argv) {
 //        List<RoomType> li = new DataProcess().getAllRoomType();
 //        for (RoomType r : li) {
@@ -925,23 +956,28 @@ public class DataProcess {
 //        }
 //
 //        String x = new DataProcess().getCustomerNameByIdCard("123");
-        Calendar cal = Calendar.getInstance();
-        Date s = new Date(cal.getTime().getTime());
-        Date e = new Date(cal.getTime().getTime());
+//        Calendar cal = Calendar.getInstance();
+//        Date s = new Date(cal.getTime().getTime());
+//        Date e = new Date(cal.getTime().getTime());
+//
+//        System.out.println(s + " " + e);
+//        List<Room> list = new DataProcess().getRoomsAvailable("1", s, e);
+//
+//        for (Room r : list) {
+//            System.out.println(r.getRoomNumber());
+//        }
+//
+//        System.out.println("\n\n");
+//
+//        ArrayList<Booking> li = new DataProcess().getAllBooking();
+//        for (Booking r : li) {
+//            System.out.println(r.getCheckinDate());
+//            System.out.println(r.getCheckoutDate());
+//        }
+        String test = "HTX1";
+        int a = Integer.valueOf(test);
 
-        System.out.println(s + " " + e);
-        List<Room> list = new DataProcess().getRoomsAvailable("1", s, e);
-
-        for (Room r : list) {
-            System.out.println(r.getRoomNumber());
-        }
-
-        System.out.println("\n\n");
-
-        ArrayList<Booking> li = new DataProcess().getAllBooking();
-        for (Booking r : li) {
-            System.out.println(r.getCheckinDate());
-            System.out.println(r.getCheckoutDate());
-        }
+        System.out.println(" test : " + a);
     }
+
 }

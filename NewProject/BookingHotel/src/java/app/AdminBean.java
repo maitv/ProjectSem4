@@ -39,7 +39,7 @@ public class AdminBean {
 
     public void setBookingIdSelected(String bookingIdSelected) {
         DataProcess db = new DataProcess();
-        
+
         currentBooking = db.getBookingById(bookingIdSelected);
     }
 
@@ -99,16 +99,61 @@ public class AdminBean {
     }
 
     public String gotoDetail(String id) {
-        setBookingIdSelected(id);
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put(
+                "SelectedId", id);
+        bookingIdSelected = id;
+        DataProcess dp = new DataProcess();
+        currentBooking = dp.getBookingById(bookingIdSelected);
 
         return "detail";
     }
-    
-    public String changeBookingStatus(String id, int status)
-    {
+
+    public String changeBookingStatus(int status) {
+        String selectedId = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("SelectedId");
+
         DataProcess dp = new DataProcess();
-        dp.updateBookingStatus(id, status);
-        
+        dp.updateBookingStatus(selectedId, status);
+
         return "success";
+    }
+
+    public boolean isUnconfirmed() {
+        String selectedId = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("SelectedId");
+        DataProcess dp = new DataProcess();
+        Booking bk = dp.getBookingById(selectedId);
+
+        return (bk.getStatus() == 0);
+    }
+
+    public boolean isConfirmed() {
+        String selectedId = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("SelectedId");
+        DataProcess dp = new DataProcess();
+        Booking bk = dp.getBookingById(selectedId);
+
+        return (bk.getStatus() == 1);
+    }
+
+    public boolean isCompleted() {
+        String selectedId = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("SelectedId");
+        DataProcess dp = new DataProcess();
+        Booking bk = dp.getBookingById(selectedId);
+
+        return (bk.getStatus() == 2);
+    }
+
+    public boolean isCanceled() {
+        String selectedId = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("SelectedId");
+        DataProcess dp = new DataProcess();
+        Booking bk = dp.getBookingById(selectedId);
+
+        return (bk.getStatus() == 3);
+    }
+
+    public boolean isDeleted() {
+        String selectedId = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("SelectedId");
+        DataProcess dp = new DataProcess();
+        Booking bk = dp.getBookingById(selectedId);
+
+        return (bk.getStatus() == 4);
     }
 }
