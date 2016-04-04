@@ -2,16 +2,34 @@ $(document).ready(function() {
 //    alert(1);
 //        $("#checkinDate").datepicker();
 //        $("#checkoutDate").datepicker();
-    $(".datepicker").datepicker({
+//        
+//    $(".datepicker").datepicker({
+//        dateFormat: 'dd-mm-yy',
+//        changeMonth: true,
+//        changeYear: true,
+//    });
+    $(".datepicker1").datepicker({
         dateFormat: 'dd-mm-yy',
         changeMonth: true,
         changeYear: true,
-        minDate: 0
+        minDate: 0 ,
+        onSelect: function(selected) {
+          $(".datepicker2").datepicker("option","minDate", selected);
+        }
     });
+    $(".datepicker2").datepicker({ 
+        dateFormat: 'dd-mm-yy',
+        changeMonth: true,
+        changeYear: true,
+        onSelect: function(selected) {
+           $(".datepicker1").datepicker("option","maxDate", selected);
+        }
+    });  
     $(".dobpicker").datepicker({
         dateFormat: 'dd-mm-yy',
         changeMonth: true,
         changeYear: true,
+        maxDate: 0
     });
     $('.slider1').bxSlider({
         slideWidth: 1170,
