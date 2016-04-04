@@ -602,6 +602,16 @@ public class DataProcess {
         if (cnn == null) {
             return false;
         }
+        
+        String qry = "INSERT INTO CustomerLastIndex(name) VALUES(?)";
+        try {
+            PreparedStatement prt = cnn.prepareStatement(qry);
+            prt.setString(1, identityNo);
+            prt.executeUpdate();
+            prt.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DataProcess.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         String query = "INSERT INTO Customer(customerId,customerName,customerCountry,customerIdentityNo,customerDOB,customerAddress,customerPhone,customerEmail) VALUES(?,?,?,?,?,?,?,?)";
         try {

@@ -501,7 +501,7 @@ public class BookingRoomBean implements Serializable {
 
         return "success";
     }
-    
+
     public String paymentMethod;
 
     public String getPaymentMethod() {
@@ -511,14 +511,14 @@ public class BookingRoomBean implements Serializable {
     public void setPaymentMethod(String paymentMethod) {
         this.paymentMethod = paymentMethod;
     }
-    
-    
+
     public String gotoPayment() {
-        if ("PayPal".equals(paymentMethod))
-        {
-        return "success";
+        if ("PayPal".equals(paymentMethod)) {
+            return "success";
+        } else {
+            gotoNotice();
+            return "failed";
         }
-        else return "failed";
     }
 
     public String gotoUserConfirmation() {
