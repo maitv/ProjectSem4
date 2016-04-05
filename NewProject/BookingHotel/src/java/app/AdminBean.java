@@ -91,6 +91,7 @@ public class AdminBean {
         if (bookingList == null) {
             DataProcess dp = new DataProcess();
             bookingList = dp.getAllBooking();
+            bookingSeletedList = dp.getAllBooking();
         }
     }
 
@@ -144,6 +145,7 @@ public class AdminBean {
         dp.updateBookingStatus(selectedId, status);
 
         bookingList = dp.getAllBooking();
+        bookingSeletedList = dp.getAllBooking();
 
         return "success";
     }
@@ -241,10 +243,13 @@ public class AdminBean {
         DataProcess dp = new DataProcess();
         if (txtSearch == null || "".equals(txtSearch)) {
             bookingList = dp.getAllBooking();
+            bookingSeletedList = dp.getAllBooking();
         } else {
-            bookingList = new ArrayList<>();
+            bookingSeletedList = new ArrayList<>();
+            bookingList =new ArrayList<>();
             Booking b = dp.getBookingById(txtSearch);
             if (b != null) {
+                bookingSeletedList.add(b);
                 bookingList.add(b);
             }
         }

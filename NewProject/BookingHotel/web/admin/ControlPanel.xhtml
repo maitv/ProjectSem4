@@ -196,7 +196,7 @@
                             </section>
                             <section class="content">
 
-                                <p:dataTable rowKey="#{r.bookingId}" id="sList" widgetVar="bookingList" selection="#{adminBean.bookingSeletedList}" value="#{adminBean.bookingList}" var="r"  >     
+                                <p:dataTable rowKey="#{r.bookingId}" id="sList" widgetVar="bookingList" selection="#{adminBean.bookingList}" value="#{adminBean.bookingSeletedList}" var="r"  >     
                                     <p:column>
                                         <f:facet name="header">
                                             Booking ID
@@ -232,6 +232,9 @@
                                             Status
                                         </f:facet>
                                         #{r.getStringStatus()}
+                                    </p:column>
+                                    <p:column>
+                                        #{r.bookingId}
                                     </p:column>
                                     <p:column>
                                         <f:facet name="header">
