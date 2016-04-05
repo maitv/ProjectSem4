@@ -12,6 +12,11 @@ import entity.PayPalAccount;
 import entity.Room;
 import entity.RoomType;
 import entity.Service;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -25,6 +30,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,16 +41,75 @@ import java.util.logging.Logger;
  */
 public class DataProcess {
 
+    private String user;
+    private String pass;
+    private String dbName;
+    private String host;
+    private String port;
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
+
+    public String getDbName() {
+        return dbName;
+    }
+
+    public void setDbName(String dbName) {
+        this.dbName = dbName;
+    }
+
+    public String getHost() {
+        return host;
+    }
+
+    public void setHost(String host) {
+        this.host = host;
+    }
+
+    public String getPort() {
+        return port;
+    }
+
+    public void setPort(String port) {
+        this.port = port;
+    }
+
+    public void loadConfiguration() {
+        Properties p = new Properties();
+        try {
+            p.load(new FileInputStream(appPath() + "/DBConfig/db.ini"));
+            
+            host = p.getProperty("DatabaseLocationIP");
+            dbName = p.getProperty("DatabaseName");
+            user = p.getProperty("Username");
+            pass = p.getProperty("Password");
+            port = p.getProperty("MSPort");
+        } catch (IOException ex) {
+            Logger.getLogger(DataProcess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     public Connection getConnection() {
+        loadConfiguration();
         Connection cnn = null;
 
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 
-            String user = "sa";
-            String pass = "123456";
-            String databaseName = "BookingRoom";
-            String url = "jdbc:sqlserver://127.0.0.1:1433;databaseName=" + databaseName;
+            String url = "jdbc:sqlserver://" + host + ":" + port + ";databaseName=" + dbName;
 
             try {
                 cnn = DriverManager.getConnection(url, user, pass);
@@ -410,7 +475,7 @@ public class DataProcess {
         }
         return true;
     }
-    
+
     public boolean booking(
             List<Room> selectedRoom,
             String checkinDate,
@@ -452,14 +517,12 @@ public class DataProcess {
         //5. Add to Payments table
         if (!addPayment(bookingId, total, "booking")) {
             return false;
-        }        
+        }
 
         //7. Add to Receipts table
         java.util.Date date = new java.util.Date();
         return addPayPalReceipts(("Payment" + bookingId), (total / 2), date, "Paypal");
     }
-
-    
 
     public boolean addBookingService(String bookingId, List<Service> services) {
         Connection cnn = getConnection();
@@ -652,7 +715,7 @@ public class DataProcess {
         if (cnn == null) {
             return false;
         }
-        
+
         String qry = "INSERT INTO CustomerLastIndex(name) VALUES(?)";
         try {
             PreparedStatement prt = cnn.prepareStatement(qry);
@@ -706,7 +769,7 @@ public class DataProcess {
 
             while (rs.next()) {
                 Room r = new Room();
-                String roomNumber = rs.getString(1);
+                String roomNumber = rs.getString("roomNumber");
                 r.setRoomNumber(roomNumber);
                 list.add(r);
             }
@@ -735,13 +798,13 @@ public class DataProcess {
 
             while (rs.next()) {
                 Booking r = new Booking();
-                r.setBookingId(rs.getString(1));
-                r.setCustomerId(rs.getString(2));
-                r.setBookingDate(rs.getDate(3));
-                r.setCheckinDate(rs.getDate(4));
-                r.setCheckoutDate(rs.getDate(5));
-                r.setBookingComment(rs.getString(6));
-                r.setStatus(rs.getInt(7));
+                r.setBookingId(rs.getString("bookingId"));
+                r.setCustomerId(rs.getString("customerId"));
+                r.setBookingDate(rs.getDate("bookingDate"));
+                r.setCheckinDate(rs.getDate("checkinDate"));
+                r.setCheckoutDate(rs.getDate("checkoutDate"));
+                r.setBookingComment(rs.getString("bookingComment"));
+                r.setStatus(rs.getInt("status"));
 
                 list.add(r);
             }
@@ -789,18 +852,18 @@ public class DataProcess {
             ResultSet rs = prst.executeQuery();
             if (rs.next()) {
                 cus = new Customer();
-                cus.setCustomerId(rs.getString(1));
-                cus.setCustomerName(rs.getString(2));
-                cus.setCustomerIdentityNo(rs.getString(3));
-                cus.setCustomerCountry(rs.getString(4));
+                cus.setCustomerId(rs.getString("customerId"));
+                cus.setCustomerName(rs.getString("customerName"));
+                cus.setCustomerIdentityNo(rs.getString("customerIdentityNo"));
+                cus.setCustomerCountry(rs.getString("customerCountry"));
 
-                java.sql.Date dobSql = rs.getDate(5);
+                java.sql.Date dobSql = rs.getDate("customerDOB");
                 java.util.Date utilDate = new java.util.Date(dobSql.getTime());
 
                 cus.setCustomerDOB(utilDate);
-                cus.setCustomerAddress(rs.getString(6));
-                cus.setCustomerPhone(rs.getString(7));
-                cus.setCustomerEmail(rs.getString(8));
+                cus.setCustomerAddress(rs.getString("customerAddress"));
+                cus.setCustomerPhone(rs.getString("customerPhone"));
+                cus.setCustomerEmail(rs.getString("customerEmail"));
             }
 
         } catch (SQLException ex) {
@@ -955,13 +1018,13 @@ public class DataProcess {
 
             if (rs.next()) {
                 bk = new Booking();
-                bk.setBookingId(rs.getString(1));
-                bk.setCustomerId(rs.getString(2));
-                bk.setBookingDate(rs.getDate(3));
-                bk.setCheckinDate(rs.getDate(4));
-                bk.setCheckoutDate(rs.getDate(5));
-                bk.setBookingComment(rs.getString(6));
-                bk.setStatus(rs.getInt(7));
+                bk.setBookingId(rs.getString("bookingId"));
+                bk.setCustomerId(rs.getString("customerId"));
+                bk.setBookingDate(rs.getDate("bookingDate"));
+                bk.setCheckinDate(rs.getDate("checkinDate"));
+                bk.setCheckoutDate(rs.getDate("checkoutDate"));
+                bk.setBookingComment(rs.getString("bookingComment"));
+                bk.setStatus(rs.getInt("status"));
             }
 
             prst.close();
@@ -1024,7 +1087,7 @@ public class DataProcess {
             rs = prst.executeQuery();
 
             while (rs.next()) {
-                String roomNumber = rs.getString(2);
+                String roomNumber = rs.getString("roomNumber");
 
                 Room r = getRoomById(roomNumber);
                 RoomType rt = getRoomTypeById(r.getRoomTypeId());
@@ -1124,6 +1187,19 @@ public class DataProcess {
         return li;
     }
 
+    public static String appPath() {
+        try {
+            String path = DataProcess.class.getResource("").getPath();
+            String fullPath = URLDecoder.decode(path, "UTF-8");
+            String pathArr[] = fullPath.split("/WEB-INF/classes");
+            fullPath = pathArr[0];
+            String reponsePath = new File(fullPath).getPath() + File.separatorChar;
+            return reponsePath;
+        } catch (UnsupportedEncodingException ex) {
+            return "";
+        }
+    }
+
     public static void main(String[] argv) {
 //        List<RoomType> li = new DataProcess().getAllRoomType();
 //        for (RoomType r : li) {
@@ -1154,10 +1230,20 @@ public class DataProcess {
 //            System.out.println(r.getCheckinDate());
 //            System.out.println(r.getCheckoutDate());
 //        }
-        String test = "HTX1";
-        int a = Integer.valueOf(test);
+//        String test = "HTX1";
+//        int a = Integer.valueOf(test);
+//
+//        System.out.println(" test : " + a);
+        Properties p = new Properties();
+        try {
+            p.load(new FileInputStream(appPath() + "/DBConfig/db.ini"));
+            System.out.println("DatabaseName = " + p.getProperty("DatabaseName"));
+            System.out.println("UserName = " + p.getProperty("Username"));
+            System.out.println("Username = " + p.getProperty("Username"));
+        } catch (IOException ex) {
+            Logger.getLogger(DataProcess.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
-        System.out.println(" test : " + a);
     }
 
 }

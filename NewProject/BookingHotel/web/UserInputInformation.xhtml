@@ -60,7 +60,7 @@
                             <h:outputLabel value="Country: " />
                             <h:inputText id="customerCountry" required="#{checkbox.value == 'true'}" readonly="#{checkbox.value == 'true'}" value="#{bookingRoomBean.customerCountry}"/> <br/>
                             <h:outputLabel value="Identity Number: " />
-                            <h:inputText id="customerIdentityNo" required="#{checkbox.value == 'true'}" readonly="#{checkbox.value == 'true'}" value="#{bookingRoomBean.customerIdentityNo}"/> <br/>
+                            <h:inputText id="customerIdentityNo" required="#{checkbox.value == 'true'}" readonly="true" value="#{bookingRoomBean.customerIdentityNo}"/> <br/>
                             <h:outputLabel value="Date of birth: " />
                             <h:inputText id="customerDOB" required="#{checkbox.value == 'true'}" readonly="#{checkbox.value == 'true'}" class="dobpicker" value="#{bookingRoomBean.customerDOB}"/> <br/>
                             <h:outputLabel value="Address: " />
