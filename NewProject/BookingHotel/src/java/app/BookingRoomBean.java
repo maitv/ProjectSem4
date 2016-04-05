@@ -49,7 +49,7 @@ public class BookingRoomBean implements Serializable {
     private String ppID;
     private String diffDays;
     private String uuid;
-
+    
     private boolean isRoomAvailable;
     private boolean isSearchClick;
 
