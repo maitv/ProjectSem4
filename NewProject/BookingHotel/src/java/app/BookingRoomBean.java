@@ -495,9 +495,9 @@ public class BookingRoomBean implements Serializable {
     public String gotoUserInputInformation() {
         // set id
         DataProcess dp = new DataProcess();
-        //String newId = dp.getAutoIdentifyNumber();
+        String newId = dp.getAutoIdentifyNumber();
 
-        //customerIdentityNo = newId;
+        customerIdentityNo = newId;
 
         return "success";
     }
@@ -550,8 +550,16 @@ public class BookingRoomBean implements Serializable {
             }
         } else {
             cus = dp.getCustomerByIdentityNo(returnCustomerIdentityNo);
+            
             if (cus.getCustomerId() != null) {
                 setPaymentMethod("PayPal");
+                this.customerAddress=cus.getCustomerAddress();
+            this.customerCountry=cus.getCustomerCountry();
+            this.customerDOB=cus.getCustomerDOB().toString();
+            this.customerEmail=cus.getCustomerEmail();
+            this.customerIdentityNo=cus.getCustomerIdentityNo();
+            this.customerName=cus.getCustomerName();
+            this.customerPhone=cus.getCustomerPhone();
                 return "success";
             }
             return "failed";
@@ -650,7 +658,7 @@ public class BookingRoomBean implements Serializable {
         DataProcess dp = new DataProcess();
 
         dp.booking(selectedRoom, checkinDate, checkoutDate, customerName, customerCountry, customerIdentityNo, cus.getCustomerDOB(), customerAddress,
-                customerPhone, customerEmail, totalPrice, selectedService, ppID, ppAccount);
+                customerPhone, customerEmail, totalPrice, selectedService);
         setPpOrderID(dp.getOrderID());
         return "success";
 

@@ -339,7 +339,7 @@ public class DataProcess {
         this.orderID = orderID;
     }
 
-    public boolean booking(
+    public boolean bookingPP(
             List<Room> selectedRoom,
             String checkinDate,
             String checkoutDate,
@@ -410,6 +410,56 @@ public class DataProcess {
         }
         return true;
     }
+    
+    public boolean booking(
+            List<Room> selectedRoom,
+            String checkinDate,
+            String checkoutDate,
+            String customerName,
+            String country,
+            String identityNo,
+            java.util.Date dob,
+            String address,
+            String phoneNumber,
+            String email,
+            float total,
+            List<Service> services) {
+        // TODO:
+        // 1. Add to Customer table
+        if (!isExistCustomer(identityNo)) {
+            if (!addCustomer(customerName, country, identityNo, dob, address, phoneNumber, email)) {
+                return false;
+            }
+        }
+
+        // 2. Add to Booking table
+        String bookingId = getBookingId(identityNo);
+        this.setOrderID(bookingId);
+        if (!addBooking(bookingId, identityNo, checkinDate, checkoutDate)) {
+            return false;
+        }
+
+        // 3. Add to Booking service table
+        if (!addBookingService(bookingId, services)) {
+            return false;
+        }
+
+        // 4. Add to BookingRoom table
+        if (!addBookingRoom(bookingId, selectedRoom)) {
+            return false;
+        }
+
+        //5. Add to Payments table
+        if (!addPayment(bookingId, total, "booking")) {
+            return false;
+        }        
+
+        //7. Add to Receipts table
+        java.util.Date date = new java.util.Date();
+        return addPayPalReceipts(("Payment" + bookingId), (total / 2), date, "Paypal");
+    }
+
+    
 
     public boolean addBookingService(String bookingId, List<Service> services) {
         Connection cnn = getConnection();
