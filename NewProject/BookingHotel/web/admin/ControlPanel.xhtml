@@ -195,56 +195,52 @@
                                 </ol>
                             </section>
                             <section class="content">
-
-                                <p:dataTable rowKey="#{r.bookingId}" id="sList" widgetVar="bookingList" selection="#{adminBean.bookingList}" value="#{adminBean.bookingSeletedList}" var="r"  >     
-                                    <p:column>
-                                        <f:facet name="header">
-                                            Booking ID
-                                        </f:facet>
-                                        #{r.bookingId}
-                                    </p:column>
-                                    <p:column>
-                                        <f:facet name="header">
-                                            Customer ID
-                                        </f:facet>
-                                        #{r.customerId}
-                                    </p:column>
-                                    <p:column>
-                                        <f:facet name="header">
-                                            Booking Date
-                                        </f:facet>
-                                        #{bookingRoomBean.getDateInFormat(r.bookingDate)}
-                                    </p:column>
-                                    <p:column>
-                                        <f:facet name="header">
-                                            Check'in Date
-                                        </f:facet>
-                                        #{bookingRoomBean.getDateInFormat(r.checkinDate)}
-                                    </p:column>
-                                    <p:column>
-                                        <f:facet name="header">
-                                            Checkout Date
-                                        </f:facet>
-                                        #{bookingRoomBean.getDateInFormat(r.checkoutDate)}
-                                    </p:column>
-                                    <p:column>
-                                        <f:facet name="header">
-                                            Status
-                                        </f:facet>
-                                        #{r.getStringStatus()}
-                                    </p:column>
-                                    <p:column>
-                                        #{r.bookingId}
-                                    </p:column>
-                                    <p:column>
-                                        <f:facet name="header">
-                                            Detail
-                                        </f:facet>
-                                        <h:form class="main-product main-form">
+                                <h:form class="main-product main-form">
+                                    <p:dataTable rowKey="#{r.bookingId}" id="sList" widgetVar="bookingList" selection="#{adminBean.bookingList}" value="#{adminBean.bookingSeletedList}" var="r"  >     
+                                        <p:column>
+                                            <f:facet name="header">
+                                                Booking ID
+                                            </f:facet>
+                                            #{r.bookingId}
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                Customer ID
+                                            </f:facet>
+                                            #{r.customerId}
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                Booking Date
+                                            </f:facet>
+                                            #{bookingRoomBean.getDateInFormat(r.bookingDate)}
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                Check'in Date
+                                            </f:facet>
+                                            #{bookingRoomBean.getDateInFormat(r.checkinDate)}
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                Checkout Date
+                                            </f:facet>
+                                            #{bookingRoomBean.getDateInFormat(r.checkoutDate)}
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                Status
+                                            </f:facet>
+                                            #{r.getStringStatus()}
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                Detail
+                                            </f:facet>
                                             <h:commandButton value="Detail" action="#{adminBean.gotoDetail(r.bookingId)}"/>
-                                        </h:form>
-                                    </p:column>
-                                </p:dataTable>
+                                        </p:column>
+                                    </p:dataTable>
+                                </h:form>
                             </section>
 
                         </div><!-- /.content-wrapper -->
