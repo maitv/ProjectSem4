@@ -495,9 +495,9 @@ public class BookingRoomBean implements Serializable {
     public String gotoUserInputInformation() {
         // set id
         DataProcess dp = new DataProcess();
-        String newId = dp.getAutoIdentifyNumber();
+        //String newId = dp.getAutoIdentifyNumber();
 
-        customerIdentityNo = newId;
+        //customerIdentityNo = newId;
 
         return "success";
     }

@@ -56,27 +56,34 @@
                         <div class="col-md-6 col-sm-6 col-xs-12 userInputConfirm" style="padding: 0px">
                             <h:outputLabel value="New customer" styleClass="title"/><br/>
                             <h:outputLabel value="Full name: " />
-                            <h:inputText required="#{checkbox.value == 'false'}" readonly="#{checkbox.value == 'false'}" value="#{bookingRoomBean.customerName}"/> <br/>
+                            <h:inputText id="customerName" required="#{checkbox.value == 'false'}" readonly="#{checkbox.value == 'false'}" value="#{bookingRoomBean.customerName}"/> <br/>
                             <h:outputLabel value="Country: " />
-                            <h:inputText required="#{checkbox.value == 'false'}" readonly="#{checkbox.value == 'false'}" value="#{bookingRoomBean.customerCountry}"/> <br/>
+                            <h:inputText id="customerCountry" required="#{checkbox.value == 'false'}" readonly="#{checkbox.value == 'false'}" value="#{bookingRoomBean.customerCountry}"/> <br/>
                             <h:outputLabel value="Identity Number: " />
-                            <h:inputText required="#{checkbox.value == 'false'}" readonly="#{checkbox.value == 'false'}" value="#{bookingRoomBean.customerIdentityNo}"/> <br/>
+                            <h:inputText id="customerIdentityNo" required="#{checkbox.value == 'false'}" readonly="#{checkbox.value == 'false'}" value="#{bookingRoomBean.customerIdentityNo}"/> <br/>
                             <h:outputLabel value="Date of birth: " />
-                            <h:inputText required="#{checkbox.value == 'false'}" readonly="#{checkbox.value == 'false'}" class="dobpicker" value="#{bookingRoomBean.customerDOB}"/> <br/>
+                            <h:inputText id="customerDOB" required="#{checkbox.value == 'false'}" readonly="#{checkbox.value == 'false'}" class="dobpicker" value="#{bookingRoomBean.customerDOB}"/> <br/>
                             <h:outputLabel value="Address: " />
-                            <h:inputText required="#{checkbox.value == 'false'}" readonly="#{checkbox.value == 'false'}" value="#{bookingRoomBean.customerAddress}"/> <br/>
+                            <h:inputText id="customerAddress" required="#{checkbox.value == 'false'}" readonly="#{checkbox.value == 'false'}" value="#{bookingRoomBean.customerAddress}"/> <br/>
                             <h:outputLabel value="Email: " />
-                            <h:inputText required="#{checkbox.value == 'false'}" readonly="#{checkbox.value == 'false'}" value="#{bookingRoomBean.customerEmail}">
+                            <h:inputText id="customerEmail" required="#{checkbox.value == 'false'}" readonly="#{checkbox.value == 'false'}" value="#{bookingRoomBean.customerEmail}">
                                 <f:validateRegex pattern="+\@.+\..+" disabled="#{checkbox.value == 'false'}"/>
                             </h:inputText><br/>
                             <h:outputLabel value="Phone: " />
-                            <h:inputText required="#{checkbox.value == 'false'}" readonly="#{checkbox.value == 'false'}" value="#{bookingRoomBean.customerPhone}"/> <br/>
+                            <h:inputText id="customerPhone" required="#{checkbox.value == 'false'}" readonly="#{checkbox.value == 'false'}" value="#{bookingRoomBean.customerPhone}">
+                                <f:validateRegex pattern="^[0-9-+()\s]+$" disabled="#{checkbox.value == 'false'}"/>
+                            </h:inputText><br/>
                         </div>
-                        <div class="col-md-6 col-sm-6 col-xs-12 userInputConfirm" style="padding: 0px">
-                            <h:selectBooleanCheckbox binding="#{checkbox}" value="returnCustomer" label="Return Customer" />
+                       <div class="col-md-6 col-sm-6 col-xs-12 userInputConfirm" style="padding: 0px">
+
+                            <p:selectBooleanCheckbox id="rccheckbox" binding="#{checkbox}" value="returnCustomer" label="Return Customer" >
+                                <p:ajax update="@all" event="change"/>
+                            </p:selectBooleanCheckbox>
+                                
+                                
                             <h:outputLabel value="Return customer" styleClass="title"/><br/>
                             <h:outputLabel  value="Identity Number: " />
-                            <h:inputText required="#{checkbox.value == 'true'}" readonly="#{checkbox.value == 'true'}" value="#{bookingRoomBean.returnCustomerIdentityNo}"/> <br/>
+                            <h:inputText id="returnCustomerIdentityNo" required="#{checkbox.value == 'true'}" readonly="#{checkbox.value == 'true'}" value="#{bookingRoomBean.returnCustomerIdentityNo}"/> <br/>
                             <h:commandButton value="Continue" action="#{bookingRoomBean.gotoUserConfirmation()}" styleClass="button"/>
                         </div>
                     </h:form>

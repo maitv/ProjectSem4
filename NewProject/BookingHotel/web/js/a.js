@@ -31,6 +31,13 @@ $(document).ready(function() {
         changeYear: true,
         maxDate: 0
     });
+    $("#rccheckbox").click(function(){
+        if (!$(this).is(':checked')) {
+            $(".dobpicker").datepicker(this.checked ? "disable" : "enable");
+        }
+        
+    });
+    
     $('.slider1').bxSlider({
         slideWidth: 1170,
         minSlides: 1,
