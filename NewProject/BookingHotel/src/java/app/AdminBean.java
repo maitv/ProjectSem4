@@ -88,9 +88,12 @@ public class AdminBean {
      * Creates a new instance of AdminBean
      */
     public AdminBean() {
+        DataProcess dp = new DataProcess();
         if (bookingList == null) {
-            DataProcess dp = new DataProcess();
             bookingList = dp.getAllBooking();
+        }
+
+        if (bookingSeletedList == null) {
             bookingSeletedList = dp.getAllBooking();
         }
     }
@@ -128,12 +131,14 @@ public class AdminBean {
     }
 
     public String gotoDetail(String id) {
-        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put(
-                "SelectedId", id);
-        bookingIdSelected = id;
-        DataProcess dp = new DataProcess();
-        currentBooking = dp.getBookingById(bookingIdSelected);
-        currentCustomer = dp.getCustomerByIdentityNo(currentBooking.getCustomerId());
+        Object obj = FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("SelectedId");
+        if (obj != null) {
+            String selectedId = (String) obj;
+            bookingIdSelected = selectedId;
+            DataProcess dp = new DataProcess();
+            currentBooking = dp.getBookingById(bookingIdSelected);
+            currentCustomer = dp.getCustomerByIdentityNo(currentBooking.getCustomerId());
+        }
 
         return "detail";
     }
@@ -246,9 +251,13 @@ public class AdminBean {
             bookingSeletedList = dp.getAllBooking();
         } else {
             bookingSeletedList = new ArrayList<>();
-            bookingList =new ArrayList<>();
+            bookingList = new ArrayList<>();
             Booking b = dp.getBookingById(txtSearch);
             if (b != null) {
+
+                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put(
+                        "SelectedId", txtSearch);
+
                 bookingSeletedList.add(b);
                 bookingList.add(b);
             }

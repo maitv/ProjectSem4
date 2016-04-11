@@ -89,6 +89,7 @@
         <navigation-case>
             <from-outcome>search</from-outcome>
             <to-view-id>/admin/ControlPanel.xhtml</to-view-id>
+            <redirect>false</redirect>
         </navigation-case>
     </navigation-rule>
     <navigation-rule>

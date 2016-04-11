@@ -3,11 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/web/Home.xhtml</file>
+            <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/web/Payment.xhtml</file>
             <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/web/admin/ControlPanel.xhtml</file>
             <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/src/java/model/DataProcess.java</file>
             <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/src/java/app/BookingRoomBean.java</file>
             <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/web/DBConfig/db.ini</file>
             <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/web/admin/BookingDetail.xhtml</file>
+            <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/web/ppCheckout.xhtml</file>
             <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/src/java/app/AdminBean.java</file>
             <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/web/UserConfirmation.xhtml</file>
             <file>file:/E:/FPT_APTECH/SEM_4/Project4/Source/trunk/NewProject/BookingHotel/web/admin/Checkout.xhtml</file>
