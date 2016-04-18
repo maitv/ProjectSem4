@@ -38,7 +38,9 @@
                                 Congratulations successful payment orders.<br/>
                                 Staff care will contact you when the order is confirmed. <br/>
                             </p>
-                            <a target="_parent" href="Home.xhtml" class="btnRed" style="padding: 5px;display: inline-block;margin: 20px 0;background: #333;color: #fff;padding: 15px 30px;border-radius: 5px;">Back to Home Page</a>
+                            <h:form>
+                                <h:commandButton value="Back to Home Page" class="btnRed" style="padding: 5px;display: inline-block;margin: 20px 0;background: #333;color: #fff;padding: 15px 30px;border-radius: 5px;" action="#{bookingRoomBean.backToHomePage()}"></h:commandButton>
+                            </h:form>
                     </div>
                 </div>
             </h:panelGroup> 

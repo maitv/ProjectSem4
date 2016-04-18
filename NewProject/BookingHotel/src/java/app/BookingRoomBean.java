@@ -49,7 +49,7 @@ public class BookingRoomBean implements Serializable {
     private String ppID;
     private String diffDays;
     private String uuid;
-    
+
     private boolean isRoomAvailable;
     private boolean isSearchClick;
 
@@ -550,16 +550,16 @@ public class BookingRoomBean implements Serializable {
             }
         } else {
             cus = dp.getCustomerByIdentityNo(returnCustomerIdentityNo);
-            
+
             if (cus.getCustomerId() != null) {
                 setPaymentMethod("PayPal");
-                this.customerAddress=cus.getCustomerAddress();
-            this.customerCountry=cus.getCustomerCountry();
-            this.customerDOB=cus.getCustomerDOB().toString();
-            this.customerEmail=cus.getCustomerEmail();
-            this.customerIdentityNo=cus.getCustomerIdentityNo();
-            this.customerName=cus.getCustomerName();
-            this.customerPhone=cus.getCustomerPhone();
+                this.customerAddress = cus.getCustomerAddress();
+                this.customerCountry = cus.getCustomerCountry();
+                this.customerDOB = cus.getCustomerDOB().toString();
+                this.customerEmail = cus.getCustomerEmail();
+                this.customerIdentityNo = cus.getCustomerIdentityNo();
+                this.customerName = cus.getCustomerName();
+                this.customerPhone = cus.getCustomerPhone();
                 return "success";
             }
             return "failed";
@@ -657,7 +657,15 @@ public class BookingRoomBean implements Serializable {
     public String gotoNotice() {
         DataProcess dp = new DataProcess();
 
-        dp.booking(selectedRoom, checkinDate, checkoutDate, customerName, customerCountry, customerIdentityNo, cus.getCustomerDOB(), customerAddress,
+        String cusId = "";
+
+        if (returnCustomerIdentityNo == null || "".equals(returnCustomerIdentityNo)) {
+            cusId = customerIdentityNo;
+        }else{
+            cusId = returnCustomerIdentityNo;
+        }
+
+        dp.booking(selectedRoom, checkinDate, checkoutDate, customerName, customerCountry, cusId, cus.getCustomerDOB(), customerAddress,
                 customerPhone, customerEmail, totalPrice, selectedService);
         setPpOrderID(dp.getOrderID());
         return "success";
@@ -673,5 +681,9 @@ public class BookingRoomBean implements Serializable {
         String str = sdf.format(d);
 
         return str;
+    }
+    
+    public String backToHomePage(){
+        return "success";
     }
 }

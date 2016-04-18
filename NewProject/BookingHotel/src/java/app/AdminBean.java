@@ -88,6 +88,10 @@ public class AdminBean {
      * Creates a new instance of AdminBean
      */
     public AdminBean() {
+        bookingList = (List<Booking>) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("bookingSeletedList");
+
+        bookingSeletedList = (List<Booking>) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("bookingList");
+
         DataProcess dp = new DataProcess();
         if (bookingList == null) {
             bookingList = dp.getAllBooking();
@@ -131,14 +135,15 @@ public class AdminBean {
     }
 
     public String gotoDetail(String id) {
-        Object obj = FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("SelectedId");
-        if (obj != null) {
-            String selectedId = (String) obj;
-            bookingIdSelected = selectedId;
-            DataProcess dp = new DataProcess();
-            currentBooking = dp.getBookingById(bookingIdSelected);
-            currentCustomer = dp.getCustomerByIdentityNo(currentBooking.getCustomerId());
-        }
+//        Object obj = FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("SelectedId");
+
+        DataProcess dp = new DataProcess();
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put(
+                "SelectedId", id);
+        bookingIdSelected = id;
+
+        currentBooking = dp.getBookingById(bookingIdSelected);
+        currentCustomer = dp.getCustomerByIdentityNo(currentBooking.getCustomerId());
 
         return "detail";
     }
@@ -222,6 +227,13 @@ public class AdminBean {
     }
 
     public String gohome() {
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("bookingSeletedList");
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("bookingList");
+
+        DataProcess dp = new DataProcess();
+        bookingList = dp.getAllBooking();
+        bookingSeletedList = dp.getAllBooking();
+
         return "gohome";
     }
 
@@ -249,6 +261,9 @@ public class AdminBean {
         if (txtSearch == null || "".equals(txtSearch)) {
             bookingList = dp.getAllBooking();
             bookingSeletedList = dp.getAllBooking();
+
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("bookingSeletedList");
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("bookingList");
         } else {
             bookingSeletedList = new ArrayList<>();
             bookingList = new ArrayList<>();
@@ -260,6 +275,12 @@ public class AdminBean {
 
                 bookingSeletedList.add(b);
                 bookingList.add(b);
+
+                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put(
+                        "bookingSeletedList", bookingSeletedList);
+
+                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put(
+                        "bookingList", bookingList);
             }
         }
 

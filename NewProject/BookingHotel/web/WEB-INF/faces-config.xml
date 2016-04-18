@@ -91,6 +91,7 @@
             <to-view-id>/admin/ControlPanel.xhtml</to-view-id>
             <redirect>false</redirect>
         </navigation-case>
+        
     </navigation-rule>
     <navigation-rule>
         <from-view-id>/admin/BookingDetail.xhtml</from-view-id>
@@ -117,6 +118,14 @@
         <navigation-case>
             <from-outcome>success</from-outcome>
             <to-view-id>/admin/ControlPanel.xhtml</to-view-id>
+            <redirect>1</redirect>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/Notice.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/Home.xhtml</to-view-id>
             <redirect>1</redirect>
         </navigation-case>
     </navigation-rule>
