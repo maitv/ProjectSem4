@@ -285,7 +285,7 @@ public class DataProcess {
 
         String query = "SELECT * FROM Room WHERE roomTypeId=? AND roomStatus != 1 AND roomNumber NOT IN ("
                 + "SELECT BookingRoom.roomNumber FROM BookingRoom INNER JOIN Booking ON BookingRoom.bookingId=Booking.bookingId"
-                + " WHERE (Booking.status!=0 AND Booking.status!=1 AND Booking.status!=2) AND (( ? BETWEEN Booking.checkinDate AND Booking.checkoutDate ) OR ( ? BETWEEN Booking.checkinDate AND Booking.checkoutDate )))";
+                + " WHERE (Booking.status=0 OR Booking.status=1 OR Booking.status=2) AND (( ? BETWEEN Booking.checkinDate AND Booking.checkoutDate ) OR ( ? BETWEEN Booking.checkinDate AND Booking.checkoutDate )))";
         try {
             PreparedStatement prst = cnn.prepareCall(query);
 

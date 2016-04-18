@@ -126,7 +126,7 @@
         <navigation-case>
             <from-outcome>success</from-outcome>
             <to-view-id>/Home.xhtml</to-view-id>
-            <redirect>1</redirect>
+            <redirect>0</redirect>
         </navigation-case>
     </navigation-rule>
 </faces-config>

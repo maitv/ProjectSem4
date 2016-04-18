@@ -684,6 +684,12 @@ public class BookingRoomBean implements Serializable {
     }
     
     public String backToHomePage(){
+        
+        checkinDate = null;
+        checkoutDate = null;
+        
+        selectedRoom = null ;
+        
         return "success";
     }
 }
