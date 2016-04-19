@@ -1009,6 +1009,7 @@ public class DataProcess {
             prst = con.prepareStatement(query);
             prst.setString(1, id);
             prst.setString(2, id);
+            prst.setString(3, id);
             rs = prst.executeQuery();
 
             if (rs.next()) {
