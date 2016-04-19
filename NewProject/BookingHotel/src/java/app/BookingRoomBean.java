@@ -658,19 +658,17 @@ public class BookingRoomBean implements Serializable {
         String cusId = "";
         if (returnCustomerIdentityNo == null || "".equals(returnCustomerIdentityNo)) {
             cusId = customerIdentityNo;
-        }else{
+        } else {
             cusId = returnCustomerIdentityNo;
         }
-        if (ppUsername.isEmpty())
-        {
-        dp.booking(selectedRoom, checkinDate, checkoutDate, customerName, customerCountry, cusId, cus.getCustomerDOB(), customerAddress,
-                customerPhone, customerEmail, totalPrice, selectedService);
+        if (ppUsername == null || ppUsername.isEmpty()) {
+            dp.booking(selectedRoom, checkinDate, checkoutDate, customerName, customerCountry, cusId, cus.getCustomerDOB(), customerAddress,
+                    customerPhone, customerEmail, totalPrice, selectedService);
+        } else {
+            dp.bookingPP(selectedRoom, checkinDate, checkoutDate, customerName, customerCountry, cusId, cus.getCustomerDOB(), customerAddress, 
+                    customerPhone, customerEmail, totalPrice, selectedService, ppID, ppAccount);
         }
-        else
-        {
-            dp.bookingPP(selectedRoom, checkinDate, checkoutDate, customerName, customerCountry, cusId, cus.getCustomerDOB(), customerAddress,customerPhone, customerEmail, totalPrice, selectedService,ppID,ppAccount);
-        }
-            setPpOrderID(dp.getOrderID());
+        setPpOrderID(dp.getOrderID());
         return "success";
 
     }
@@ -685,14 +683,14 @@ public class BookingRoomBean implements Serializable {
 
         return str;
     }
-    
-    public String backToHomePage(){
-        
+
+    public String backToHomePage() {
+
         checkinDate = null;
         checkoutDate = null;
-        
-        selectedRoom = null ;
-        
+
+        selectedRoom = null;
+
         return "success";
     }
 }
