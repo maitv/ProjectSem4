@@ -71,12 +71,12 @@
                             <h:inputText id="customerAddress" required="#{checkbox.value == 'false'}" readonly="#{checkbox.value == 'true'}" value="#{bookingRoomBean.customerAddress}"/> <br/>
                             <h:message for="customerAddress" style="color:red"></h:message><br/>
                             <h:outputLabel value="Email: " />
-                            <h:inputText id="customerEmail" required="#{checkbox.value == 'false'}" readonly="#{checkbox.value == 'true'}" value="#{bookingRoomBean.customerEmail}">
+                            <h:inputText validatorMessage="Invalid email" id="customerEmail" required="#{checkbox.value == 'false'}" readonly="#{checkbox.value == 'true'}" value="#{bookingRoomBean.customerEmail}">
                                 <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" disabled="#{checkbox.value == 'true'}" />
                             </h:inputText><br/>
                             <h:message for="customerEmail" style="color:red"></h:message><br/>
                             <h:outputLabel value="Phone: " />
-                            <h:inputText id="customerPhone" required="#{checkbox.value == 'false'}" readonly="#{checkbox.value == 'true'}" value="#{bookingRoomBean.customerPhone}">
+                            <h:inputText validatorMessage="Invalid phone" id="customerPhone" required="#{checkbox.value == 'false'}" readonly="#{checkbox.value == 'true'}" value="#{bookingRoomBean.customerPhone}">
                                 <f:validateRegex pattern="^[0-9-+()\s]+$" disabled="#{checkbox.value == 'true'}"/>
                             </h:inputText><br/>
                             <h:message for="customerPhone" style="color:red"></h:message><br/>
