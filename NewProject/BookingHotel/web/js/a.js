@@ -29,7 +29,7 @@ $(document).ready(function() {
         dateFormat: 'dd-mm-yy',
         changeMonth: true,
         changeYear: true,
-        maxDate: 0
+        maxDate: '-18y'
     });
     $("#rccheckbox").click(function(){
         if (!$(this).is(':checked')) {

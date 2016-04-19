@@ -646,7 +646,6 @@ public class BookingRoomBean implements Serializable {
     }
 
     public String gotoppConfirmation() {
-
         if ((totalPrice / 2) > ppAccount) {
             return "failed";
         }
@@ -656,18 +655,22 @@ public class BookingRoomBean implements Serializable {
 
     public String gotoNotice() {
         DataProcess dp = new DataProcess();
-
         String cusId = "";
-
         if (returnCustomerIdentityNo == null || "".equals(returnCustomerIdentityNo)) {
             cusId = customerIdentityNo;
         }else{
             cusId = returnCustomerIdentityNo;
         }
-
+        if (ppUsername.isEmpty())
+        {
         dp.booking(selectedRoom, checkinDate, checkoutDate, customerName, customerCountry, cusId, cus.getCustomerDOB(), customerAddress,
                 customerPhone, customerEmail, totalPrice, selectedService);
-        setPpOrderID(dp.getOrderID());
+        }
+        else
+        {
+            dp.bookingPP(selectedRoom, checkinDate, checkoutDate, customerName, customerCountry, cusId, cus.getCustomerDOB(), customerAddress,customerPhone, customerEmail, totalPrice, selectedService,ppID,ppAccount);
+        }
+            setPpOrderID(dp.getOrderID());
         return "success";
 
     }

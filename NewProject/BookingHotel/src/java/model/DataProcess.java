@@ -516,10 +516,7 @@ public class DataProcess {
         if (!addPayment(bookingId, total, "booking")) {
             return false;
         }
-
-        //7. Add to Receipts table
-        java.util.Date date = new java.util.Date();
-        return addPayPalReceipts(("Payment" + bookingId), (total / 2), date, "Paypal");
+        else return true;
     }
 
     public boolean addBookingService(String bookingId, List<Service> services) {
@@ -961,7 +958,6 @@ public class DataProcess {
             prst.setFloat(4, paymentAmmount);
             prst.setString(5, paymentComment);
             prst.executeUpdate();
-
             prst.close();
 
         } catch (SQLException ex) {
@@ -1004,7 +1000,7 @@ public class DataProcess {
     }
 
     public Booking getBookingById(String id) {
-        String query = "SELECT * FROM Booking WHERE bookingId=?";
+        String query = "SELECT * FROM Booking LEFT JOIN Customer ON Booking.customerId=Customer.customerId WHERE Booking.bookingId=? OR Booking.customerId=? OR Customer.customerName=?";
         PreparedStatement prst;
         ResultSet rs = null;
         Booking bk = null;
@@ -1012,6 +1008,7 @@ public class DataProcess {
         try {
             prst = con.prepareStatement(query);
             prst.setString(1, id);
+            prst.setString(2, id);
             rs = prst.executeQuery();
 
             if (rs.next()) {

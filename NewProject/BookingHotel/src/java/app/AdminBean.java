@@ -261,7 +261,6 @@ public class AdminBean {
         if (txtSearch == null || "".equals(txtSearch)) {
             bookingList = dp.getAllBooking();
             bookingSeletedList = dp.getAllBooking();
-
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("bookingSeletedList");
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("bookingList");
         } else {
@@ -269,16 +268,12 @@ public class AdminBean {
             bookingList = new ArrayList<>();
             Booking b = dp.getBookingById(txtSearch);
             if (b != null) {
-
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put(
                         "SelectedId", txtSearch);
-
                 bookingSeletedList.add(b);
                 bookingList.add(b);
-
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put(
                         "bookingSeletedList", bookingSeletedList);
-
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put(
                         "bookingList", bookingList);
             }

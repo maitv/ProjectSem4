@@ -57,51 +57,54 @@
 
                     <h:form id="form" style="display: inline-block; margin-top: 10px;">
                         <p:dataTable value="#{bookingRoomBean.selectedRoom}" var="r">
-                            <p:column>
+                            <p:column style="text-align:center">
                                 <f:facet name="header">
                                     Room Number
                                 </f:facet>
-                                #{r.roomNumber}
+                                <h:outputText value="#{r.roomNumber}"/>
                             </p:column>
-                            <p:column>
+                            <p:column style="text-align:center">
                                 <f:facet name="header">
-                                    Room Desc
+                                    Room Description
                                 </f:facet>
-                                #{r.roomDesc}
+                                <h:outputText value="#{r.roomDesc}" />
                             </p:column>
-                            <p:column>
+                            <p:column style="text-align:center">
                                 <f:facet name="header">
-                                    Price
+                                    Price ($)
                                 </f:facet>
-                                #{bookingRoomBean.getPrice(r.roomTypeId)}
+                                <h:outputText value="#{bookingRoomBean.getPrice(r.roomTypeId)}"/>                              
                             </p:column>
-                            <p:column>
+                            <p:column style="text-align:center">
                                 <f:facet name="header">
                                     Days
                                 </f:facet>
-                                #{bookingRoomBean.diffDays}
+                                <h:outputText value="#{bookingRoomBean.diffDays}"/>                                
                             </p:column>             
                         </p:dataTable>
                         <div style="margin: 20px 0px 0px">
                             <p:dataTable rowKey="#{r.serviceName}" id="sList" widgetVar="serviceList" selection="#{bookingRoomBean.selectedService}" value="#{bookingRoomBean.serviceList}" var="r"  >     
-                                <p:column selectionMode="multiple" style="width:100px;text-align:center" />
-                                <p:column>
+                                <p:column selectionMode="multiple" style="width:100px;text-align:center">
+                                </p:column>
+                                <p:column style="text-align:center">
                                     <f:facet name="header">
                                         Service Name
                                     </f:facet>
-                                    #{r.serviceName}
+                                    <h:outputText value="#{r.serviceName}"/>
+                                    
                                 </p:column>
-                                <p:column>
+                                <p:column style="text-align:center">
                                     <f:facet name="header">
-                                        Service Desc
+                                        Service Description
                                     </f:facet>
-                                    #{r.serviceDesc}
+                                    <h:outputText value="#{r.serviceDesc}"/>
+                                    
                                 </p:column>
-                                <p:column>
+                                <p:column style="text-align:center">
                                     <f:facet name="header">
-                                        Price
+                                        Price ($)
                                     </f:facet>
-                                    #{r.servicePrice}
+                                   <h:outputText value="#{r.servicePrice}"/>                                   
 
                                 </p:column>            
                             </p:dataTable>
